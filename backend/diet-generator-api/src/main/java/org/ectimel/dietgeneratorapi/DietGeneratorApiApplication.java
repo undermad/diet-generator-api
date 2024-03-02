@@ -1,14 +1,16 @@
-package org.ectimel.backend;
+package org.ectimel.dietgeneratorapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class DietGeneratorApiApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Hello Diet Generator");
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(DietGeneratorApiApplication.class, args);
+
+
+
 	}
 
 }
