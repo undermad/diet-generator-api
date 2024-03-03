@@ -1,10 +1,10 @@
-package org.ectimel.dietgeneratorapi;
+package org.ectimel.dietgenerator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DietGeneratorApiApplicationTests {
+class DietGeneratorApplicationTests {
 
 	@Test
 	void contextLoads() {
