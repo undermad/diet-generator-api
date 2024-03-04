@@ -37,6 +37,13 @@ Happy coding!
 
 ## 2. Domain
 
+**Diet**
+
+Main business entities are `Diet` that is created by `DietGenerator` using `Recipie`. Each `Recipie` is set `Product` items in strictly defined % ratio.
+`Product` consist of `Nutrients` information such as `Carbohydrates`, `Fats`, `Proteins`.
+
+
+
 ---
 
 ## 3. Architecture
