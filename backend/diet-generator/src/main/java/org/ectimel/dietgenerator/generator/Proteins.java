@@ -1,5 +1,3 @@
 package org.ectimel.dietgenerator.generator;
 
-public class Proteins {
-    private Double amount;
-}
+public record Proteins(Double totalProteins) { }

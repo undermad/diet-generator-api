@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.generator;
+package org.ectimel.dietgenerator.ninja;
 
 import lombok.Getter;
 

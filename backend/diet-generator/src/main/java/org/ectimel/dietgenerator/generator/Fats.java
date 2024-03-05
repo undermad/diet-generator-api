@@ -1,5 +1,4 @@
 package org.ectimel.dietgenerator.generator;
 
-public class Fats {
-    private Double amount;
+public record Fats(Double totalFats, Double saturatedFats) {
 }
