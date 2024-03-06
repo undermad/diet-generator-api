@@ -1,3 +1,3 @@
-package org.ectimel.dietgenerator.generator;
+package org.ectimel.dietgenerator.domain.model;
 
 public record Proteins(Double totalProteins) { }

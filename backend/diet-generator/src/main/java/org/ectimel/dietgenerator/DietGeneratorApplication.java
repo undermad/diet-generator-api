@@ -1,14 +1,10 @@
 package org.ectimel.dietgenerator;
 
-import org.ectimel.dietgenerator.generator.Product;
-import org.ectimel.dietgenerator.ninja.NinjaApi;
-import org.ectimel.dietgenerator.ninja.NinjaResponse;
-import org.springframework.beans.factory.annotation.Value;
+import org.ectimel.dietgenerator.domain.model.Product;
+import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestClient;
 
 @SpringBootApplication
 public class DietGeneratorApplication implements CommandLineRunner {

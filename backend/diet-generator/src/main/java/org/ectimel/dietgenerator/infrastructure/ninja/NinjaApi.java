@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.ninja;
+package org.ectimel.dietgenerator.infrastructure.ninja;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;

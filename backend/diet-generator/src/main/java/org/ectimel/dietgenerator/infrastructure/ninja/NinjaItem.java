@@ -1,7 +1,7 @@
-package org.ectimel.dietgenerator.ninja;
+package org.ectimel.dietgenerator.infrastructure.ninja;
 
 import lombok.ToString;
-import org.ectimel.dietgenerator.generator.*;
+import org.ectimel.dietgenerator.domain.model.*;
 
 @ToString
 public class NinjaItem {

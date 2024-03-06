@@ -1,8 +1,10 @@
-package org.ectimel.dietgenerator.generator;
+package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.ToString;
 
+@Data
 @ToString
 @Builder
 public class Nutrients {
@@ -11,5 +13,8 @@ public class Nutrients {
     private Carbohydrates carbohydrates;
     private Proteins proteins;
     private Fats fats;
+
+
+
 
 }
