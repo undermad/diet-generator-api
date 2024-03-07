@@ -1,0 +1,2 @@
+1. Round double calculation to 2 decimal places.
+    - use BigDecimal to achieve it

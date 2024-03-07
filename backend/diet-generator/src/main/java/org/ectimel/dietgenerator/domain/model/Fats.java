@@ -1,4 +1,11 @@
 package org.ectimel.dietgenerator.domain.model;
 
-public record Fats(Double totalFats, Double saturatedFats) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Fats {
+    private Double totalFats;
+    private Double saturatedFats;
 }

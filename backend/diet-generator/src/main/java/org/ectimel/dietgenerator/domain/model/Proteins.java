@@ -1,3 +1,10 @@
 package org.ectimel.dietgenerator.domain.model;
 
-public record Proteins(Double totalProteins) { }
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Proteins {
+    private Double totalProteins;
+}

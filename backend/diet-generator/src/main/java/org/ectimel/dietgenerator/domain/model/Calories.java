@@ -1,4 +1,10 @@
 package org.ectimel.dietgenerator.domain.model;
 
-public record Calories(Double calories) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Calories {
+    private Double calories;
 }
