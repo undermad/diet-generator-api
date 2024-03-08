@@ -4,6 +4,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+
 @Data
 @ToString
 @Builder
@@ -13,39 +17,43 @@ public class Product {
     private ProductType productType;
     private Nutrients nutrients;
 
-    public Calories getCalories() {
-        return this.nutrients.getCalories();
-    }
-
-    public Nutrients calculateNutrients(Double grams) {
+    public Nutrients calculateNutrients(BigDecimal grams) {
         return new Nutrients(calculateCalories(grams),
                 calculateCarbohydrates(grams),
                 calculateProteins(grams),
                 calculateFats(grams));
     }
 
-    public Calories calculateCalories(Double grams) {
-        double totalCaloriesInGram = this.nutrients.getCalories().getCalories() / 100;
-        return new Calories(totalCaloriesInGram * grams);
+    public Calories calculateCalories(BigDecimal grams) {
+        BigDecimal totalCaloriesInGram = this.nutrients.getCalories().getTotalCalories()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        return new Calories(totalCaloriesInGram.multiply((grams)));
     }
 
-    public Carbohydrates calculateCarbohydrates(Double grams) {
-        double totalCarbohydratesInGram = this.nutrients.getCarbohydrates().getTotalCarbohydrates() / 100;
-        double fibreInGram = this.nutrients.getCarbohydrates().getFiber() / 100;
-        double sugarInGram = this.nutrients.getCarbohydrates().getSugar() / 100;
+    public Carbohydrates calculateCarbohydrates(BigDecimal grams) {
 
-        return new Carbohydrates(totalCarbohydratesInGram * grams, fibreInGram * grams, sugarInGram * grams);
+        BigDecimal totalCarbohydratesInGram = this.nutrients.getCarbohydrates().getTotalCarbohydrates()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        BigDecimal fibreInGram = this.nutrients.getCarbohydrates().getFiber()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        BigDecimal sugarInGram = this.nutrients.getCarbohydrates().getSugar()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+
+        return new Carbohydrates(totalCarbohydratesInGram.multiply(grams), fibreInGram.multiply(grams), sugarInGram.multiply(grams));
     }
 
-    public Proteins calculateProteins(Double grams) {
-        double totalProteinsInGram = this.nutrients.getProteins().getTotalProteins() / 100;
-        return new Proteins(totalProteinsInGram * grams);
+    public Proteins calculateProteins(BigDecimal grams) {
+        BigDecimal totalProteinsInGram = this.nutrients.getProteins().getTotalProteins()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        return new Proteins(totalProteinsInGram.multiply(grams));
     }
 
-    public Fats calculateFats(Double grams) {
-        double totalFatsInGram = this.nutrients.getFats().getTotalFats() / 100;
-        double saturatedFatInGram = this.nutrients.getFats().getSaturatedFats() / 100;
-        return new Fats(totalFatsInGram * grams, saturatedFatInGram * grams);
+    public Fats calculateFats(BigDecimal grams) {
+        BigDecimal totalFatsInGram = this.nutrients.getFats().getTotalFats()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        BigDecimal saturatedFatInGram = this.nutrients.getFats().getSaturatedFats()
+                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        return new Fats(totalFatsInGram.multiply(grams), saturatedFatInGram.multiply(grams));
     }
 
 

@@ -2,32 +2,33 @@ package org.ectimel.dietgenerator.domain.model;
 
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @ToString
 public class Recipe {
 
-    private Map<Product, Integer> ingredientsProportion;
-    private Nutrients nutrients;
+    private final Map<Product, BigDecimal> ingredientsProportion;
+    private final Nutrients nutrients;
 
-    public Recipe(Map<Product, Integer> ingredientsProportion) {
+    public Recipe(Map<Product, BigDecimal> ingredientsProportion) {
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
     }
 
     private Nutrients calculateNutrients() {
-        Nutrients nutrients = new Nutrients(new Calories(0D), new Carbohydrates(0D, 0D, 0D), new Proteins(0D), new Fats(0D, 0D));
+        Nutrients calculatedNutrients = Nutrients.createEmptyNutrients();
 
         ingredientsProportion.forEach((product, percentage) -> {
-            Nutrients productNutrients = product.calculateNutrients(percentage.doubleValue());
+            Nutrients productNutrients = product.calculateNutrients(percentage);
 
-            nutrients.addCalories(productNutrients.getCalories());
-            nutrients.addCarbohydrates(productNutrients.getCarbohydrates());
-            nutrients.addProteins(productNutrients.getProteins());
-            nutrients.addFats(productNutrients.getFats());
+            calculatedNutrients.addCalories(productNutrients.getCalories());
+            calculatedNutrients.addCarbohydrates(productNutrients.getCarbohydrates());
+            calculatedNutrients.addProteins(productNutrients.getProteins());
+            calculatedNutrients.addFats(productNutrients.getFats());
 
         });
-        return nutrients;
+        return calculatedNutrients;
     }
 
 

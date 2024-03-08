@@ -3,8 +3,10 @@ package org.ectimel.dietgenerator.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 public class Calories {
-    private Double calories;
+    private BigDecimal totalCalories;
 }

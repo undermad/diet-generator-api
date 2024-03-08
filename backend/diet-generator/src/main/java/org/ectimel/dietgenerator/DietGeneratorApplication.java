@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,16 +30,16 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         Product rice = ninjaApi.getNinjaItem("rice").mapToProduct();
         Product chicken = ninjaApi.getNinjaItem("chicken").mapToProduct();
-        Map<Product, Integer> recipeProportion = Map.of(rice, 80, chicken, 20);
+        Map<Product, BigDecimal> recipeProportion = Map.of(rice, BigDecimal.valueOf(80), chicken, BigDecimal.valueOf(20));
 
 
         System.out.println(rice);
         System.out.println(chicken);
 
 
-        Recipe recipe = new Recipe(recipeProportion);
+        Recipe ryzZKurwczakiem = new Recipe(recipeProportion);
 
-        System.out.println(recipe);
+        System.out.println(ryzZKurwczakiem);
 
 
     }

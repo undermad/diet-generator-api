@@ -3,6 +3,8 @@ package org.ectimel.dietgenerator.infrastructure.ninja;
 import lombok.ToString;
 import org.ectimel.dietgenerator.domain.model.*;
 
+import java.math.BigDecimal;
+
 @ToString
 public class NinjaItem {
     public String name;
@@ -23,10 +25,10 @@ public class NinjaItem {
         return Product.builder()
                 .name(this.name)
                 .nutrients(Nutrients.builder()
-                        .calories(new Calories(this.calories))
-                        .fats(new Fats(this.fat_total_g, (double) this.fat_saturated_g))
-                        .carbohydrates(new Carbohydrates((double) this.carbohydrates_total_g, this.fiber_g, this.sugar_g))
-                        .proteins(new Proteins(this.protein_g))
+                        .calories(new Calories(new BigDecimal(this.calories)))
+                        .fats(new Fats(new BigDecimal(this.fat_total_g), new BigDecimal(fat_saturated_g)))
+                        .carbohydrates(new Carbohydrates(new BigDecimal(carbohydrates_total_g), new BigDecimal(fiber_g), new BigDecimal(sugar_g)))
+                        .proteins(new Proteins(new BigDecimal(protein_g)))
                         .build())
                 .build();
     }
