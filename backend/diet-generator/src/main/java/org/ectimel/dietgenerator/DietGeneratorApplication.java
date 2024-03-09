@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         Recipe ryzZKurwczakiem = new Recipe(recipeProportion);
 
-        System.out.println(ryzZKurwczakiem);
+        System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
 
 
     }

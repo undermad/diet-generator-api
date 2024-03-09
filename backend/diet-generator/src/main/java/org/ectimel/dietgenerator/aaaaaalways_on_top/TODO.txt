@@ -1,2 +1,39 @@
 1. Round double calculation to 2 decimal places.
     - use BigDecimal to achieve it
+
+
+NOTE ABOUT KCAL
+
+The number of calories (kcal) required for a person depends on various factors
+ such as age, gender, weight, height, and physical activity level.
+ Two common methods to estimate daily calorie requirements are the Harris-Benedict Equation and the Mifflin-St Jeor Equation.
+
+Basal Metabolic Rate
+
+
+### Harris-Benedict Equation
+**For men:**
+\[ BMR = 88.362 + (13.397 \times \text{weight in kg}) + (4.799 \times \text{height in cm}) - (5.677 \times \text{age in years}) \]
+
+**For women:**
+\[ BMR = 447.593 + (9.247 \times \text{weight in kg}) + (3.098 \times \text{height in cm}) - (4.330 \times \text{age in years}) \]
+
+### Mifflin-St Jeor Equation
+
+**For men:**
+\[ BMR = (10 \times \text{weight in kg}) + (6.25 \times \text{height in cm}) - (5 \times \text{age in years}) + 5 \]
+
+**For women:**
+\[ BMR = (10 \times \text{weight in kg}) + (6.25 \times \text{height in cm}) - (5 \times \text{age in years}) - 161 \]
+
+### Total Daily Energy Expenditure (TDEE)
+
+To calculate the total daily energy expenditure (TDEE), which represents the total number of calories needed to maintain your current weight, you multiply your Basal Metabolic Rate (BMR) by an activity factor:
+
+- Sedentary (little or no exercise): BMR × 1.2
+- Lightly active (light exercise/sports 1-3 days/week): BMR × 1.375
+- Moderately active (moderate exercise/sports 3-5 days/week): BMR × 1.55
+- Very active (hard exercise/sports 6-7 days a week): BMR × 1.725
+- Super active (very hard exercise/sports & a physical job): BMR × 1.9
+
+Choose the activity level that best matches your lifestyle to find your TDEE. This will give you a rough estimate of the calories you need to maintain your current weight. To lose or gain weight, you would adjust your calorie intake accordingly, usually by creating a deficit (for weight loss) or a surplus (for weight gain) from your TDEE.

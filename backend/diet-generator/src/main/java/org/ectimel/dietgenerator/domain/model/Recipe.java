@@ -1,11 +1,13 @@
 package org.ectimel.dietgenerator.domain.model;
 
+import lombok.Getter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 @ToString
+@Getter
 public class Recipe {
 
     private final Map<Product, BigDecimal> ingredientsProportion;
