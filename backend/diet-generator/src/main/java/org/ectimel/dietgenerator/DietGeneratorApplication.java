@@ -1,5 +1,9 @@
 package org.ectimel.dietgenerator;
 
+import org.ectimel.dietgenerator.domain.calories_calculator.ActiveLevel;
+import org.ectimel.dietgenerator.domain.calories_calculator.BMRAttributes;
+import org.ectimel.dietgenerator.domain.calories_calculator.Gender;
+import org.ectimel.dietgenerator.domain.calories_calculator.MifflinStJeorCalculator;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
@@ -9,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
@@ -41,6 +44,21 @@ public class DietGeneratorApplication implements CommandLineRunner {
         Recipe ryzZKurwczakiem = new Recipe(recipeProportion);
 
         System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
+
+
+        BMRAttributes bmrAttributes = BMRAttributes.builder()
+                .bodyWeightInKg(new BigDecimal("110"))
+                .heightInCm(new BigDecimal("174"))
+                .age(new BigDecimal("30"))
+                .activeLevel(ActiveLevel.MODERATELY_ACTIVE)
+                .gender(Gender.MALE)
+                .build();
+
+        MifflinStJeorCalculator mifflinStJeorCalculator = new MifflinStJeorCalculator();
+
+        System.out.println(mifflinStJeorCalculator
+                .calculate(bmrAttributes)
+                .calculateTDEE(bmrAttributes.getActiveLevel()));
 
 
     }
