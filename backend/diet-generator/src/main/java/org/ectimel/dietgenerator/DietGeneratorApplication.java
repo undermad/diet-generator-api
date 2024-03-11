@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator;
 
+import org.ectimel.dietgenerator.domain.calories_calculator.BMICalculator;
 import org.ectimel.dietgenerator.domain.calories_calculator.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calories_calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calories_calculator.Gender;
@@ -59,6 +60,10 @@ public class DietGeneratorApplication implements CommandLineRunner {
         System.out.println(mifflinStJeorCalculator
                 .calculate(bmrAttributes)
                 .calculateTDEE(bmrAttributes.getActiveLevel()));
+
+        BMICalculator bmiCalculator = new BMICalculator();
+
+        System.out.println(bmiCalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
 
 
     }
