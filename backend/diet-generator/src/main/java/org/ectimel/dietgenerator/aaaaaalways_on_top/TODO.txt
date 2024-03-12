@@ -1,5 +1,8 @@
 1. Round double calculation to 2 decimal places.
-    - use BigDecimal to achieve it
+    - use BigDecimal to achieve it COMPLETED
+
+    - app.logomakr.com/8VdsLZ <-- logo link
+    - add better colors
 
 
 NOTE ABOUT KCAL

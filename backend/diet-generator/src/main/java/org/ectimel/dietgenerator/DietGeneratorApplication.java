@@ -5,6 +5,7 @@ import org.ectimel.dietgenerator.domain.calories_calculator.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calories_calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calories_calculator.Gender;
 import org.ectimel.dietgenerator.domain.calories_calculator.MifflinStJeorCalculator;
+import org.ectimel.dietgenerator.domain.model.Meal;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
@@ -12,8 +13,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication
@@ -35,14 +38,23 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         Product rice = ninjaApi.getNinjaItem("rice").mapToProduct();
         Product chicken = ninjaApi.getNinjaItem("chicken").mapToProduct();
-        Map<Product, BigDecimal> recipeProportion = Map.of(rice, BigDecimal.valueOf(80), chicken, BigDecimal.valueOf(20));
+        Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(rice, BigDecimal.valueOf(80), chicken, BigDecimal.valueOf(20));
+        Recipe ryzZKurwczakiem = new Recipe(ryzZKurwczakiemprop);
 
+        Product tomato = ninjaApi.getNinjaItem("tomato").mapToProduct();
+        Product onion = ninjaApi.getNinjaItem("onion").mapToProduct();
+        Product oliveOil = ninjaApi.getNinjaItem("olive oil").mapToProduct();
+        Map<Product, BigDecimal> saladProportion = Map.of(
+                tomato, new BigDecimal("50"),
+                onion, new BigDecimal("45"),
+                oliveOil, new BigDecimal("5"));
 
-        System.out.println(rice);
-        System.out.println(chicken);
+        Recipe salad = new Recipe(saladProportion);
 
+        List<Recipe> recipes = List.of(ryzZKurwczakiem, salad);
 
-        Recipe ryzZKurwczakiem = new Recipe(recipeProportion);
+        Meal kurwczakZRyzemITrawa = new Meal(recipes);
+
 
         System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
 
