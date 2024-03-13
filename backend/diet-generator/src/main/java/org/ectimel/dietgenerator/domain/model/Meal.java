@@ -1,32 +1,14 @@
 package org.ectimel.dietgenerator.domain.model;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public class Meal {
-    private List<Recipe> recipes;
-    private Product proteinFiller;
-    private Product fatFiller;
-    private Product carbohydrateFiller;
 
+    private Map<Recipe, BigDecimal> recipesToGrams;
 
-    public Meal(List<Recipe> recipes) {
-        this.recipes = recipes;
-    }
-
-    public void findFillers() {
-
-    }
-
-    private Product findProteinFiller() {
-        return null;
-    }
-
-    private Product findFatFiller() {
-        return null;
-    }
-
-    private Product findCarbohydrateFiller() {
-        return null;
+    public Meal(Map<Recipe, BigDecimal> recipesToGrams) {
+        this.recipesToGrams = recipesToGrams;
     }
 
 }

@@ -24,6 +24,13 @@ public class Nutrients {
                 new Fats(new BigDecimal("0"), new BigDecimal("0")));
     }
 
+    public void addNutrients(Nutrients nutrientsToAdd) {
+        addCalories(nutrientsToAdd.getCalories());
+        addCarbohydrates(nutrientsToAdd.getCarbohydrates());
+        addFats(nutrientsToAdd.getFats());
+        addProteins(nutrientsToAdd.getProteins());
+    }
+
 
     public void addCalories(Calories calories) {
         this.calories.setTotalCalories(this.calories.getTotalCalories().add(calories.getTotalCalories()));

@@ -38,8 +38,12 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         Product rice = ninjaApi.getNinjaItem("rice").mapToProduct();
         Product chicken = ninjaApi.getNinjaItem("chicken").mapToProduct();
-        Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(rice, BigDecimal.valueOf(80), chicken, BigDecimal.valueOf(20));
+        Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(
+                rice, BigDecimal.valueOf(25),
+                chicken, BigDecimal.valueOf(75));
         Recipe ryzZKurwczakiem = new Recipe(ryzZKurwczakiemprop);
+        ryzZKurwczakiem.setProteinFiller(chicken);
+
 
         Product tomato = ninjaApi.getNinjaItem("tomato").mapToProduct();
         Product onion = ninjaApi.getNinjaItem("onion").mapToProduct();
@@ -50,10 +54,13 @@ public class DietGeneratorApplication implements CommandLineRunner {
                 oliveOil, new BigDecimal("5"));
 
         Recipe salad = new Recipe(saladProportion);
+        salad.setFatFiller(oliveOil);
 
-        List<Recipe> recipes = List.of(ryzZKurwczakiem, salad);
+        Map<Recipe, BigDecimal> recipesToGrams = Map.of(
+                ryzZKurwczakiem, new BigDecimal(400),
+                salad, new BigDecimal(100));
 
-        Meal kurwczakZRyzemITrawa = new Meal(recipes);
+        Meal kurwczakZRyzemITrawa = new Meal(recipesToGrams);
 
 
         System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
