@@ -1,9 +1,6 @@
 package org.ectimel.dietgenerator.domain.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,6 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
 @Builder
+@AllArgsConstructor
 @Getter
 @Setter
 public class Recipe {
@@ -19,9 +17,6 @@ public class Recipe {
     private final Map<Product, BigDecimal> ingredientsProportion;
     private final Nutrients nutrients;
 
-    private Product proteinFiller;
-    private Product fatFiller;
-    private Product carbohydrateFiller;
 
 
     public Recipe(Map<Product, BigDecimal> ingredientsProportion) {

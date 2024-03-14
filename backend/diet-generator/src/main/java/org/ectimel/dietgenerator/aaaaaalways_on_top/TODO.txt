@@ -4,6 +4,26 @@
     - app.logomakr.com/8VdsLZ <-- logo link
     - add better colors
 
+2. Create meal sizes:
+    - small: 0.7
+    - normal: 1.0
+    - large: 1.3
+    - extra-large: 1.6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 NOTE ABOUT KCAL
 

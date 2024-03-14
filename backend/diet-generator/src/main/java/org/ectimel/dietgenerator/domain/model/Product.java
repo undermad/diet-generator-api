@@ -2,6 +2,7 @@ package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
@@ -10,12 +11,15 @@ import java.math.RoundingMode;
 
 @Data
 @ToString
+@Setter
 @Builder
 public class Product {
 
     private String name;
     private ProductType productType;
     private Nutrients nutrients;
+    private Filler filler;
+
 
     public Nutrients calculateNutrients(BigDecimal grams) {
         return new Nutrients(calculateCalories(grams),
