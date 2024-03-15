@@ -26,6 +26,7 @@ public class Recipe {
         this.nutrients = calculateNutrients();
     }
 
+
     public Nutrients calculateNutrients(BigDecimal grams) {
         Nutrients calculatedNutrients = Nutrients.createEmptyNutrients();
         ingredientsProportion.forEach(((product, percentage) -> {

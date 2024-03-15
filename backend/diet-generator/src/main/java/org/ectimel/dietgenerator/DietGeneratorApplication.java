@@ -56,12 +56,7 @@ public class DietGeneratorApplication implements CommandLineRunner {
                 tomato, new BigDecimal("50"),
                 onion, new BigDecimal("45"),
                 oliveOil, new BigDecimal("5"));
-        Recipe salad = new Recipe(saladProportion);
 
-        Map<Recipe, BigDecimal> recipesToGrams = Map.of(
-                ryzZKurwczakiem, new BigDecimal(400),
-                salad, new BigDecimal(100));
-        Meal kurwczakZRyzemITrawa = new Meal(recipesToGrams);
 
 
         System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
