@@ -46,6 +46,10 @@ public class DietGeneratorApplication implements CommandLineRunner {
                 chicken, BigDecimal.valueOf(75));
         Recipe ryzZKurwczakiem = new Recipe(ryzZKurwczakiemprop);
 
+        System.out.println("Rice total calories");
+        System.out.println(rice.getNutrients().getCalories().getTotalCalories());
+        System.out.println("Chicken total calories");
+        System.out.println(chicken.getNutrients().getCalories().getTotalCalories());
 
         Product tomato = ninjaApi.getNinjaItem("tomato").mapToProduct();
         Product onion = ninjaApi.getNinjaItem("onion").mapToProduct();
@@ -58,7 +62,7 @@ public class DietGeneratorApplication implements CommandLineRunner {
                 oliveOil, new BigDecimal("5"));
 
 
-
+        System.out.println("Ryz z kurwczakiem RECIPE total calories");
         System.out.println(ryzZKurwczakiem.getNutrients().getCalories().getTotalCalories().setScale(2, RoundingMode.HALF_UP));
 
 
@@ -80,6 +84,14 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         System.out.println(bmiCalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
 
+
+        Meal ryzZKurwCZakiemMeal = Meal.createMeal(ryzZKurwczakiem, new BigDecimal(500));
+
+        System.out.println(ryzZKurwCZakiemMeal.getNutrients().getCalories().getTotalCalories());
+        ryzZKurwCZakiemMeal.getRecipesToGrams().forEach((product, amountInGrams) -> {
+            System.out.println(product.getName());
+            System.out.println(amountInGrams.doubleValue());
+        });
 
     }
 }
