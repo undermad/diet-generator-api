@@ -16,12 +16,13 @@ public class Recipe {
 
     private final Map<Product, BigDecimal> ingredientsProportion;
     private final Nutrients nutrients;
+    private final BigDecimal basePortion;
 
 
 
-    public Recipe(Map<Product, BigDecimal> ingredientsProportion) {
+    public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion) {
         validateProportion(ingredientsProportion);
-
+        this.basePortion = basePortion;
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
     }
