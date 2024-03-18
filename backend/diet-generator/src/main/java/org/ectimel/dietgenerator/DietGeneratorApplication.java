@@ -37,8 +37,8 @@ public class DietGeneratorApplication implements CommandLineRunner {
             System.out.println(product.getName() + " " + bigDecimal.doubleValue());
         }));
 
-        Dish ryzZKurwczakiemDishCalories = Dish.createDish(ryzZKurwczakiem, new BigDecimal(500));
-        ryzZKurwczakiemDishCalories.getRecipesToGrams().forEach(((product, bigDecimal) -> {
+        Dish salad = Dish.createDish(onionTomatoSalad);
+        salad.getRecipesToGrams().forEach(((product, bigDecimal) -> {
             System.out.println(product.getName() + " " + bigDecimal.doubleValue());
         }));
 

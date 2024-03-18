@@ -32,9 +32,9 @@ public class TestInit {
         oliveOil.setFiller(Filler.FAT);
 
         Map<Product, BigDecimal> saladProportion = Map.of(
-                tomato, new BigDecimal("50"),
-                onion, new BigDecimal("45"),
-                oliveOil, new BigDecimal("5"));
+                tomato, new BigDecimal("67"),
+                onion, new BigDecimal("30"),
+                oliveOil, new BigDecimal("3"));
 
         return new Recipe(saladProportion, new BigDecimal("200"));
 
