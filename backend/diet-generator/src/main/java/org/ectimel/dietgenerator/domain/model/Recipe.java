@@ -17,14 +17,18 @@ public class Recipe {
     private final Map<Product, BigDecimal> ingredientsProportion;
     private final Nutrients nutrients;
     private final BigDecimal basePortion;
+    private boolean isScalable;
+    private String name;
 
 
 
-    public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion) {
+    public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name) {
+        this.name = name;
         validateProportion(ingredientsProportion);
         this.basePortion = basePortion;
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
+        this.isScalable = isScalable;
     }
 
 

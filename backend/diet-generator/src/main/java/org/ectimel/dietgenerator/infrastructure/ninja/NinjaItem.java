@@ -22,6 +22,7 @@ public class NinjaItem {
 
 
     public Product mapToProduct() {
+        System.out.println(this.name + " " + this.fat_total_g);
         return Product.builder()
                 .name(this.name)
                 .nutrients(Nutrients.builder()

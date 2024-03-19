@@ -13,12 +13,14 @@ import java.util.Map;
 @Getter
 public class Dish {
 
-    private Map<Product, BigDecimal> recipesToGrams;
+    private Map<Product, BigDecimal> productToGrams;
     private Nutrients nutrients;
+    private Recipe recipe;
 
-    private Dish(Map<Product, BigDecimal> recipesToGrams) {
-        this.recipesToGrams = recipesToGrams;
+    private Dish(Map<Product, BigDecimal> productToGrams, Recipe recipe) {
+        this.productToGrams = productToGrams;
         this.nutrients = calculateNutrients();
+        this.recipe = recipe;
     }
 
     public static Dish createDish(Recipe recipe) {
@@ -27,7 +29,7 @@ public class Dish {
             calculatedRecipeToGram.put(product, recipe.getBasePortion()
                     .multiply(proportion.divide(BigDecimal.valueOf(100), 2, RoundingMode.FLOOR)));
         }));
-        return new Dish(calculatedRecipeToGram);
+        return new Dish(calculatedRecipeToGram, recipe);
     }
 
     public static Dish createDish(Recipe recipe, BigDecimal requiredCalories) {
@@ -37,17 +39,15 @@ public class Dish {
         recipe.getIngredientsProportion().forEach(((product, proportion) -> {
             emptyRecipeToGram.put(product, proportion.multiply(factor));
         }));
-        return new Dish(emptyRecipeToGram);
+        return new Dish(emptyRecipeToGram, recipe);
     }
 
     private Nutrients calculateNutrients() {
         Nutrients mealNutrients = Nutrients.createEmptyNutrients();
-        recipesToGrams.forEach(((product, bigDecimal) -> {
+        productToGrams.forEach(((product, bigDecimal) -> {
             mealNutrients.addNutrients(product.calculateNutrients(bigDecimal));
         }));
         return mealNutrients;
     }
-
-
 
 }

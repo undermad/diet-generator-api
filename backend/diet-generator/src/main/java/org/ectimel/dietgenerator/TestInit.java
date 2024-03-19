@@ -36,7 +36,7 @@ public class TestInit {
                 onion, new BigDecimal("30"),
                 oliveOil, new BigDecimal("3"));
 
-        return new Recipe(saladProportion, new BigDecimal("200"));
+        return new Recipe(saladProportion, new BigDecimal("200"), true, "Kurwatka");
 
     }
 
@@ -50,12 +50,12 @@ public class TestInit {
         Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(
                 rice, BigDecimal.valueOf(25),
                 chicken, BigDecimal.valueOf(75));
-        return new Recipe(ryzZKurwczakiemprop, new BigDecimal("400"));
+        return new Recipe(ryzZKurwczakiemprop, new BigDecimal("400"), true, "Ryz z kurwczakiem");
     }
 
     public void printBmi() {
         BMRAttributes bmrAttributes = BMRAttributes.builder()
-                .bodyWeightInKg(new BigDecimal("110"))
+                .bodyWeightInKg(new BigDecimal("120"))
                 .heightInCm(new BigDecimal("174"))
                 .age(new BigDecimal("30"))
                 .activeLevel(ActiveLevel.MODERATELY_ACTIVE)

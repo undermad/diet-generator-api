@@ -60,5 +60,34 @@ public class Product {
         return new Fats(totalFatsInGram.multiply(grams), saturatedFatInGram.multiply(grams));
     }
 
+    public BigDecimal calculateProductGrams(Filler filler, BigDecimal grams) {
+        if (filler.equals(Filler.PROTEIN)) {
+            return calculateProductGramsForRequiredProteins(grams);
+        } else if (filler.equals(Filler.CARBOHYDRATE)) {
+            return calculateProductGramsForRequiredCarbohydrates(grams);
+        } else if (filler.equals(Filler.FAT)) {
+            return calculateProductGramsForRequiredFats(grams);
+        }
+        return BigDecimal.valueOf(0);
+    }
+
+    private BigDecimal calculateProductGramsForRequiredCarbohydrates(BigDecimal requiredCarbohydrates) {
+        BigDecimal totalCarbohydrates = nutrients.getCarbohydrates().getTotalCarbohydrates();
+        return requiredCarbohydrates.divide(totalCarbohydrates, 2, RoundingMode.HALF_DOWN)
+                .multiply(BigDecimal.valueOf(100));
+    }
+
+    private BigDecimal calculateProductGramsForRequiredProteins(BigDecimal requiredProteins) {
+        BigDecimal totalProteins = nutrients.getProteins().getTotalProteins();
+        return requiredProteins.divide(totalProteins, 2, RoundingMode.HALF_DOWN)
+                .multiply(BigDecimal.valueOf(100));
+    }
+
+    private BigDecimal calculateProductGramsForRequiredFats(BigDecimal requiredFats) {
+        BigDecimal totalFats = nutrients.getFats().getTotalFats();
+        return requiredFats.divide(totalFats, 2, RoundingMode.HALF_DOWN)
+                .multiply(BigDecimal.valueOf(100));
+    }
+
 
 }
