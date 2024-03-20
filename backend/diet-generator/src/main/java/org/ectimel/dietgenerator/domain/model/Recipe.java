@@ -21,10 +21,9 @@ public class Recipe {
     private String name;
 
 
-
     public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name) {
+        validateProducts(ingredientsProportion, isScalable);
         this.name = name;
-        validateProportion(ingredientsProportion);
         this.basePortion = basePortion;
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
@@ -57,14 +56,18 @@ public class Recipe {
         return calculatedNutrients;
     }
 
-    private void validateProportion(Map<Product, BigDecimal> ingredientsProportion) {
-        AtomicReference<Double> total = new AtomicReference<>(0D);
-        ingredientsProportion.forEach((product, bigDecimal) -> {
-            total.updateAndGet(v -> (v + bigDecimal.doubleValue()));
-        });
+    private void validateProducts(Map<Product, BigDecimal> ingredientsProportion, boolean isScalable) {
         try {
+            AtomicReference<Double> total = new AtomicReference<>(0D);
+            AtomicReference<Boolean> canScale = new AtomicReference<>(false);
+            ingredientsProportion.forEach((product, bigDecimal) -> {
+                if(product.isFiller()) canScale.set(true);
+                total.updateAndGet(v -> (v + bigDecimal.doubleValue()));
+            });
             if (total.get() != 100) {
                 throw new Exception("Proportion percentage must equal 100.");
+            } else if (isScalable && !canScale.get()) {
+                throw new Exception("Scalable recipe must have at least one filler");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

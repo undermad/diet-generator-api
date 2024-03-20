@@ -25,6 +25,7 @@ public class NinjaItem {
         System.out.println(this.name + " " + this.fat_total_g);
         return Product.builder()
                 .name(this.name)
+                .filler(Filler.NONE)
                 .nutrients(Nutrients.builder()
                         .calories(new Calories(new BigDecimal(this.calories)))
                         .fats(new Fats(new BigDecimal(this.fat_total_g), new BigDecimal(fat_saturated_g)))

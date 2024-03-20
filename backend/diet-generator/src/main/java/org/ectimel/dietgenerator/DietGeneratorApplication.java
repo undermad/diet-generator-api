@@ -1,7 +1,6 @@
 package org.ectimel.dietgenerator;
 
 import org.ectimel.dietgenerator.domain.generator.Dish;
-import org.ectimel.dietgenerator.domain.generator.Meal;
 import org.ectimel.dietgenerator.domain.model.Filler;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
@@ -10,7 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @SpringBootApplication
 public class DietGeneratorApplication implements CommandLineRunner {
@@ -45,33 +43,29 @@ public class DietGeneratorApplication implements CommandLineRunner {
             System.out.println(product.getName() + " " + bigDecimal.doubleValue());
         }));
 
-        Meal meal = new Meal(List.of(ryzZKurwczakiemDish, salad));
-        meal.getDishes().forEach(dish -> {
-            System.out.println(dish.getRecipe().getName());
-            dish.getProductToGrams().forEach(((product, bigDecimal) -> {
-                System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
-            }));
-        });
-        System.out.println("total carbo: " + meal.getNutrients().getCarbohydrates().getTotalCarbohydrates());
-        System.out.println("total fat: " + meal.getNutrients().getFats().getTotalFats());
+
+        System.out.println(ryzZKurwczakiemDish.getRecipe().getName());
+        ryzZKurwczakiemDish.getProductToGrams().forEach(((product, bigDecimal) -> {
+            System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
+        }));
+        System.out.println("total carbo: " + ryzZKurwczakiemDish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
+        System.out.println("total fat: " + ryzZKurwczakiemDish.getNutrients().getFats().getTotalFats());
 
         System.out.println("*****");
         System.out.println("*****");
         System.out.println("*****");
 
         System.out.println("FILLING IN PROGRESS!");
-        meal.addFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(10));
-        meal.addFiller(Filler.FAT, BigDecimal.valueOf(3));
+        ryzZKurwczakiemDish.addFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(10));
+        ryzZKurwczakiemDish.addFiller(Filler.FAT, BigDecimal.valueOf(3));
 
-        meal.getDishes().forEach(dish -> {
-            System.out.println(dish.getRecipe().getName());
-            dish.getProductToGrams().forEach(((product, bigDecimal) -> {
-                System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
-            }));
-        });
+        System.out.println(ryzZKurwczakiemDish.getRecipe().getName());
+        ryzZKurwczakiemDish.getProductToGrams().forEach(((product, bigDecimal) -> {
+            System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
+        }));
 
-        System.out.println("total carbo: " + meal.getNutrients().getCarbohydrates().getTotalCarbohydrates());
-        System.out.println("total fat: " + meal.getNutrients().getFats().getTotalFats());
+        System.out.println("total carbo: " + ryzZKurwczakiemDish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
+        System.out.println("total fat: " + ryzZKurwczakiemDish.getNutrients().getFats().getTotalFats());
 
 
     }

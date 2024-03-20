@@ -89,5 +89,9 @@ public class Product {
                 .multiply(BigDecimal.valueOf(100));
     }
 
+    public boolean isFiller() {
+        return !this.getFiller().equals(Filler.NONE);
+    }
+
 
 }
