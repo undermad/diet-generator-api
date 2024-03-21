@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 
 @Data
 @ToString
+@AllArgsConstructor
 @Builder
 public class Nutrients {
 

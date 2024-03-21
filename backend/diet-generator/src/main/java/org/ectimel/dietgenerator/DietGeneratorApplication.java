@@ -2,8 +2,14 @@ package org.ectimel.dietgenerator;
 
 import org.ectimel.dietgenerator.domain.generator.Dish;
 import org.ectimel.dietgenerator.domain.model.Filler;
+import org.ectimel.dietgenerator.domain.model.Product;
+import org.ectimel.dietgenerator.domain.model.ProductType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
+import org.ectimel.dietgenerator.infrastructure.persistance.ProductRepository;
+import org.ectimel.dietgenerator.infrastructure.persistance.models.NutrientInformation;
+import org.ectimel.dietgenerator.infrastructure.persistance.models.ProductDocument;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,9 +22,13 @@ public class DietGeneratorApplication implements CommandLineRunner {
     private final NinjaApi ninjaApi;
     private final TestInit testInit;
 
-    public DietGeneratorApplication(NinjaApi ninjaApi, TestInit testInit) {
+    @Qualifier("mongoProductRepository")
+    private final ProductRepository productRepository;
+
+    public DietGeneratorApplication(NinjaApi ninjaApi, TestInit testInit, ProductRepository productRepository) {
         this.ninjaApi = ninjaApi;
         this.testInit = testInit;
+        this.productRepository = productRepository;
     }
 
 
@@ -66,6 +76,27 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         System.out.println("total carbo: " + ryzZKurwczakiemDish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
         System.out.println("total fat: " + ryzZKurwczakiemDish.getNutrients().getFats().getTotalFats());
+
+        ProductDocument potatoDocument = ProductDocument.builder()
+                .name("Potato")
+                .productType(ProductType.VEGETABLE)
+                .filler(Filler.CARBOHYDRATE)
+                .nutrientInformation(NutrientInformation.builder()
+                        .totalCalories(77)
+                        .totalCarbohydrates(17.47)
+                        .fiber(0)
+                        .sugar(0)
+                        .totalProteins(2.02)
+                        .totalFats(0.09)
+                        .saturatedFats(0)
+                        .build())
+                .build();
+
+        Product potato = potatoDocument.mapToDomain();
+        System.out.println(potato.getNutrients().getCalories().getTotalCalories());
+
+        productRepository.save(potatoDocument);
+
 
 
     }

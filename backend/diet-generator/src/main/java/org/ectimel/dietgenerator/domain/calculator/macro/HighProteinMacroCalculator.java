@@ -1,8 +1,6 @@
 package org.ectimel.dietgenerator.domain.calculator.macro;
 
 import org.ectimel.dietgenerator.domain.calculator.Gender;
-import org.ectimel.dietgenerator.domain.calculator.MacroCalculatorAttributes;
-import org.ectimel.dietgenerator.domain.model.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -1,4 +1,6 @@
-package org.ectimel.dietgenerator.domain.calculator;
+package org.ectimel.dietgenerator.domain.calculator.macro;
+
+import org.ectimel.dietgenerator.domain.calculator.Gender;
 
 import java.math.BigDecimal;
 
