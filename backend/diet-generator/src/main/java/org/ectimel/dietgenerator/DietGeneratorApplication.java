@@ -6,9 +6,10 @@ import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.ProductType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
-import org.ectimel.dietgenerator.infrastructure.persistance.ProductRepository;
-import org.ectimel.dietgenerator.infrastructure.persistance.models.NutrientInformation;
-import org.ectimel.dietgenerator.infrastructure.persistance.models.ProductDocument;
+import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,10 +26,13 @@ public class DietGeneratorApplication implements CommandLineRunner {
     @Qualifier("mongoProductRepository")
     private final ProductRepository productRepository;
 
-    public DietGeneratorApplication(NinjaApi ninjaApi, TestInit testInit, ProductRepository productRepository) {
+    private final ProductMapper productMapper;
+
+    public DietGeneratorApplication(NinjaApi ninjaApi, TestInit testInit, ProductRepository productRepository, ProductMapper productMapper) {
         this.ninjaApi = ninjaApi;
         this.testInit = testInit;
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
 
@@ -92,11 +96,12 @@ public class DietGeneratorApplication implements CommandLineRunner {
                         .build())
                 .build();
 
-        Product potato = potatoDocument.mapToDomain();
+        Product potato = productMapper.mapToDomain(potatoDocument);
         System.out.println(potato.getNutrients().getCalories().getTotalCalories());
 
-        productRepository.save(potatoDocument);
+        Product potato1 = productRepository.save(potato);
 
+        System.out.println(potato1.getName());
 
 
     }

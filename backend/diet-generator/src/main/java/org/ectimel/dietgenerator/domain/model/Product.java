@@ -1,9 +1,6 @@
 package org.ectimel.dietgenerator.domain.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,6 +9,8 @@ import java.math.RoundingMode;
 @Data
 @ToString
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Product {
 

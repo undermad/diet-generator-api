@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator.domain.calculator.macro;
 
 
-public interface MacroCalculator {
+public sealed interface MacroCalculator permits HighProteinMacroCalculator {
     Macronutrient calculate(MacroCalculatorAttributes requiredCalories);
 }

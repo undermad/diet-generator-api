@@ -5,7 +5,7 @@ import org.ectimel.dietgenerator.domain.calculator.Gender;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class HighProteinMacroCalculator implements MacroCalculator {
+public final class HighProteinMacroCalculator implements MacroCalculator {
 
 
     @Override
