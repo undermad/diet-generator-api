@@ -1,7 +1,7 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 import org.ectimel.dietgenerator.domain.model.*;
-import org.ectimel.dietgenerator.infrastructure.persistance.DatabaseMapper;
+import org.ectimel.dietgenerator.infrastructure.persistance.EntityMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
 import org.springframework.stereotype.Component;
@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class ProductMapper implements DatabaseMapper<Product, ProductDocument> {
+public class ProductMapper implements EntityMapper<Product, ProductDocument> {
 
 
     @Override
     public Product mapToDomain(ProductDocument entityObject) {
         return Product.builder()
+                .id(entityObject.getId())
                 .name(entityObject.getName())
                 .nutrients(new Nutrients(
                         new Calories(
@@ -36,6 +37,7 @@ public class ProductMapper implements DatabaseMapper<Product, ProductDocument> {
     @Override
     public ProductDocument mapToEntity(Product domainObject) {
         return ProductDocument.builder()
+                .id(domainObject.getId())
                 .name(domainObject.getName())
                 .productType(domainObject.getProductType())
                 .filler(domainObject.getFiller())
