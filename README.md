@@ -1,4 +1,6 @@
-# Diet Generator
+# Fatatu - Diet Generator 
+
+![C2 screenshot](/screenshots/fatatu_logo.png)
 
 Diet generator is simple monolith application written in Java with clean architecture principles
 and comprehensive documentation. It is also part of the [100commits](https://100commitow.pl/) competitive event.
