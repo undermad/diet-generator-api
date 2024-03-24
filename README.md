@@ -9,11 +9,11 @@ and comprehensive documentation. It is also part of the [100commits](https://100
 
 ---
 
-### 1.1 What is Diet Generator?
+### 1.1 What is Fatatu?
 
-Diet generator is application that will generate list of the meals with all ingredients and nutrition's information
-based on given criteria such as
-required kcal, diet targets, diet type etc. As addition, each diet will provide shopping list.
+Fatatu is diet generator application that will generate list of the meals with all ingredients and nutrition's information
+based on given criteria such as required kcal, diet targets, diet type etc.
+As addition, each diet will provide shopping list.
 
 With one click you can get diet and go straight to the shop and buy what you need, you don't need to wast time on
 browsing for recipe or adjusting macros. This application will do it for you.
