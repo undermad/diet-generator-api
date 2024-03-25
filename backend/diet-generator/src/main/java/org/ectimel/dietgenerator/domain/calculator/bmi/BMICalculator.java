@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.bmi_calculator;
+package org.ectimel.dietgenerator.domain.calculator.bmi;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

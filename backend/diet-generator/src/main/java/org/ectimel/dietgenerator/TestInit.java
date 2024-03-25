@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator;
 
-import org.ectimel.dietgenerator.domain.bmi_calculator.BMICalculator;
+import org.ectimel.dietgenerator.domain.calculator.bmi.BMICalculator;
 import org.ectimel.dietgenerator.domain.calculator.bmi.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
@@ -8,7 +8,9 @@ import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalcula
 import org.ectimel.dietgenerator.domain.model.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
+import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -19,8 +21,12 @@ public class TestInit {
 
     private final NinjaApi ninjaApi;
 
-    public TestInit(NinjaApi ninjaApi) {
+    @Qualifier("mongoProductRepositoryImpl")
+    private final ProductRepository productRepository;
+
+    public TestInit(NinjaApi ninjaApi, ProductRepository productRepository) {
         this.ninjaApi = ninjaApi;
+        this.productRepository = productRepository;
     }
 
 
@@ -31,10 +37,14 @@ public class TestInit {
         Product oliveOil = ninjaApi.getNinjaItem("olive oil").mapToProduct();
         oliveOil.setFiller(Filler.FAT);
 
+        Product savedTomato = productRepository.save(tomato);
+        Product savedOnion = productRepository.save(onion);
+        Product savedOliveOil = productRepository.save(oliveOil);
+
         Map<Product, BigDecimal> saladProportion = Map.of(
-                tomato, new BigDecimal("67"),
-                onion, new BigDecimal("30"),
-                oliveOil, new BigDecimal("3"));
+                savedTomato, new BigDecimal("67"),
+                savedOnion, new BigDecimal("30"),
+                savedOliveOil, new BigDecimal("3"));
 
         return new Recipe(saladProportion, new BigDecimal("200"), true, "Kurwatka");
 
@@ -47,9 +57,12 @@ public class TestInit {
         Product chicken = ninjaApi.getNinjaItem("chicken").mapToProduct();
         chicken.setFiller(Filler.PROTEIN);
 
+        Product savedRice = productRepository.save(rice);
+        Product savedChicken = productRepository.save(chicken);
+
         Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(
-                rice, BigDecimal.valueOf(25),
-                chicken, BigDecimal.valueOf(75));
+                savedRice, BigDecimal.valueOf(25),
+                savedChicken, BigDecimal.valueOf(75));
         return new Recipe(ryzZKurwczakiemprop, new BigDecimal("400"), true, "Ryz z kurwczakiem");
     }
 

@@ -5,6 +5,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
@@ -14,11 +15,12 @@ import java.util.concurrent.atomic.AtomicReference;
 @Setter
 public class Recipe {
 
+    private UUID id;
+    private String name;
     private final Map<Product, BigDecimal> ingredientsProportion;
     private final Nutrients nutrients;
     private final BigDecimal basePortion;
     private boolean isScalable;
-    private String name;
 
 
     public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name) {

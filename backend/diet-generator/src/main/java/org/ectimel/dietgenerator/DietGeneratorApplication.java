@@ -5,34 +5,38 @@ import org.ectimel.dietgenerator.domain.model.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.ProductType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
+import org.ectimel.dietgenerator.domain.port.out.RecipeRepository;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
 import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.RecipeMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.RecipeDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @SpringBootApplication
 public class DietGeneratorApplication implements CommandLineRunner {
 
-    private final NinjaApi ninjaApi;
     private final TestInit testInit;
 
-    @Qualifier("mongoProductRepository")
+    @Qualifier("mongoProductRepositoryImpl")
     private final ProductRepository productRepository;
+
+    @Qualifier("mongoRecipeRepositoryImpl")
+    private final RecipeRepository recipeRepository;
 
     private final ProductMapper productMapper;
 
-    public DietGeneratorApplication(NinjaApi ninjaApi, TestInit testInit, ProductRepository productRepository, ProductMapper productMapper) {
-        this.ninjaApi = ninjaApi;
+    public DietGeneratorApplication(TestInit testInit, ProductRepository productRepository, RecipeRepository recipeRepository, ProductMapper productMapper) {
         this.testInit = testInit;
         this.productRepository = productRepository;
+        this.recipeRepository = recipeRepository;
         this.productMapper = productMapper;
     }
 
@@ -104,6 +108,10 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
         System.out.println(potato1.getName());
 
+
+        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
+
+        System.out.println(recipe.getNutrients().getCalories().getTotalCalories());
 
     }
 }

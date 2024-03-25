@@ -11,24 +11,19 @@ import java.math.BigDecimal;
 @Component
 public class ProductMapper implements EntityMapper<Product, ProductDocument> {
 
+    private final NutrientMapper nutrientMapper;
+
+    public ProductMapper(NutrientMapper nutrientMapper) {
+        this.nutrientMapper = nutrientMapper;
+    }
+
 
     @Override
     public Product mapToDomain(ProductDocument entityObject) {
         return Product.builder()
                 .id(entityObject.getId())
                 .name(entityObject.getName())
-                .nutrients(new Nutrients(
-                        new Calories(
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getTotalCalories())),
-                        new Carbohydrates(
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getTotalCarbohydrates()),
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getFiber()),
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getFiber())),
-                        new Proteins(
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getTotalProteins())),
-                        new Fats(
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getTotalFats()),
-                                BigDecimal.valueOf(entityObject.getNutrientInformation().getSaturatedFats()))))
+                .nutrients(nutrientMapper.mapToDomain(entityObject.getNutrientInformation()))
                 .productType(entityObject.getProductType())
                 .filler(entityObject.getFiller())
                 .build();
@@ -41,14 +36,7 @@ public class ProductMapper implements EntityMapper<Product, ProductDocument> {
                 .name(domainObject.getName())
                 .productType(domainObject.getProductType())
                 .filler(domainObject.getFiller())
-                .nutrientInformation(NutrientInformation.builder()
-                        .totalCalories(domainObject.getNutrients().getCalories().getTotalCalories().doubleValue())
-                        .totalCarbohydrates(domainObject.getNutrients().getCarbohydrates().getTotalCarbohydrates().doubleValue())
-                        .fiber(domainObject.getNutrients().getCarbohydrates().getFiber().doubleValue())
-                        .sugar(domainObject.getNutrients().getCarbohydrates().getTotalCarbohydrates().doubleValue())
-                        .totalFats(domainObject.getNutrients().getFats().getTotalFats().doubleValue())
-                        .saturatedFats(domainObject.getNutrients().getFats().getSaturatedFats().doubleValue())
-                        .build())
+                .nutrientInformation(nutrientMapper.mapToEntity(domainObject.getNutrients()))
                 .build();
     }
 
