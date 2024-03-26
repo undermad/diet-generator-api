@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.model;
+package org.ectimel.dietgenerator.domain.model.nutrient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Proteins {
-    private BigDecimal totalProteins;
+public class Fats {
+    private BigDecimal totalFats;
+    private BigDecimal saturatedFats;
+
+
 }

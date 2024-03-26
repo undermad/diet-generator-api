@@ -2,6 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.ninja;
 
 import lombok.ToString;
 import org.ectimel.dietgenerator.domain.model.*;
+import org.ectimel.dietgenerator.domain.model.nutrient.*;
 
 import java.math.BigDecimal;
 

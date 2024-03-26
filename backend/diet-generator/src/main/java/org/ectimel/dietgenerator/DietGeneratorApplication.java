@@ -1,18 +1,15 @@
 package org.ectimel.dietgenerator;
 
 import org.ectimel.dietgenerator.domain.generator.Dish;
-import org.ectimel.dietgenerator.domain.model.Filler;
+import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.ProductType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.port.out.RecipeRepository;
-import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
 import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.RecipeMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.RecipeDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

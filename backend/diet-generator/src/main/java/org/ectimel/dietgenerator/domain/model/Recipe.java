@@ -1,6 +1,7 @@
 package org.ectimel.dietgenerator.domain.model;
 
 import lombok.*;
+import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

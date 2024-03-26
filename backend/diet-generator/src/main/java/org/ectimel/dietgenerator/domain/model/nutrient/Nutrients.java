@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.model;
+package org.ectimel.dietgenerator.domain.model.nutrient;
 
 import lombok.*;
 

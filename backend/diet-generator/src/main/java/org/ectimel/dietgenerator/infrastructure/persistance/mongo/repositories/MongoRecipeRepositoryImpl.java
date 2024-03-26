@@ -28,7 +28,7 @@ public class MongoRecipeRepositoryImpl implements RecipeRepository {
 
     @Override
     public Recipe save(Recipe recipe) {
-        RecipeDocument savedRecipeDocument = springDataMongoRecipeRepository.save(recipeMapper.mapToEntity(recipe));
+        RecipeDocument savedRecipeDocument = springDataMongoRecipeRepository.save(recipeMapper.mapFromDomain(recipe));
 
         return recipeMapper.mapToDomain(savedRecipeDocument);
     }

@@ -1,19 +1,10 @@
 1. Round double calculation to 2 decimal places.
-    - use BigDecimal to achieve it COMPLETED
+    - use BigDecimal to achieve it              COMPLETED
 
-    - app.logomakr.com/8VdsLZ <-- logo link
-    - add better colors
-
-2. Create meal sizes:
-    - small: 0.7
-    - normal: 1.0
-    - large: 1.3
-    - extra-large: 1.6
-
-create
+    - add logo                                  COMPLETED
 
 
-
+Make sure entities always have ID <- factory method?
 
 
 

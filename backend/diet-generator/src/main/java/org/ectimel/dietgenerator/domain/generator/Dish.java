@@ -1,8 +1,8 @@
 package org.ectimel.dietgenerator.domain.generator;
 
 import lombok.Getter;
-import org.ectimel.dietgenerator.domain.model.Filler;
-import org.ectimel.dietgenerator.domain.model.Nutrients;
+import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
+import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 

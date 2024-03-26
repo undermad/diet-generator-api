@@ -21,7 +21,7 @@ public class MongoProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product save(Product product) {
-        ProductDocument savedProduct = productRepository.save(productMapper.mapToEntity(product));
+        ProductDocument savedProduct = productRepository.save(productMapper.mapFromDomain(product));
         return productMapper.mapToDomain(savedProduct);
     }
 }

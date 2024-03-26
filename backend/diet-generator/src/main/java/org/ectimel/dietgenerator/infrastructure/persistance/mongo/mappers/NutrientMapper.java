@@ -1,14 +1,14 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
-import org.ectimel.dietgenerator.domain.model.*;
-import org.ectimel.dietgenerator.infrastructure.persistance.EntityMapper;
+import org.ectimel.dietgenerator.domain.model.nutrient.*;
+import org.ectimel.dietgenerator.domain.port.DomainMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
-public class NutrientMapper implements EntityMapper<Nutrients, NutrientInformation> {
+public class NutrientMapper implements DomainMapper<Nutrients, NutrientInformation> {
 
     @Override
     public Nutrients mapToDomain(NutrientInformation entityObject) {
@@ -27,7 +27,7 @@ public class NutrientMapper implements EntityMapper<Nutrients, NutrientInformati
     }
 
     @Override
-    public NutrientInformation mapToEntity(Nutrients domainObject) {
+    public NutrientInformation mapFromDomain(Nutrients domainObject) {
         return NutrientInformation.builder()
                 .totalCalories(domainObject.getCalories().getTotalCalories().doubleValue())
                 .totalCarbohydrates(domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue())

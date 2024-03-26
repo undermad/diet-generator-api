@@ -2,9 +2,8 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
-import org.ectimel.dietgenerator.infrastructure.persistance.EntityMapper;
+import org.ectimel.dietgenerator.domain.port.DomainMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductAmount;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.RecipeDocument;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class RecipeMapper implements EntityMapper<Recipe, RecipeDocument> {
+public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
 
     private final NutrientMapper nutrientMapper;
     private final ProductMapper productMapper;
@@ -40,12 +39,12 @@ public class RecipeMapper implements EntityMapper<Recipe, RecipeDocument> {
     }
 
     @Override
-    public RecipeDocument mapToEntity(Recipe domainObject) {
+    public RecipeDocument mapFromDomain(Recipe domainObject) {
         return RecipeDocument.builder()
                 .id(domainObject.getId())
                 .name(domainObject.getName())
                 .ingredientsProportion(mapProductProportionToEntity(domainObject.getIngredientsProportion()))
-                .nutrientInformation(nutrientMapper.mapToEntity(domainObject.getNutrients()))
+                .nutrientInformation(nutrientMapper.mapFromDomain(domainObject.getNutrients()))
                 .isScalable(domainObject.isScalable())
                 .basePortion(domainObject.getBasePortion().doubleValue())
                 .build();
@@ -55,7 +54,7 @@ public class RecipeMapper implements EntityMapper<Recipe, RecipeDocument> {
     private List<ProductAmount> mapProductProportionToEntity(Map<Product, BigDecimal> proportionMap) {
         List<ProductAmount> productsProportions = new ArrayList<>();
         proportionMap.forEach(((product, percentage) -> {
-            productsProportions.add(new ProductAmount(productMapper.mapToEntity(product), percentage.doubleValue()));
+            productsProportions.add(new ProductAmount(productMapper.mapFromDomain(product), percentage.doubleValue()));
         }));
         return productsProportions;
     }

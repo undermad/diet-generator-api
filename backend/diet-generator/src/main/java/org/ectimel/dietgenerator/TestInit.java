@@ -5,7 +5,7 @@ import org.ectimel.dietgenerator.domain.calculator.bmi.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalculator;
-import org.ectimel.dietgenerator.domain.model.Filler;
+import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
