@@ -1,6 +1,8 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 
@@ -8,6 +10,7 @@ import java.util.UUID;
 
 @Getter
 @SuperBuilder
+@NoArgsConstructor
 public abstract class MongoUUIDEntity {
 
     @Id

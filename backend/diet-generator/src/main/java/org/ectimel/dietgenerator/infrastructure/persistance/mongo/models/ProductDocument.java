@@ -1,15 +1,16 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.ectimel.dietgenerator.domain.model.*;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @SuperBuilder
+@NoArgsConstructor
 @Document(collection = "products")
 public class ProductDocument extends MongoUUIDEntity {
 

@@ -5,6 +5,7 @@ import org.ectimel.dietgenerator.domain.calculator.bmi.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalculator;
+import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
@@ -46,7 +47,14 @@ public class TestInit {
                 savedOnion, new BigDecimal("30"),
                 savedOliveOil, new BigDecimal("3"));
 
-        return new Recipe(saladProportion, new BigDecimal("200"), true, "Kurwatka");
+        return Recipe.builder()
+                .name("Kurwatka")
+                .howToPrepare("Mix all products together")
+                .ingredientsProportion(saladProportion)
+                .dietType(DietType.PROTEIN)
+                .basePortion(BigDecimal.valueOf(200))
+                .isScalable(true)
+                .build();
 
     }
 
@@ -63,7 +71,15 @@ public class TestInit {
         Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(
                 savedRice, BigDecimal.valueOf(25),
                 savedChicken, BigDecimal.valueOf(75));
-        return new Recipe(ryzZKurwczakiemprop, new BigDecimal("400"), true, "Ryz z kurwczakiem");
+
+        return Recipe.builder()
+                .name("Ryz z kurwiczkiem")
+                .howToPrepare("Fry the chicken, boil the rice and grow you muscles")
+                .dietType(DietType.PROTEIN)
+                .ingredientsProportion(ryzZKurwczakiemprop)
+                .basePortion(BigDecimal.valueOf(400))
+                .isScalable(true)
+                .build();
     }
 
     public void printBmi() {

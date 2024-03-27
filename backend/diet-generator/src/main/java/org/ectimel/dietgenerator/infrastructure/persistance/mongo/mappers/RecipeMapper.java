@@ -27,15 +27,16 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
 
     @Override
     public Recipe mapToDomain(RecipeDocument entityObject) {
-        return Recipe.builder()
-                .id(entityObject.getId())
-                .name(entityObject.getName())
-                .ingredientsProportion(mapProductProportionToDomain(entityObject.getIngredientsProportion()))
-                .nutrients(nutrientMapper.mapToDomain(entityObject.getNutrientInformation()))
-                .isScalable(entityObject.isScalable())
-                .basePortion(BigDecimal.valueOf(entityObject.getBasePortion()))
-                .build();
-
+        Recipe recipe = new Recipe();
+        recipe.setId(entityObject.getId());
+        recipe.setName(entityObject.getName());
+        recipe.setHowToPrepare(entityObject.getHowToPrepare());
+        recipe.setDietType(entityObject.getDietType());
+        recipe.setNutrients(nutrientMapper.mapToDomain(entityObject.getNutrientInformation()));
+        recipe.setScalable(entityObject.isScalable());
+        recipe.setBasePortion(BigDecimal.valueOf(entityObject.getBasePortion()));
+        recipe.setIngredientsProportion(mapProductProportionToDomain(entityObject.getIngredientsProportion()));
+        return recipe;
     }
 
     @Override
@@ -43,6 +44,8 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
         return RecipeDocument.builder()
                 .id(domainObject.getId())
                 .name(domainObject.getName())
+                .howToPrepare(domainObject.getHowToPrepare())
+                .dietType(domainObject.getDietType())
                 .ingredientsProportion(mapProductProportionToEntity(domainObject.getIngredientsProportion()))
                 .nutrientInformation(nutrientMapper.mapFromDomain(domainObject.getNutrients()))
                 .isScalable(domainObject.isScalable())

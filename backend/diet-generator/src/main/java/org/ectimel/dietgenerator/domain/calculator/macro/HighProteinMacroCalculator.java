@@ -17,14 +17,16 @@ public final class HighProteinMacroCalculator implements MacroCalculator {
     }
 
     private BigDecimal calculateCarbohydrates(BigDecimal requiredCalories, BigDecimal totalProteins, BigDecimal totalFats) {
-        BigDecimal caloriesLeft = requiredCalories.min(totalProteins.multiply(BigDecimal.valueOf(4)))
-                .add(totalFats.multiply(BigDecimal.valueOf(9)));
+        BigDecimal caloriesLeft = requiredCalories
+                .subtract(totalProteins.multiply(BigDecimal.valueOf(4)))
+                .subtract(totalFats.multiply(BigDecimal.valueOf(9)));
         return caloriesLeft.divide(BigDecimal.valueOf(4), 1, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calculateTotalFats(BigDecimal requiredCalories) {
         BigDecimal oneThirdRequiredCalories = requiredCalories.multiply(BigDecimal.valueOf(0.3));
-        return oneThirdRequiredCalories.divide(BigDecimal.valueOf(3), 1, RoundingMode.HALF_UP);
+        return oneThirdRequiredCalories
+                .divide(BigDecimal.valueOf(9), 1, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calculateTotalProtein(BigDecimal bodyWeight, Gender gender) {

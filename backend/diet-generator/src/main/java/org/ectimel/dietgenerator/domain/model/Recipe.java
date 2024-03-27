@@ -1,6 +1,7 @@
 package org.ectimel.dietgenerator.domain.model;
 
 import lombok.*;
+import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
@@ -10,27 +11,35 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
-@Builder
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Recipe {
 
     private UUID id;
     private String name;
-    private final Map<Product, BigDecimal> ingredientsProportion;
-    private final Nutrients nutrients;
-    private final BigDecimal basePortion;
+    private Map<Product, BigDecimal> ingredientsProportion;
+    private Nutrients nutrients;
+    private BigDecimal basePortion;
     private boolean isScalable;
+    private String howToPrepare;
+    private DietType dietType;
 
 
-    public Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name) {
+    private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, DietType dietType) {
         validateProducts(ingredientsProportion, isScalable);
         this.name = name;
         this.basePortion = basePortion;
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
         this.isScalable = isScalable;
+        this.howToPrepare = howToPrepare;
+        this.dietType = dietType;
+    }
+
+    @Builder
+    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, DietType dietType){
+        return new Recipe(ingredientsProportion, basePortion, isScalable, name, howToPrepare, dietType);
     }
 
 
@@ -59,7 +68,7 @@ public class Recipe {
         return calculatedNutrients;
     }
 
-    private void validateProducts(Map<Product, BigDecimal> ingredientsProportion, boolean isScalable) {
+    private static void validateProducts(Map<Product, BigDecimal> ingredientsProportion, boolean isScalable) {
         try {
             AtomicReference<Double> total = new AtomicReference<>(0D);
             AtomicReference<Boolean> canScale = new AtomicReference<>(false);

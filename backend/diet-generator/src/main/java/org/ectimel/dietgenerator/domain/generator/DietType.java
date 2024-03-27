@@ -6,23 +6,18 @@ import lombok.Getter;
 public enum DietType {
     PROTEIN("Protein");
 
-    private final String description;
+    private final String name;
 
-    DietType(String description) {
-        this.description = description;
+    DietType(String name) {
+        this.name = name;
     }
 
     public static DietType fromValue(String value) {
         for (DietType dietType : DietType.values()){
-            if(dietType.getDescription().equalsIgnoreCase(value))
+            if(dietType.getName().equalsIgnoreCase(value))
                 return dietType;
         }
         throw new IllegalArgumentException("Unknown diet type");
     }
-
-    public String toValue() {
-        return getDescription();
-    }
-
 
 }

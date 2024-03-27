@@ -1,17 +1,17 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.models;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @SuperBuilder
+@NoArgsConstructor
 @Document(collection = "recipes")
 public class RecipeDocument extends MongoUUIDEntity{
 
@@ -20,5 +20,7 @@ public class RecipeDocument extends MongoUUIDEntity{
     private NutrientInformation nutrientInformation;
     private Double basePortion;
     private boolean isScalable;
+    private DietType dietType;
+    private String howToPrepare;
 
 }
