@@ -1,6 +1,5 @@
-package org.ectimel.dietgenerator.infrastructure.persistance.mongo.models;
+package org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

@@ -8,8 +8,8 @@ import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.port.out.RecipeRepository;
 import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductDocument;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.NutrientInformation;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,20 +21,13 @@ import java.math.BigDecimal;
 public class DietGeneratorApplication implements CommandLineRunner {
 
     private final TestInit testInit;
-
-    @Qualifier("mongoProductRepositoryImpl")
-    private final ProductRepository productRepository;
-
     @Qualifier("mongoRecipeRepositoryImpl")
     private final RecipeRepository recipeRepository;
 
-    private final ProductMapper productMapper;
 
-    public DietGeneratorApplication(TestInit testInit, ProductRepository productRepository, RecipeRepository recipeRepository, ProductMapper productMapper) {
+    public DietGeneratorApplication(TestInit testInit, RecipeRepository recipeRepository) {
         this.testInit = testInit;
-        this.productRepository = productRepository;
         this.recipeRepository = recipeRepository;
-        this.productMapper = productMapper;
     }
 
 
@@ -45,70 +38,12 @@ public class DietGeneratorApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        testInit.printBmi();
+//        testInit.printBmi();
+//        testInit.initProductsFromFile();
+
         Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
-        Recipe onionTomatoSalad = testInit.initSalad();
-
-        Dish ryzZKurwczakiemDish = Dish.createDish(ryzZKurwczakiem);
-        ryzZKurwczakiemDish.getProductToGrams().forEach(((product, bigDecimal) -> {
-            System.out.println(product.getName() + " " + bigDecimal.doubleValue());
-        }));
-
-        Dish salad = Dish.createDish(onionTomatoSalad);
-        salad.getProductToGrams().forEach(((product, bigDecimal) -> {
-            System.out.println(product.getName() + " " + bigDecimal.doubleValue());
-        }));
-
-
-        System.out.println(ryzZKurwczakiemDish.getRecipe().getName());
-        ryzZKurwczakiemDish.getProductToGrams().forEach(((product, bigDecimal) -> {
-            System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
-        }));
-        System.out.println("total carbo: " + ryzZKurwczakiemDish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
-        System.out.println("total fat: " + ryzZKurwczakiemDish.getNutrients().getFats().getTotalFats());
-
-        System.out.println("*****");
-        System.out.println("*****");
-        System.out.println("*****");
-
-        System.out.println("FILLING IN PROGRESS!");
-        ryzZKurwczakiemDish.addFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(10));
-        ryzZKurwczakiemDish.addFiller(Filler.FAT, BigDecimal.valueOf(3));
-
-        System.out.println(ryzZKurwczakiemDish.getRecipe().getName());
-        ryzZKurwczakiemDish.getProductToGrams().forEach(((product, bigDecimal) -> {
-            System.out.println("Product name: " + product.getName() + " " + bigDecimal.doubleValue() + " grams");
-        }));
-
-        System.out.println("total carbo: " + ryzZKurwczakiemDish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
-        System.out.println("total fat: " + ryzZKurwczakiemDish.getNutrients().getFats().getTotalFats());
-
-        ProductDocument potatoDocument = ProductDocument.builder()
-                .name("Potato")
-                .productType(ProductType.VEGETABLE)
-                .filler(Filler.CARBOHYDRATE)
-                .nutrientInformation(NutrientInformation.builder()
-                        .totalCalories(77)
-                        .totalCarbohydrates(17.47)
-                        .fiber(0)
-                        .sugar(0)
-                        .totalProteins(2.02)
-                        .totalFats(0.09)
-                        .saturatedFats(0)
-                        .build())
-                .build();
-
-        Product potato = productMapper.mapToDomain(potatoDocument);
-        System.out.println(potato.getNutrients().getCalories().getTotalCalories());
-
-        Product potato1 = productRepository.save(potato);
-
-        System.out.println(potato1.getName());
-
-
         Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
 
-        System.out.println(recipe.getNutrients().getCalories().getTotalCalories());
 
     }
 }

@@ -6,78 +6,71 @@ import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalculator;
 import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
+import org.ectimel.dietgenerator.infrastructure.ninja.NinjaService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
 @Component
 public class TestInit {
 
-    private final NinjaApi ninjaApi;
+    private final NinjaService ninjaService;
 
-    @Qualifier("mongoProductRepositoryImpl")
-    private final ProductRepository productRepository;
+    @Value("classpath:products.txt")
+    private Resource productsFile;
 
-    public TestInit(NinjaApi ninjaApi, ProductRepository productRepository) {
-        this.ninjaApi = ninjaApi;
-        this.productRepository = productRepository;
+
+    public TestInit(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
     }
 
+    public void initProductsFromFile() throws IOException {
 
-    public Recipe initSalad() {
-
-        Product tomato = ninjaApi.getNinjaItem("tomato").mapToProduct();
-        Product onion = ninjaApi.getNinjaItem("onion").mapToProduct();
-        Product oliveOil = ninjaApi.getNinjaItem("olive oil").mapToProduct();
-        oliveOil.setFiller(Filler.FAT);
-
-        Product savedTomato = productRepository.save(tomato);
-        Product savedOnion = productRepository.save(onion);
-        Product savedOliveOil = productRepository.save(oliveOil);
-
-        Map<Product, BigDecimal> saladProportion = Map.of(
-                savedTomato, new BigDecimal("67"),
-                savedOnion, new BigDecimal("30"),
-                savedOliveOil, new BigDecimal("3"));
-
-        return Recipe.builder()
-                .name("Kurwatka")
-                .howToPrepare("Mix all products together")
-                .ingredientsProportion(saladProportion)
-                .dietType(DietType.PROTEIN)
-                .basePortion(BigDecimal.valueOf(200))
-                .isScalable(true)
-                .build();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(productsFile.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] productInfo = line.split("/");
+                String product = productInfo[0];
+                Filler filler = productInfo.length > 1 ? Filler.valueOf(productInfo[1]) : Filler.NONE;
+                ninjaService.saveProductFromNinjaApi(product, filler);
+            }
+        }
 
     }
+
 
     public Recipe initRyzZKurwczakiem() {
-        Product rice = ninjaApi.getNinjaItem("rice").mapToProduct();
-        rice.setFiller(Filler.CARBOHYDRATE);
-
-        Product chicken = ninjaApi.getNinjaItem("chicken").mapToProduct();
-        chicken.setFiller(Filler.PROTEIN);
-
-        Product savedRice = productRepository.save(rice);
-        Product savedChicken = productRepository.save(chicken);
 
         Map<Product, BigDecimal> ryzZKurwczakiemprop = Map.of(
-                savedRice, BigDecimal.valueOf(25),
-                savedChicken, BigDecimal.valueOf(75));
+                ninjaService.saveProductFromNinjaApi("rice", Filler.CARBOHYDRATE), BigDecimal.valueOf(15),
+                ninjaService.saveProductFromNinjaApi("chicken breast", Filler.PROTEIN), BigDecimal.valueOf(52),
+                ninjaService.saveProductFromNinjaApi("tomato", Filler.NONE), BigDecimal.valueOf(15),
+                ninjaService.saveProductFromNinjaApi("onion", Filler.NONE), BigDecimal.valueOf(15),
+                ninjaService.saveProductFromNinjaApi("olive oil", Filler.FAT), BigDecimal.valueOf(3));
 
         return Recipe.builder()
-                .name("Ryz z kurwiczkiem")
-                .howToPrepare("Fry the chicken, boil the rice and grow you muscles")
-                .dietType(DietType.PROTEIN)
+                .name("Ryz z kurwiczkiem i kurwisalatka")
+                .howToPrepare("Fry the chicken, boil the rice and grow you muscles, eat all vegetables and never skip legs day!")
+                .dietType(List.of(DietType.PROTEIN))
+                .mealTypes(List.of(MealType.LUNCH))
                 .ingredientsProportion(ryzZKurwczakiemprop)
-                .basePortion(BigDecimal.valueOf(400))
+                .basePortion(BigDecimal.valueOf(500))
                 .isScalable(true)
                 .build();
     }

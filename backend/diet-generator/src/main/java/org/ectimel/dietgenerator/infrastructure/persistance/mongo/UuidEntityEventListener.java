@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo;
 
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.MongoUUIDEntity;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.MongoUUIDEntity;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
 import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;

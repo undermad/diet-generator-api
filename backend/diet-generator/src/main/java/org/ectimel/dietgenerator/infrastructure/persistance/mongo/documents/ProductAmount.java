@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.infrastructure.persistance.mongo.models;
+package org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -6,6 +6,7 @@ import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -20,26 +21,27 @@ public class Recipe {
     private String name;
     private Map<Product, BigDecimal> ingredientsProportion;
     private Nutrients nutrients;
-    private BigDecimal basePortion;
+    private BigDecimal basePortionInGrams;
     private boolean isScalable;
     private String howToPrepare;
-    private DietType dietType;
+    private List<DietType> dietTypes;
+    private List<MealType> mealTypes;
 
 
-    private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, DietType dietType) {
+    private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietTypes, List<MealType> mealTypes) {
         validateProducts(ingredientsProportion, isScalable);
         this.name = name;
-        this.basePortion = basePortion;
+        this.basePortionInGrams = basePortionInGrams;
         this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
         this.isScalable = isScalable;
         this.howToPrepare = howToPrepare;
-        this.dietType = dietType;
+        this.dietTypes = dietTypes;
     }
 
     @Builder
-    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, DietType dietType){
-        return new Recipe(ingredientsProportion, basePortion, isScalable, name, howToPrepare, dietType);
+    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
+        return new Recipe(ingredientsProportion, basePortion, isScalable, name, howToPrepare, dietType, mealTypes);
     }
 
 

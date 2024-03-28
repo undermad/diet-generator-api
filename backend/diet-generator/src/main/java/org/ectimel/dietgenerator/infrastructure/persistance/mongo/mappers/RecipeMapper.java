@@ -3,8 +3,8 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.port.DomainMapper;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.ProductAmount;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.RecipeDocument;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductAmount;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.RecipeDocument;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -31,10 +31,11 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
         recipe.setId(entityObject.getId());
         recipe.setName(entityObject.getName());
         recipe.setHowToPrepare(entityObject.getHowToPrepare());
-        recipe.setDietType(entityObject.getDietType());
+        recipe.setDietTypes(entityObject.getDietTypes());
         recipe.setNutrients(nutrientMapper.mapToDomain(entityObject.getNutrientInformation()));
         recipe.setScalable(entityObject.isScalable());
-        recipe.setBasePortion(BigDecimal.valueOf(entityObject.getBasePortion()));
+        recipe.setMealTypes(entityObject.getMealTypes());
+        recipe.setBasePortionInGrams(BigDecimal.valueOf(entityObject.getBasePortionInGrams()));
         recipe.setIngredientsProportion(mapProductProportionToDomain(entityObject.getIngredientsProportion()));
         return recipe;
     }
@@ -45,11 +46,12 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
                 .id(domainObject.getId())
                 .name(domainObject.getName())
                 .howToPrepare(domainObject.getHowToPrepare())
-                .dietType(domainObject.getDietType())
+                .dietTypes(domainObject.getDietTypes())
+                .mealTypes(domainObject.getMealTypes())
                 .ingredientsProportion(mapProductProportionToEntity(domainObject.getIngredientsProportion()))
                 .nutrientInformation(nutrientMapper.mapFromDomain(domainObject.getNutrients()))
                 .isScalable(domainObject.isScalable())
-                .basePortion(domainObject.getBasePortion().doubleValue())
+                .basePortionInGrams(domainObject.getBasePortionInGrams().doubleValue())
                 .build();
     }
 

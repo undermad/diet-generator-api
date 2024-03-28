@@ -20,7 +20,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody Product product) {
-        Product savedProduct = productService.createProduct(product);
+        Product savedProduct = productService.saveProduct(product);
         return ResponseEntity.ok(savedProduct.getName());
     }
 

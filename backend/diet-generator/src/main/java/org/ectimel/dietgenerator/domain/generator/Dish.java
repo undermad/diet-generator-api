@@ -28,7 +28,7 @@ public class Dish {
     public static Dish createDish(Recipe recipe) {
         Map<Product, BigDecimal> calculatedRecipeToGram = new HashMap<>();
         recipe.getIngredientsProportion().forEach(((product, proportion) -> {
-            calculatedRecipeToGram.put(product, recipe.getBasePortion()
+            calculatedRecipeToGram.put(product, recipe.getBasePortionInGrams()
                     .multiply(proportion.divide(BigDecimal.valueOf(100), 2, RoundingMode.FLOOR)));
         }));
         return new Dish(calculatedRecipeToGram, recipe);

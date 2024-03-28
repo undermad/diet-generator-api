@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 import org.ectimel.dietgenerator.domain.model.nutrient.*;
 import org.ectimel.dietgenerator.domain.port.DomainMapper;
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.models.NutrientInformation;
+import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.NutrientInformation;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
