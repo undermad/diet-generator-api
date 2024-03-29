@@ -10,13 +10,9 @@ import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
-import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
-import org.ectimel.dietgenerator.infrastructure.ninja.NinjaApi;
 import org.ectimel.dietgenerator.infrastructure.ninja.NinjaService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.port.out;
+package org.ectimel.dietgenerator.application.repositories;
 
 import org.ectimel.dietgenerator.domain.model.Product;
 

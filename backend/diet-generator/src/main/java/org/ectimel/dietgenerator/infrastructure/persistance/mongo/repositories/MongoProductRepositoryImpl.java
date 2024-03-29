@@ -1,7 +1,7 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.repositories;
 
 import org.ectimel.dietgenerator.domain.model.Product;
-import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
+import org.ectimel.dietgenerator.application.repositories.ProductRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductDocument;
 import org.springframework.beans.factory.annotation.Qualifier;

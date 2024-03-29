@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.port;
+package org.ectimel.dietgenerator.application.port;
 
 public interface DomainMapper<D, E> {
     D mapToDomain(E entityObject);

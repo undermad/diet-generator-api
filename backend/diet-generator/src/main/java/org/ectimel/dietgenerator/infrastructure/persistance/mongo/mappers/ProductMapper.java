@@ -1,7 +1,7 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 import org.ectimel.dietgenerator.domain.model.*;
-import org.ectimel.dietgenerator.domain.port.DomainMapper;
+import org.ectimel.dietgenerator.application.port.DomainMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductDocument;
 import org.springframework.stereotype.Component;
 

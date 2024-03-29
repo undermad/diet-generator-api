@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.application.dto;
+package org.ectimel.dietgenerator.presentation.api.dto;
 
 import java.util.Date;
 

@@ -1,8 +1,8 @@
-package org.ectimel.dietgenerator.application.controller;
+package org.ectimel.dietgenerator.presentation.api.controller;
 
-import org.ectimel.dietgenerator.application.dto.DietRequest;
+import org.ectimel.dietgenerator.presentation.api.dto.DietRequest;
 import org.ectimel.dietgenerator.domain.model.Diet;
-import org.ectimel.dietgenerator.domain.port.in.DietService;
+import org.ectimel.dietgenerator.application.port.in.DietService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

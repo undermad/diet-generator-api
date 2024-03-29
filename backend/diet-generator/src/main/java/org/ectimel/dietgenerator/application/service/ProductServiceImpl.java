@@ -1,8 +1,8 @@
-package org.ectimel.dietgenerator.domain.service;
+package org.ectimel.dietgenerator.application.service;
 
+import org.ectimel.dietgenerator.application.port.in.ProductService;
 import org.ectimel.dietgenerator.domain.model.Product;
-import org.ectimel.dietgenerator.domain.port.in.ProductService;
-import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
+import org.ectimel.dietgenerator.application.repositories.ProductRepository;
 
 public class ProductServiceImpl implements ProductService {
 

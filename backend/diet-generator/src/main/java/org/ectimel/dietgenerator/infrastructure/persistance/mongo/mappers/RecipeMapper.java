@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.Recipe;
-import org.ectimel.dietgenerator.domain.port.DomainMapper;
+import org.ectimel.dietgenerator.application.port.DomainMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductAmount;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.RecipeDocument;
 import org.springframework.stereotype.Component;

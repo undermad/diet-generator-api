@@ -1,11 +1,11 @@
 package org.ectimel.dietgenerator.infrastructure.configuration;
 
-import org.ectimel.dietgenerator.domain.port.in.DietService;
-import org.ectimel.dietgenerator.domain.port.in.ProductService;
-import org.ectimel.dietgenerator.domain.port.out.ProductRepository;
-import org.ectimel.dietgenerator.domain.port.out.RecipeRepository;
-import org.ectimel.dietgenerator.domain.service.DietServiceImpl;
-import org.ectimel.dietgenerator.domain.service.ProductServiceImpl;
+import org.ectimel.dietgenerator.application.port.in.DietService;
+import org.ectimel.dietgenerator.application.port.in.ProductService;
+import org.ectimel.dietgenerator.application.repositories.ProductRepository;
+import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
+import org.ectimel.dietgenerator.application.service.DietServiceImpl;
+import org.ectimel.dietgenerator.application.service.ProductServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

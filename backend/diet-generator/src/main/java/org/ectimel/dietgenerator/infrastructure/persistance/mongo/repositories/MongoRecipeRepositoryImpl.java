@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.repositories;
 
 import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
-import org.ectimel.dietgenerator.domain.port.out.RecipeRepository;
+import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.RecipeMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.RecipeDocument;
 import org.springframework.beans.factory.annotation.Qualifier;

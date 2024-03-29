@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.ninja;
 
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
-import org.ectimel.dietgenerator.domain.port.in.ProductService;
+import org.ectimel.dietgenerator.application.port.in.ProductService;
 import org.springframework.stereotype.Component;
 
 @Component
