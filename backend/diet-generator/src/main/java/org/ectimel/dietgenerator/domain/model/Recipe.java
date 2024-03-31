@@ -30,10 +30,10 @@ public class Recipe {
 
     private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietTypes, List<MealType> mealTypes) {
         validateProducts(ingredientsProportion, isScalable);
+        this.nutrients = calculateNutrients();
         this.name = name;
         this.basePortionInGrams = basePortionInGrams;
         this.ingredientsProportion = ingredientsProportion;
-        this.nutrients = calculateNutrients();
         this.isScalable = isScalable;
         this.howToPrepare = howToPrepare;
         this.dietTypes = dietTypes;

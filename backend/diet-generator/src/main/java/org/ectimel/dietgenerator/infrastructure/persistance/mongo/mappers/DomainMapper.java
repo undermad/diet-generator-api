@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.application.port;
+package org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers;
 
 public interface DomainMapper<D, E> {
     D mapToDomain(E entityObject);
