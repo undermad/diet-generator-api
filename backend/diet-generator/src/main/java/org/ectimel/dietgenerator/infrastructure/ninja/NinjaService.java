@@ -20,6 +20,7 @@ public class NinjaService {
 
     public Product saveProductFromNinjaApi(String query, Filler filler) {
         Product product = ninjaApi.getNinjaItem(query).mapToProduct();
+        System.out.println(product.getNutrients().getProteins().getTotalProteins());
         if(!Filler.NONE.equals(filler)) product.setFiller(filler);
         return productService.saveProduct(product);
     }

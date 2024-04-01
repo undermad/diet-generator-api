@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum DietType {
-    PROTEIN("Protein");
+    PROTEIN("Protein"),
+    VEGETARIAN("Vegetarian");
 
     private final String name;
 

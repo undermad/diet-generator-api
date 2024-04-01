@@ -30,18 +30,18 @@ public class Recipe {
 
     private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietTypes, List<MealType> mealTypes) {
         validateProducts(ingredientsProportion, isScalable);
+        this.ingredientsProportion = ingredientsProportion;
         this.nutrients = calculateNutrients();
         this.name = name;
         this.basePortionInGrams = basePortionInGrams;
-        this.ingredientsProportion = ingredientsProportion;
         this.isScalable = isScalable;
         this.howToPrepare = howToPrepare;
         this.dietTypes = dietTypes;
     }
 
     @Builder
-    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortion, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
-        return new Recipe(ingredientsProportion, basePortion, isScalable, name, howToPrepare, dietType, mealTypes);
+    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
+        return new Recipe(ingredientsProportion, basePortionInGrams, isScalable, name, howToPrepare, dietType, mealTypes);
     }
 
 

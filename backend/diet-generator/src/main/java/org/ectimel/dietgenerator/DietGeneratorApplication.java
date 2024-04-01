@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator;
 
+import org.ectimel.dietgenerator.domain.generator.Dish;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,9 +32,21 @@ public class DietGeneratorApplication implements CommandLineRunner {
 //        testInit.printBmi();
 //        testInit.initProductsFromFile();
 
-        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
-        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
+//        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
+//        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
+//
+//        Recipe omlette = testInit.initBreakfast();
+//        Recipe savedOmlette = recipeRepository.save(omlette);
+//        System.out.println(savedOmlette.getNutrients().getCalories().getTotalCalories());
 
+        Recipe cottageRadish = testInit.initDinner();
+        Recipe savedCottageRadish = recipeRepository.save(cottageRadish);
+
+        Dish dish = Dish.createDish(savedCottageRadish);
+        System.out.println("Calories in omlet dish: " + dish.getNutrients().getCalories().getTotalCalories());
+        System.out.println("Proteins: " + dish.getNutrients().getProteins().getTotalProteins());
+        System.out.println("Fats: " + dish.getNutrients().getFats().getTotalFats());
+        System.out.println("Carbohydrates: " + dish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
 
     }
 }

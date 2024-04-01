@@ -66,10 +66,54 @@ public class TestInit {
                 .dietType(List.of(DietType.PROTEIN))
                 .mealTypes(List.of(MealType.LUNCH))
                 .ingredientsProportion(ryzZKurwczakiemprop)
-                .basePortion(BigDecimal.valueOf(500))
+                .basePortionInGrams(BigDecimal.valueOf(500))
                 .isScalable(true)
                 .build();
     }
+
+    public Recipe initBreakfast() {
+
+        Map<Product, BigDecimal> breakfastIngredients = Map.of(
+                ninjaService.saveProductFromNinjaApi("tomato", Filler.NONE), BigDecimal.valueOf(33),
+                ninjaService.saveProductFromNinjaApi("whole egg", Filler.NONE), BigDecimal.valueOf(25),
+                ninjaService.saveProductFromNinjaApi("chives", Filler.NONE), BigDecimal.valueOf(0.35),
+                ninjaService.saveProductFromNinjaApi("button mushroom", Filler.NONE), BigDecimal.valueOf(40),
+                ninjaService.saveProductFromNinjaApi("butter", Filler.FAT), BigDecimal.valueOf(1.3),
+                ninjaService.saveProductFromNinjaApi("basil", Filler.NONE), BigDecimal.valueOf(0.35)
+        );
+        return Recipe.builder()
+                .name("Omelette")
+                .howToPrepare("Prepare")
+                .dietType(List.of(DietType.PROTEIN, DietType.VEGETARIAN))
+                .mealTypes(List.of(MealType.BREAKFAST))
+                .ingredientsProportion(breakfastIngredients)
+                .basePortionInGrams(BigDecimal.valueOf(756))
+                .isScalable(true)
+                .build();
+    }
+
+    public Recipe initDinner() {
+
+        Map<Product, BigDecimal> mealIngredients = Map.of(
+                ninjaService.saveProductFromNinjaApi("low fat cottage cheese", Filler.PROTEIN), BigDecimal.valueOf(37),
+                ninjaService.saveProductFromNinjaApi("wholegrain bread", Filler.CARBOHYDRATE), BigDecimal.valueOf(17),
+                ninjaService.saveProductFromNinjaApi("radish", Filler.NONE), BigDecimal.valueOf(15),
+                ninjaService.saveProductFromNinjaApi("tomato", Filler.NONE), BigDecimal.valueOf(15),
+                ninjaService.saveProductFromNinjaApi("natural yogurt", Filler.FAT), BigDecimal.valueOf(13),
+                ninjaService.saveProductFromNinjaApi("butter", Filler.FAT), BigDecimal.valueOf(2),
+                ninjaService.saveProductFromNinjaApi("chives", Filler.NONE), BigDecimal.valueOf(1)
+        );
+        return Recipe.builder()
+                .name("Cottage cheese with radish")
+                .howToPrepare("Chop vegetable and mix all ingredients")
+                .dietType(List.of(DietType.PROTEIN))
+                .mealTypes(List.of(MealType.DINNER, MealType.BREAKFAST))
+                .ingredientsProportion(mealIngredients)
+                .basePortionInGrams(BigDecimal.valueOf(405))
+                .isScalable(true)
+                .build();
+    }
+
 
     public void printBmi() {
         BMRAttributes bmrAttributes = BMRAttributes.builder()

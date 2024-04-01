@@ -32,6 +32,7 @@ public class NutrientMapper implements DomainMapper<Nutrients, NutrientInformati
                 .totalCarbohydrates(domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue())
                 .fiber(domainObject.getCarbohydrates().getFiber().doubleValue())
                 .sugar(domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue())
+                .totalProteins(domainObject.getProteins().getTotalProteins().doubleValue())
                 .totalFats(domainObject.getFats().getTotalFats().doubleValue())
                 .saturatedFats(domainObject.getFats().getSaturatedFats().doubleValue())
                 .build();
