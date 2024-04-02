@@ -25,13 +25,11 @@ public class DietServiceImpl implements DietService {
     @Override
     public Diet generateDiet(DietAttributes dietAttributes) {
 
-        MacroCalculator macroCalculator = MacroCalculatorFactory.getMacroCalculator(dietAttributes.dietType());
-        MacroCalculatorAttributes macroCalculatorAttributes = new MacroCalculatorAttributes(
-                dietAttributes.requiredCalories(),
-                dietAttributes.bodyWeightInKg(),
-                dietAttributes.gender());
-        Macronutrient macronutrient = macroCalculator.calculate(macroCalculatorAttributes);
-
+        Macronutrient macronutrient = calculateMacronutrients(dietAttributes);
+        System.out.println("Required calories: " + macronutrient.calories().doubleValue());
+        System.out.println("Required proteins: " + macronutrient.proteins().doubleValue());
+        System.out.println("Required carbohydrates: " + macronutrient.carbohydrates().doubleValue());
+        System.out.println("Required fats: " + macronutrient.fats().doubleValue());
         List<Recipe> recipes = recipeRepository.findAllRecipesByDietType(dietAttributes.dietType());
 
         DietGenerator dietGenerator = new DietGenerator(
@@ -42,4 +40,15 @@ public class DietServiceImpl implements DietService {
 
         return dietGenerator.generateDiet();
     }
+
+    private Macronutrient calculateMacronutrients(DietAttributes dietAttributes) {
+        MacroCalculator macroCalculator = MacroCalculatorFactory.getMacroCalculator(dietAttributes.dietType());
+        MacroCalculatorAttributes macroCalculatorAttributes = new MacroCalculatorAttributes(
+                dietAttributes.requiredCalories(),
+                dietAttributes.bodyWeightInKg(),
+                dietAttributes.gender());
+        return macroCalculator.calculate(macroCalculatorAttributes);
+    }
+
+
 }

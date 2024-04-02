@@ -19,6 +19,7 @@ public class Diet {
     }
 
     public void addDish(Dish dish) {
+        this.nutrients.addNutrients(dish.getNutrients());
         this.dishes.add(dish);
     }
 }

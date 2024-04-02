@@ -1,5 +1,7 @@
 package org.ectimel.dietgenerator.domain.generator;
 
+import lombok.Builder;
+import lombok.NonNull;
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
 import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.domain.model.Recipe;
@@ -12,35 +14,46 @@ import java.util.Random;
 
 public class DietGenerator {
 
+    private final Random random;
+
+    private final List<Recipe> breakfastRecipes;
+    private final List<Recipe> lunchRecipes;
+    private final List<Recipe> dinnerRecipes;
+    private final List<Recipe> snackRecipes;
+
     private Macronutrient macronutrient;
-    private BigDecimal numberOfMeals;
-    private BigDecimal requiredCalories;
 
-    private List<Recipe> breakfastRecipes;
-    private List<Recipe> lunchRecipes;
-    private List<Recipe> dinnerRecipes;
-    private List<Recipe> snackRecipes;
-
-    private BigDecimal baseCaloriesPerMeal;
-    private Random random;
+    private final BigDecimal requiredTotalCalories;
+    private final BigDecimal reservedCalories;
+    private final BigDecimal requiredCaloriesAfterReservation;
+    private final BigDecimal numberOfMeals;
+    private final BigDecimal baseCaloriesPerMeal;
 
 
-    public DietGenerator(BigDecimal requiredCalories, BigDecimal numberOfMeals, Macronutrient macronutrient, List<Recipe> recipes) {
+    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient macronutrient, List<Recipe> recipes) {
         this.macronutrient = macronutrient;
         this.numberOfMeals = numberOfMeals;
-        this.requiredCalories = requiredCalories;
+        this.requiredTotalCalories = requiredTotalCalories;
         this.breakfastRecipes = new ArrayList<>();
         this.lunchRecipes = new ArrayList<>();
         this.dinnerRecipes = new ArrayList<>();
         this.snackRecipes = new ArrayList<>();
         segregateRecipes(recipes);
-        this.baseCaloriesPerMeal = requiredCalories.divide(numberOfMeals, 2, RoundingMode.DOWN);
+
+        this.reservedCalories = requiredTotalCalories.multiply(BigDecimal.valueOf(0.1));
+        this.requiredCaloriesAfterReservation = requiredTotalCalories.subtract(reservedCalories);
+        this.baseCaloriesPerMeal = requiredCaloriesAfterReservation.divide(numberOfMeals, 2, RoundingMode.DOWN);
         this.random = new Random();
     }
 
     public Diet generateDiet() {
         Diet diet = new Diet();
+        addDishes(diet);
 
+        return diet;
+    }
+
+    private void addDishes(Diet diet) {
         Dish breakfast = getRandomDish(breakfastRecipes);
         diet.addDish(breakfast);
 
@@ -53,8 +66,6 @@ public class DietGenerator {
 
         Dish dinner = getRandomDish(dinnerRecipes);
         diet.addDish(dinner);
-
-        return diet;
     }
 
     private Dish getRandomDish(List<Recipe> recipes) {
