@@ -32,12 +32,11 @@ public class DietGeneratorApplication implements CommandLineRunner {
 //        testInit.printBmi();
 //        testInit.initProductsFromFile();
 
-//        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
-//        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
-//
-//        Recipe omlette = testInit.initBreakfast();
-//        Recipe savedOmlette = recipeRepository.save(omlette);
-//        System.out.println(savedOmlette.getNutrients().getCalories().getTotalCalories());
+        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
+        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
+
+        Recipe omlette = testInit.initBreakfast();
+        Recipe savedOmlette = recipeRepository.save(omlette);
 
         Recipe cottageRadish = testInit.initDinner();
         Recipe savedCottageRadish = recipeRepository.save(cottageRadish);

@@ -37,6 +37,7 @@ public class Recipe {
         this.isScalable = isScalable;
         this.howToPrepare = howToPrepare;
         this.dietTypes = dietTypes;
+        this.mealTypes = mealTypes;
     }
 
     @Builder

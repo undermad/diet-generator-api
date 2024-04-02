@@ -107,7 +107,7 @@ public class TestInit {
                 .name("Cottage cheese with radish")
                 .howToPrepare("Chop vegetable and mix all ingredients")
                 .dietType(List.of(DietType.PROTEIN))
-                .mealTypes(List.of(MealType.DINNER, MealType.BREAKFAST))
+                .mealTypes(List.of(MealType.DINNER))
                 .ingredientsProportion(mealIngredients)
                 .basePortionInGrams(BigDecimal.valueOf(405))
                 .isScalable(true)
