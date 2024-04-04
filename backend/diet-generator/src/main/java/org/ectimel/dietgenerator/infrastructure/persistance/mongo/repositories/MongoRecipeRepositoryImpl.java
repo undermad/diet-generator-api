@@ -1,6 +1,7 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.repositories;
 
 import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.RecipeMapper;
@@ -24,8 +25,16 @@ public class MongoRecipeRepositoryImpl implements RecipeRepository {
     }
 
     @Override
-    public List<Recipe> findAllRecipesByDietType(DietType dietType) {
+    public List<Recipe> findAllByDietType(DietType dietType) {
         List<RecipeDocument> recipes = springDataMongoRecipeRepository.findAllByDietType(dietType);
+        return recipes.stream()
+                .map(recipeMapper::mapToDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Recipe> findAllByDietAndMealTypes(DietType dietType, MealType mealType) {
+        List<RecipeDocument> recipes = springDataMongoRecipeRepository.findAllByDietAndMealTypes(dietType, mealType);
         return recipes.stream()
                 .map(recipeMapper::mapToDomain)
                 .collect(Collectors.toList());

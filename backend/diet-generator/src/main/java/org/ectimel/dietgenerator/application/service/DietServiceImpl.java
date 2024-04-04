@@ -7,11 +7,16 @@ import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculatorFactory;
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
 import org.ectimel.dietgenerator.domain.generator.DietAttributes;
 import org.ectimel.dietgenerator.domain.generator.DietGenerator;
+import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.Diet;
+import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DietServiceImpl implements DietService {
@@ -26,19 +31,26 @@ public class DietServiceImpl implements DietService {
     public Diet generateDiet(DietAttributes dietAttributes) {
 
         Macronutrient macronutrient = calculateMacronutrients(dietAttributes);
-        System.out.println("Required calories: " + macronutrient.calories().doubleValue());
-        System.out.println("Required proteins: " + macronutrient.proteins().doubleValue());
-        System.out.println("Required carbohydrates: " + macronutrient.carbohydrates().doubleValue());
-        System.out.println("Required fats: " + macronutrient.fats().doubleValue());
-        List<Recipe> recipes = recipeRepository.findAllRecipesByDietType(dietAttributes.dietType());
+        
+        Map<MealType, List<Recipe>> allRecipes = getAllSegregatedRecipes(dietAttributes.dietType());
 
-        DietGenerator dietGenerator = new DietGenerator(
-                dietAttributes.requiredCalories(),
-                dietAttributes.numberOfMeals(),
-                macronutrient,
-                recipes);
+//        DietGenerator dietGenerator = new DietGenerator(
+//                dietAttributes.requiredCalories(),
+//                dietAttributes.numberOfMeals(),
+//                macronutrient,
+//                recipes);
 
-        return dietGenerator.generateDiet();
+        return null;
+//        return dietGenerator.generateDiet();
+    }
+
+    private Map<MealType, List<Recipe>> getAllSegregatedRecipes(DietType dietType) {
+        Map<MealType, List<Recipe>> allRecipes = new HashMap<>();
+        Arrays.stream(MealType.values()).forEach(mealType -> {
+            List<Recipe> mealTypeRecipes = recipeRepository.findAllByDietAndMealTypes(dietType, mealType);
+            allRecipes.put(mealType, mealTypeRecipes);
+        });
+        return allRecipes;
     }
 
     private Macronutrient calculateMacronutrients(DietAttributes dietAttributes) {
@@ -49,6 +61,7 @@ public class DietServiceImpl implements DietService {
                 dietAttributes.gender());
         return macroCalculator.calculate(macroCalculatorAttributes);
     }
+    
 
 
 }
