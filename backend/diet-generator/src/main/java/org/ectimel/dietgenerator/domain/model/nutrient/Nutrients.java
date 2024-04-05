@@ -24,31 +24,57 @@ public class Nutrients {
                 new Fats(new BigDecimal("0"), new BigDecimal("0")));
     }
 
-    public void addNutrients(Nutrients nutrientsToAdd) {
-        addCalories(nutrientsToAdd.getCalories());
-        addCarbohydrates(nutrientsToAdd.getCarbohydrates());
-        addFats(nutrientsToAdd.getFats());
-        addProteins(nutrientsToAdd.getProteins());
+    public void addNutrients(Nutrients nutrients) {
+        addCalories(nutrients.getCalories());
+        addCarbohydrates(nutrients.getCarbohydrates());
+        addFats(nutrients.getFats());
+        addProteins(nutrients.getProteins());
+    }
+
+    public void subtractNutrients(Nutrients nutrients) {
+        subtractCalories(nutrients.getCalories());
+        subtractCarbohydrates(nutrients.getCarbohydrates());
+        subtractFats(nutrients.getFats());
+        subtractProteins(nutrients.getProteins());
     }
 
 
-    public void addCalories(Calories calories) {
+    private void addCalories(Calories calories) {
         this.calories.setTotalCalories(this.calories.getTotalCalories().add(calories.getTotalCalories()));
     }
 
-    public void addCarbohydrates(Carbohydrates carbohydrates) {
+    private void addCarbohydrates(Carbohydrates carbohydrates) {
         this.carbohydrates.setTotalCarbohydrates(this.carbohydrates.getTotalCarbohydrates().add(carbohydrates.getTotalCarbohydrates()));
         this.carbohydrates.setFiber(this.carbohydrates.getFiber().add(carbohydrates.getFiber()));
         this.carbohydrates.setSugar(this.carbohydrates.getSugar().add(carbohydrates.getSugar()));
     }
 
-    public void addProteins(Proteins proteins) {
+    private void addProteins(Proteins proteins) {
         this.proteins.setTotalProteins(this.proteins.getTotalProteins().add(proteins.getTotalProteins()));
     }
 
-    public void addFats(Fats fats) {
+    private void addFats(Fats fats) {
         this.fats.setTotalFats(this.fats.getTotalFats().add(fats.getTotalFats()));
         this.fats.setSaturatedFats(this.fats.getSaturatedFats().add(fats.getSaturatedFats()));
+    }
+
+    private void subtractCalories(Calories calories) {
+        this.calories.setTotalCalories(this.calories.getTotalCalories().subtract(calories.getTotalCalories()));
+    }
+
+    private void subtractCarbohydrates(Carbohydrates carbohydrates) {
+        this.carbohydrates.setTotalCarbohydrates(this.carbohydrates.getTotalCarbohydrates().subtract(carbohydrates.getTotalCarbohydrates()));
+        this.carbohydrates.setFiber(this.carbohydrates.getFiber().subtract(carbohydrates.getFiber()));
+        this.carbohydrates.setSugar(this.carbohydrates.getSugar().subtract(carbohydrates.getSugar()));
+    }
+
+    private void subtractFats(Fats fats) {
+        this.fats.setTotalFats(this.fats.getTotalFats().subtract(fats.getTotalFats()));
+        this.fats.setSaturatedFats(this.fats.getSaturatedFats().subtract(fats.getSaturatedFats()));
+    }
+
+    private void subtractProteins(Proteins proteins) {
+        this.proteins.setTotalProteins(this.proteins.getTotalProteins().subtract(proteins.getTotalProteins()));
     }
 
 

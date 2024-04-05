@@ -34,14 +34,13 @@ public class DietServiceImpl implements DietService {
         
         Map<MealType, List<Recipe>> allRecipes = getAllSegregatedRecipes(dietAttributes.dietType());
 
-//        DietGenerator dietGenerator = new DietGenerator(
-//                dietAttributes.requiredCalories(),
-//                dietAttributes.numberOfMeals(),
-//                macronutrient,
-//                recipes);
+        DietGenerator dietGenerator = new DietGenerator(
+                dietAttributes.requiredCalories(),
+                dietAttributes.numberOfMeals(),
+                macronutrient,
+                allRecipes);
 
-        return null;
-//        return dietGenerator.generateDiet();
+        return dietGenerator.generateDiet();
     }
 
     private Map<MealType, List<Recipe>> getAllSegregatedRecipes(DietType dietType) {

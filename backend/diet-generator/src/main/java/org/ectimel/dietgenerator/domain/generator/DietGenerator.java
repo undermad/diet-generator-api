@@ -42,23 +42,34 @@ public class DietGenerator {
     public Diet generateDiet() {
         Diet diet = new Diet();
         addDishes(diet);
-
+        fill(diet)
         return diet;
     }
 
+    private void fill(Diet diet) {
+        diet.getDishes().forEach(dish -> {
+
+        });
+    }
+
     private void addDishes(Diet diet) {
-        Dish breakfast = getRandomDish(MealType.BREAKFAST);
-        diet.addDish(breakfast);
+        addDish(diet, MealType.BREAKFAST);
 
         for (int i = 1; i < numberOfMeals.doubleValue() - 1; i++) {
-            Dish dish;
-            if(i == 3) dish = getRandomDish(MealType.SNACK);
-            else dish = getRandomDish(MealType.LUNCH);
-            diet.addDish(dish);
+            if(i == 3) {
+                addDish(diet, MealType.SNACK);
+                continue;
+            }
+            addDish(diet, MealType.LUNCH);
         }
 
-        Dish dinner = getRandomDish(MealType.DINNER);
-        diet.addDish(dinner);
+        addDish(diet, MealType.DINNER);
+    }
+
+    private void addDish(Diet diet, MealType mealType) {
+        Dish breakfast = getRandomDish(mealType);
+        diet.addDish(breakfast);
+        macronutrient.reduceValues(breakfast.getNutrients());
     }
 
     private Dish getRandomDish(MealType mealType) {

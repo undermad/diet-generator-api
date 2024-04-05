@@ -8,6 +8,7 @@ import org.ectimel.dietgenerator.domain.model.Recipe;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -18,11 +19,23 @@ public class Dish {
     private Map<Product, BigDecimal> productToGrams;
     private Nutrients nutrients;
     private Recipe recipe;
+    private Map<Filler, Integer> numberOfFillers;
 
     private Dish(Map<Product, BigDecimal> productToGrams, Recipe recipe) {
         this.productToGrams = productToGrams;
         this.nutrients = calculateNutrients();
         this.recipe = recipe;
+        this.numberOfFillers = populateFillers();
+    }
+
+    private Map<Filler, Integer> populateFillers() {
+        Map<Filler, Integer> fillers = new HashMap<>();
+        Arrays.stream(Filler.values()).forEach(filler -> {
+            if(!filler.equals(Filler.NONE)) {
+                fillers.put(filler, countFillers(filler));
+            }
+        });
+        return fillers;
     }
 
     public static Dish createDish(Recipe recipe) {
@@ -52,10 +65,13 @@ public class Dish {
         return mealNutrients;
     }
 
-    public void addFiller(Filler filler, BigDecimal grams) {
-        BigDecimal numberOfFillers = BigDecimal.valueOf(countFillers(filler));
-        if (recipe.isScalable() && numberOfFillers.doubleValue() > 0) {
-            BigDecimal gramsFraction = grams.divide(numberOfFillers, 2, RoundingMode.HALF_DOWN);
+    public void increaseFiller(Filler filler, BigDecimal grams) {
+        Integer fillerPopulation = numberOfFillers.get(filler);
+        if(fillerPopulation == null) return;
+
+        BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
+        if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
+            BigDecimal gramsFraction = grams.divide(numberOfProductFillers, 2, RoundingMode.HALF_DOWN);
             productToGrams.forEach(((product, bigDecimal) -> {
                 if (product.getFiller().equals(filler)) {
                     BigDecimal currentGrams = productToGrams.get(product);
@@ -66,6 +82,26 @@ public class Dish {
             }));
         }
     }
+
+    public void reduceFiller(Filler filler, BigDecimal grams) {
+        Integer fillerPopulation = numberOfFillers.get(filler);
+        if(fillerPopulation == null) return;
+
+        BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
+        if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
+            BigDecimal gramsFraction = grams.divide(numberOfProductFillers, 2, RoundingMode.HALF_DOWN);
+            productToGrams.forEach(((product, bigDecimal) -> {
+                if (product.getFiller().equals(filler)) {
+                    BigDecimal currentGrams = productToGrams.get(product);
+                    BigDecimal productGramsToRemove = product.calculateProductGrams(filler, gramsFraction);
+                    productToGrams.put(product, currentGrams.subtract(productGramsToRemove));
+                    nutrients.subtractNutrients(product.calculateNutrients(productGramsToRemove));
+                }
+            }));
+        }
+    }
+
+
 
     private int countFillers(Filler filler) {
         AtomicReference<Integer> allFillers = new AtomicReference<>(0);

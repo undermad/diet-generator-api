@@ -61,12 +61,7 @@ public class Recipe {
 
         ingredientsProportion.forEach((product, percentage) -> {
             Nutrients productNutrients = product.calculateNutrients(percentage);
-
-            calculatedNutrients.addCalories(productNutrients.getCalories());
-            calculatedNutrients.addCarbohydrates(productNutrients.getCarbohydrates());
-            calculatedNutrients.addProteins(productNutrients.getProteins());
-            calculatedNutrients.addFats(productNutrients.getFats());
-
+            calculatedNutrients.addNutrients(productNutrients);
         });
         return calculatedNutrients;
     }
