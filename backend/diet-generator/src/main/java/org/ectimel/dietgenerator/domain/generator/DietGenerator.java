@@ -4,22 +4,20 @@ import lombok.Builder;
 import lombok.NonNull;
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
 import org.ectimel.dietgenerator.domain.model.Diet;
+import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class DietGenerator {
 
     private final Random random;
 
-    private final List<Recipe> breakfastRecipes;
-    private final List<Recipe> lunchRecipes;
-    private final List<Recipe> dinnerRecipes;
-    private final List<Recipe> snackRecipes;
+    Map<MealType, List<Recipe>> recipes;
 
     private Macronutrient macronutrient;
 
@@ -30,15 +28,10 @@ public class DietGenerator {
     private final BigDecimal baseCaloriesPerMeal;
 
 
-    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient macronutrient, List<Recipe> recipes) {
+    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient macronutrient, Map<MealType, List<Recipe>> recipes) {
         this.macronutrient = macronutrient;
         this.numberOfMeals = numberOfMeals;
         this.requiredTotalCalories = requiredTotalCalories;
-        this.breakfastRecipes = new ArrayList<>();
-        this.lunchRecipes = new ArrayList<>();
-        this.dinnerRecipes = new ArrayList<>();
-        this.snackRecipes = new ArrayList<>();
-        segregateRecipes(recipes);
 
         this.reservedCalories = requiredTotalCalories.multiply(BigDecimal.valueOf(0.1));
         this.requiredCaloriesAfterReservation = requiredTotalCalories.subtract(reservedCalories);
@@ -54,39 +47,26 @@ public class DietGenerator {
     }
 
     private void addDishes(Diet diet) {
-        Dish breakfast = getRandomDish(breakfastRecipes);
+        Dish breakfast = getRandomDish(MealType.BREAKFAST);
         diet.addDish(breakfast);
 
         for (int i = 1; i < numberOfMeals.doubleValue() - 1; i++) {
             Dish dish;
-            if(i == 3) dish = getRandomDish(snackRecipes);
-            else dish = getRandomDish(lunchRecipes);
+            if(i == 3) dish = getRandomDish(MealType.SNACK);
+            else dish = getRandomDish(MealType.LUNCH);
             diet.addDish(dish);
         }
 
-        Dish dinner = getRandomDish(dinnerRecipes);
+        Dish dinner = getRandomDish(MealType.DINNER);
         diet.addDish(dinner);
     }
 
-    private Dish getRandomDish(List<Recipe> recipes) {
-        Recipe recipe = recipes.get(random.nextInt(recipes.size()));
-        return Dish.createDish(recipe, baseCaloriesPerMeal);
+    private Dish getRandomDish(MealType mealType) {
+        List<Recipe> mealTypeRecipes = recipes.get(mealType);
+        Recipe randomRecipe = mealTypeRecipes.get(random.nextInt(mealTypeRecipes.size()));
+        return Dish.createDish(randomRecipe, baseCaloriesPerMeal);
     }
 
-
-    private void segregateRecipes(List<Recipe> allRecipes) {
-        allRecipes.forEach(recipe -> {
-            recipe.getMealTypes().forEach(mealType -> {
-                switch (mealType) {
-                    case BREAKFAST -> breakfastRecipes.add(recipe);
-                    case LUNCH -> lunchRecipes.add(recipe);
-                    case SNACK -> snackRecipes.add(recipe);
-                    case DINNER -> dinnerRecipes.add(recipe);
-                }
-            });
-        });
-
-    }
 
 
 }
