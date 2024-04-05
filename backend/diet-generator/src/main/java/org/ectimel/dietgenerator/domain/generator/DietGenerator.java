@@ -42,7 +42,7 @@ public class DietGenerator {
     public Diet generateDiet() {
         Diet diet = new Diet();
         addDishes(diet);
-        fill(diet)
+        fill(diet);
         return diet;
     }
 
