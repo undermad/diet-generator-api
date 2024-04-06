@@ -65,9 +65,9 @@ public class Dish {
         return mealNutrients;
     }
 
-    public void increaseFiller(Filler filler, BigDecimal grams) {
+    public boolean increaseFiller(Filler filler, BigDecimal grams) {
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return;
+        if(fillerPopulation == null) return false;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
@@ -81,11 +81,12 @@ public class Dish {
                 }
             }));
         }
+        return true;
     }
 
-    public void reduceFiller(Filler filler, BigDecimal grams) {
+    public boolean reduceFiller(Filler filler, BigDecimal grams) {
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return;
+        if(fillerPopulation == null) return false;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
@@ -99,6 +100,7 @@ public class Dish {
                 }
             }));
         }
+        return true;
     }
 
 
