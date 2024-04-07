@@ -1,10 +1,13 @@
 package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Data;
+import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
 import org.ectimel.dietgenerator.domain.generator.Dish;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +34,25 @@ public class Diet {
                 scalableDishes.add(dish);
         });
         return scalableDishes;
+    }
+
+    public void reduceMacronutrient(Filler filler, BigDecimal amount, Macronutrient missingMacronutrients) {
+        List<Dish> scalableDishes = getScalableDishesByFiller(filler);
+        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
+        for (Dish dish : scalableDishes) {
+            Nutrients reducedNutrients = dish.reduceFiller(filler, eachDishAmount);
+            missingMacronutrients.increaseValues(reducedNutrients);
+            nutrients.subtractNutrients(reducedNutrients);
+        }
+    }
+
+    public void increaseMacronutrient(Filler filler, BigDecimal amount, Macronutrient missingMacronutrients) {
+        List<Dish> scalableDishes = getScalableDishesByFiller(filler);
+        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
+        for (Dish dish : scalableDishes) {
+            Nutrients addedNutrients = dish.increaseFiller(filler, eachDishAmount);
+            missingMacronutrients.reduceValues(addedNutrients);
+            nutrients.addNutrients(addedNutrients);
+        }
     }
 }

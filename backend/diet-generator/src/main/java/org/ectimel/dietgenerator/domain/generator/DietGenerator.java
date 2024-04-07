@@ -19,7 +19,7 @@ public class DietGenerator {
 
     Map<MealType, List<Recipe>> recipes;
 
-    private Macronutrient macronutrients;
+    private Macronutrient missingMacronutrients;
 
     private final BigDecimal requiredTotalCalories;
     private final BigDecimal reservedCalories;
@@ -28,8 +28,8 @@ public class DietGenerator {
     private final BigDecimal baseCaloriesPerMeal;
 
 
-    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient macronutrients, Map<MealType, List<Recipe>> recipes) {
-        this.macronutrients = macronutrients;
+    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient missingMacronutrients, Map<MealType, List<Recipe>> recipes) {
+        this.missingMacronutrients = missingMacronutrients;
         this.numberOfMeals = numberOfMeals;
         this.requiredTotalCalories = requiredTotalCalories;
 
@@ -51,43 +51,23 @@ public class DietGenerator {
     private void adjustMacronutrients(Diet diet) {
         int numberOfLoops = 10;
         for (int i = 0; i < numberOfLoops; i++) {
-            if (macronutrients.getCarbohydrates().doubleValue() < 0)
-                reduceMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates().abs());
+            if (missingMacronutrients.getCarbohydrates().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.CARBOHYDRATE, missingMacronutrients.getCarbohydrates().abs(), missingMacronutrients);
             else
-                increaseMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates());
+                diet.increaseMacronutrient(Filler.CARBOHYDRATE, missingMacronutrients.getCarbohydrates(), missingMacronutrients);
 
-            if (macronutrients.getFats().doubleValue() < 0)
-                reduceMacronutrient(diet, Filler.FAT, macronutrients.getFats().abs());
+            if (missingMacronutrients.getFats().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.FAT, missingMacronutrients.getFats().abs(), missingMacronutrients);
             else
-                increaseMacronutrient(diet, Filler.FAT, macronutrients.getFats());
+                diet.increaseMacronutrient(Filler.FAT, missingMacronutrients.getFats(), missingMacronutrients);
 
-            if (macronutrients.getProteins().doubleValue() < 0)
-                reduceMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins().abs());
+            if (missingMacronutrients.getProteins().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins().abs(), missingMacronutrients);
             else
-                increaseMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins());
+                diet.increaseMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins(), missingMacronutrients);
 
         }
     }
-
-    private void increaseMacronutrient(Diet diet, Filler filler, BigDecimal amount) {
-        List<Dish> scalableDishes = diet.getScalableDishesByFiller(filler);
-        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
-        for (Dish dish : scalableDishes) {
-            Nutrients reducedNutrients = dish.increaseFiller(filler, eachDishAmount);
-            macronutrients.increaseValues(reducedNutrients);
-        }
-    }
-
-    private void reduceMacronutrient(Diet diet, Filler filler, BigDecimal amount) {
-        List<Dish> scalableDishes = diet.getScalableDishesByFiller(filler);
-        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
-        for (Dish dish : scalableDishes) {
-            Nutrients reducedNutrients = dish.reduceFiller(filler, eachDishAmount);
-            macronutrients.reduceValues(reducedNutrients);
-        }
-
-    }
-
 
     private void addDishes(Diet diet) {
         addDish(diet, MealType.BREAKFAST);
@@ -104,7 +84,7 @@ public class DietGenerator {
     private void addDish(Diet diet, MealType mealType) {
         Dish breakfast = getRandomDish(mealType);
         diet.addDish(breakfast);
-        macronutrients.reduceValues(breakfast.getNutrients());
+        missingMacronutrients.reduceValues(breakfast.getNutrients());
     }
 
     private Dish getRandomDish(MealType mealType) {
