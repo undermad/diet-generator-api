@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.MealType;
+import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -24,5 +25,6 @@ public class RecipeDocument extends MongoUUIDEntity{
     private String howToPrepare;
     private List<DietType> dietTypes;
     private List<MealType> mealTypes;
+    private List<Filler> scalableFillers;
 
 }

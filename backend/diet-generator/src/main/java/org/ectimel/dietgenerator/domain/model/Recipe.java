@@ -2,13 +2,12 @@ package org.ectimel.dietgenerator.domain.model;
 
 import lombok.*;
 import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 @ToString
@@ -26,6 +25,7 @@ public class Recipe {
     private String howToPrepare;
     private List<DietType> dietTypes;
     private List<MealType> mealTypes;
+    private Set<Filler> scalableFillers;
 
 
     private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietTypes, List<MealType> mealTypes) {
@@ -38,11 +38,20 @@ public class Recipe {
         this.howToPrepare = howToPrepare;
         this.dietTypes = dietTypes;
         this.mealTypes = mealTypes;
+        this.scalableFillers = findScalableFillers(ingredientsProportion);
     }
 
     @Builder
     public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
         return new Recipe(ingredientsProportion, basePortionInGrams, isScalable, name, howToPrepare, dietType, mealTypes);
+    }
+
+    private static Set<Filler> findScalableFillers(Map<Product, BigDecimal> products) {
+        Set<Filler> fillers = new HashSet<>();
+        products.forEach((product, bigDecimal) -> {
+            if(product.isFiller()) fillers.add(product.getFiller());
+        });
+        return fillers;
     }
 
 

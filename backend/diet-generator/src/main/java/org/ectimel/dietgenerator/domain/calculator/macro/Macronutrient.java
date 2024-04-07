@@ -23,7 +23,14 @@ public class Macronutrient {
         setCalories(calories.subtract(nutrients.getCalories().getTotalCalories()));
         setProteins(proteins.subtract(nutrients.getProteins().getTotalProteins()));
         setFats(fats.subtract(nutrients.getFats().getTotalFats()));
-        setCarbohydrates(nutrients.getCarbohydrates().getTotalCarbohydrates());
+        setCarbohydrates(carbohydrates.subtract(nutrients.getCarbohydrates().getTotalCarbohydrates()));
+    }
+
+    public void increaseValues(Nutrients nutrients) {
+        setCalories(calories.add(nutrients.getCalories().getTotalCalories()));
+        setProteins(proteins.add(nutrients.getProteins().getTotalProteins()));
+        setFats(fats.add(nutrients.getFats().getTotalFats()));
+        setCarbohydrates(carbohydrates.add(nutrients.getCarbohydrates().getTotalCarbohydrates()));
     }
 
 

@@ -5,14 +5,13 @@ import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
+import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class DietGenerator {
 
@@ -38,58 +37,60 @@ public class DietGenerator {
         this.requiredCaloriesAfterReservation = requiredTotalCalories.subtract(reservedCalories);
         this.baseCaloriesPerMeal = requiredCaloriesAfterReservation.divide(numberOfMeals, 2, RoundingMode.DOWN);
         this.random = new Random();
+        this.recipes = recipes;
     }
 
     public Diet generateDiet() {
         Diet diet = new Diet();
         addDishes(diet);
-        fill(diet);
+        adjustMacronutrients(diet);
         return diet;
     }
 
-    private void fill(Diet diet) {
-
-        // you need to take care that each filling cycle, other macro need to be updated!!!!
-    }
 
     private void adjustMacronutrients(Diet diet) {
-        if (macronutrients.getCarbohydrates().doubleValue() < 0)
-            reduceMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates().abs());
-        else
-            increaseMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates());
-        if (macronutrients.getFats().doubleValue() < 0)
-            reduceMacronutrient(diet, Filler.FAT, macronutrients.getFats().abs());
-        else
-            increaseMacronutrient(diet, Filler.FAT, macronutrients.getFats());
-        if (macronutrients.getProteins().doubleValue() < 0)
-            reduceMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins().abs());
-        else
-            increaseMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins());
+        int numberOfLoops = 10;
+        for (int i = 0; i < numberOfLoops; i++) {
+            if (macronutrients.getCarbohydrates().doubleValue() < 0)
+                reduceMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates().abs());
+            else
+                increaseMacronutrient(diet, Filler.CARBOHYDRATE, macronutrients.getCarbohydrates());
 
+            if (macronutrients.getFats().doubleValue() < 0)
+                reduceMacronutrient(diet, Filler.FAT, macronutrients.getFats().abs());
+            else
+                increaseMacronutrient(diet, Filler.FAT, macronutrients.getFats());
+
+            if (macronutrients.getProteins().doubleValue() < 0)
+                reduceMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins().abs());
+            else
+                increaseMacronutrient(diet, Filler.PROTEIN, macronutrients.getProteins());
+
+        }
     }
 
     private void increaseMacronutrient(Diet diet, Filler filler, BigDecimal amount) {
-
+        List<Dish> scalableDishes = diet.getScalableDishesByFiller(filler);
+        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
+        for (Dish dish : scalableDishes) {
+            Nutrients reducedNutrients = dish.increaseFiller(filler, eachDishAmount);
+            macronutrients.increaseValues(reducedNutrients);
+        }
     }
 
     private void reduceMacronutrient(Diet diet, Filler filler, BigDecimal amount) {
-        AtomicReference<BigDecimal> eachMealAmount = new AtomicReference<>(amount.divide(BigDecimal.valueOf(diet.getDishes().size()), 2, RoundingMode.HALF_DOWN));
-        AtomicReference<BigDecimal> currentAmount = new AtomicReference<>(BigDecimal.valueOf(amount.doubleValue()));
-        AtomicInteger allDishesAmount = new AtomicInteger(diet.getDishes().size());
-        diet.getDishes().forEach(dish -> {
-            allDishesAmount.getAndDecrement();
-            if (dish.reduceFiller(filler, eachMealAmount.get()))
-                currentAmount.set(currentAmount.get().subtract(eachMealAmount.get()));
-            else
-                eachMealAmount.set(eachMealAmount.get().add(eachMealAmount.get().divide(BigDecimal.valueOf(allDishesAmount.get()), 2, RoundingMode.HALF_DOWN)));
-        });
+        List<Dish> scalableDishes = diet.getScalableDishesByFiller(filler);
+        BigDecimal eachDishAmount = amount.divide(BigDecimal.valueOf(scalableDishes.size()), 2, RoundingMode.HALF_DOWN);
+        for (Dish dish : scalableDishes) {
+            Nutrients reducedNutrients = dish.reduceFiller(filler, eachDishAmount);
+            macronutrients.reduceValues(reducedNutrients);
+        }
 
     }
 
 
     private void addDishes(Diet diet) {
         addDish(diet, MealType.BREAKFAST);
-
         for (int i = 1; i < numberOfMeals.doubleValue() - 1; i++) {
             if (i == 3) {
                 addDish(diet, MealType.SNACK);
@@ -97,7 +98,6 @@ public class DietGenerator {
             }
             addDish(diet, MealType.LUNCH);
         }
-
         addDish(diet, MealType.DINNER);
     }
 

@@ -7,10 +7,7 @@ import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.Reci
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
@@ -36,6 +33,7 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
         recipe.setMealTypes(entityObject.getMealTypes());
         recipe.setBasePortionInGrams(BigDecimal.valueOf(entityObject.getBasePortionInGrams()));
         recipe.setIngredientsProportion(mapProductProportionToDomain(entityObject.getIngredientsProportion()));
+        recipe.setScalableFillers(new HashSet<>(entityObject.getScalableFillers()));
         return recipe;
     }
 
@@ -51,6 +49,7 @@ public class RecipeMapper implements DomainMapper<Recipe, RecipeDocument> {
                 .nutrientInformation(nutrientMapper.mapFromDomain(domainObject.getNutrients()))
                 .isScalable(domainObject.isScalable())
                 .basePortionInGrams(domainObject.getBasePortionInGrams().doubleValue())
+                .scalableFillers(domainObject.getScalableFillers().stream().toList())
                 .build();
     }
 

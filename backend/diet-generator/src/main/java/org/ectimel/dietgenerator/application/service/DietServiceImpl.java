@@ -31,7 +31,11 @@ public class DietServiceImpl implements DietService {
     public Diet generateDiet(DietAttributes dietAttributes) {
 
         Macronutrient macronutrient = calculateMacronutrients(dietAttributes);
-        
+        System.out.println("Calories: " + macronutrient.getCalories().doubleValue());
+        System.out.println("Carbohydrates: " + macronutrient.getCarbohydrates().doubleValue());
+        System.out.println("Proteins: " + macronutrient.getProteins().doubleValue());
+        System.out.println("Fats: " + macronutrient.getFats().doubleValue());
+
         Map<MealType, List<Recipe>> allRecipes = getAllSegregatedRecipes(dietAttributes.dietType());
 
         DietGenerator dietGenerator = new DietGenerator(

@@ -65,9 +65,10 @@ public class Dish {
         return mealNutrients;
     }
 
-    public boolean increaseFiller(Filler filler, BigDecimal grams) {
+    public Nutrients increaseFiller(Filler filler, BigDecimal grams) {
+        Nutrients totalAddedNutrients = Nutrients.createEmptyNutrients();
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return false;
+        if(fillerPopulation == null) return totalAddedNutrients;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
@@ -77,16 +78,19 @@ public class Dish {
                     BigDecimal currentGrams = productToGrams.get(product);
                     BigDecimal productGramsToAdd = product.calculateProductGrams(filler, gramsFraction);
                     productToGrams.put(product, currentGrams.add(productGramsToAdd));
-                    nutrients.addNutrients(product.calculateNutrients(productGramsToAdd));
+                    Nutrients subtractedNutrients = product.calculateNutrients(productGramsToAdd);
+                    nutrients.addNutrients(subtractedNutrients);
+                    totalAddedNutrients.addNutrients(subtractedNutrients);
                 }
             }));
         }
-        return true;
+        return totalAddedNutrients;
     }
 
-    public boolean reduceFiller(Filler filler, BigDecimal grams) {
+    public Nutrients reduceFiller(Filler filler, BigDecimal grams) {
+        Nutrients totalReducedNutrients = Nutrients.createEmptyNutrients();
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return false;
+        if(fillerPopulation == null) return totalReducedNutrients;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
@@ -96,11 +100,13 @@ public class Dish {
                     BigDecimal currentGrams = productToGrams.get(product);
                     BigDecimal productGramsToRemove = product.calculateProductGrams(filler, gramsFraction);
                     productToGrams.put(product, currentGrams.subtract(productGramsToRemove));
-                    nutrients.subtractNutrients(product.calculateNutrients(productGramsToRemove));
+                    Nutrients subtractedNutrients = product.calculateNutrients(productGramsToRemove);
+                    nutrients.subtractNutrients(subtractedNutrients);
+                    totalReducedNutrients.addNutrients(subtractedNutrients);
                 }
             }));
         }
-        return true;
+        return totalReducedNutrients;
     }
 
 
