@@ -5,7 +5,6 @@ import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
-import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,24 +16,22 @@ public class DietGenerator {
 
     private final Random random;
 
-    Map<MealType, List<Recipe>> recipes;
+    private Map<MealType, List<Recipe>> recipes;
 
     private Macronutrient missingMacronutrients;
 
-    private final BigDecimal requiredTotalCalories;
     private final BigDecimal reservedCalories;
     private final BigDecimal requiredCaloriesAfterReservation;
     private final BigDecimal numberOfMeals;
     private final BigDecimal baseCaloriesPerMeal;
 
 
-    public DietGenerator(BigDecimal requiredTotalCalories, BigDecimal numberOfMeals, Macronutrient missingMacronutrients, Map<MealType, List<Recipe>> recipes) {
+    public DietGenerator(BigDecimal numberOfMeals, Macronutrient missingMacronutrients, Map<MealType, List<Recipe>> recipes) {
         this.missingMacronutrients = missingMacronutrients;
         this.numberOfMeals = numberOfMeals;
-        this.requiredTotalCalories = requiredTotalCalories;
 
-        this.reservedCalories = requiredTotalCalories.multiply(BigDecimal.valueOf(0.1));
-        this.requiredCaloriesAfterReservation = requiredTotalCalories.subtract(reservedCalories);
+        this.reservedCalories = missingMacronutrients.getCalories().multiply(BigDecimal.valueOf(0.1));
+        this.requiredCaloriesAfterReservation = missingMacronutrients.getCalories().subtract(reservedCalories);
         this.baseCaloriesPerMeal = requiredCaloriesAfterReservation.divide(numberOfMeals, 2, RoundingMode.DOWN);
         this.random = new Random();
         this.recipes = recipes;
@@ -49,7 +46,7 @@ public class DietGenerator {
 
 
     private void adjustMacronutrients(Diet diet) {
-        int numberOfLoops = 10;
+        int numberOfLoops = 3;
         for (int i = 0; i < numberOfLoops; i++) {
             if (missingMacronutrients.getCarbohydrates().doubleValue() < 0)
                 diet.reduceMacronutrient(Filler.CARBOHYDRATE, missingMacronutrients.getCarbohydrates().abs(), missingMacronutrients);
