@@ -1,7 +1,7 @@
 package org.ectimel.dietgenerator.presentation.api.exception;
 
 import org.apache.coyote.BadRequestException;
-import org.ectimel.dietgenerator.presentation.api.dto.ExceptionResponse;
+import org.ectimel.dietgenerator.presentation.api.dto.response.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.presentation.api.dto;
+package org.ectimel.dietgenerator.presentation.api.dto.request;
 
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 import org.ectimel.dietgenerator.domain.generator.DietAttributes;
