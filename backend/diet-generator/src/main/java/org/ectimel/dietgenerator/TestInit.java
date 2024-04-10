@@ -1,9 +1,10 @@
 package org.ectimel.dietgenerator;
 
 import org.ectimel.dietgenerator.domain.calculator.bmi.BMICalculator;
-import org.ectimel.dietgenerator.domain.calculator.bmi.ActiveLevel;
+import org.ectimel.dietgenerator.domain.calculator.calories.ActiveLevel;
 import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
+import org.ectimel.dietgenerator.domain.calculator.calories.BMRCalculator;
 import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalculator;
 import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.MealType;
@@ -124,14 +125,13 @@ public class TestInit {
                 .gender(Gender.MALE)
                 .build();
 
-        MifflinStJeorCalculator mifflinStJeorCalculator = new MifflinStJeorCalculator();
+        BMRCalculator mifflinStJeorCalculator = new MifflinStJeorCalculator();
 
         System.out.println("Required calories per day: " + mifflinStJeorCalculator
                 .calculate(bmrAttributes)
                 .calculateTDEE(bmrAttributes.getActiveLevel()));
 
-        BMICalculator bmiCalculator = new BMICalculator();
-        System.out.println("BMI" + bmiCalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
+        System.out.println("BMI" + BMICalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
     }
 
 }

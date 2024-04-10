@@ -1,12 +1,13 @@
-package org.ectimel.dietgenerator.application.service;
+package org.ectimel.dietgenerator.application.usecase;
 
-import org.ectimel.dietgenerator.application.port.in.DietService;
+import org.ectimel.dietgenerator.application.port.in.CreateDiet;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculator;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculatorAttributes;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculatorFactory;
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
 import org.ectimel.dietgenerator.domain.generator.DietAttributes;
 import org.ectimel.dietgenerator.domain.generator.DietGenerator;
+import org.ectimel.dietgenerator.domain.generator.DietGeneratorImpl;
 import org.ectimel.dietgenerator.domain.generator.DietType;
 import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.domain.model.MealType;
@@ -19,31 +20,26 @@ import java.util.List;
 import java.util.Map;
 
 
-public class DietServiceImpl implements DietService {
+public class CreateDietUseCase implements CreateDiet {
 
     private final RecipeRepository recipeRepository;
 
-    public DietServiceImpl(RecipeRepository recipeRepository) {
+    public CreateDietUseCase(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 
     @Override
-    public Diet generateDiet(DietAttributes dietAttributes) {
+    public Diet createDiet(DietAttributes dietAttributes) {
 
         Macronutrient macronutrient = calculateMacronutrients(dietAttributes);
-        System.out.println("Calories: " + macronutrient.getCalories().doubleValue());
-        System.out.println("Carbohydrates: " + macronutrient.getCarbohydrates().doubleValue());
-        System.out.println("Proteins: " + macronutrient.getProteins().doubleValue());
-        System.out.println("Fats: " + macronutrient.getFats().doubleValue());
-
         Map<MealType, List<Recipe>> allRecipes = getAllSegregatedRecipes(dietAttributes.dietType());
 
-        DietGenerator dietGenerator = new DietGenerator(
+        DietGenerator dietGeneratorImpl = new DietGeneratorImpl(
                 dietAttributes.numberOfMeals(),
                 macronutrient,
                 allRecipes);
 
-        return dietGenerator.generateDiet();
+        return dietGeneratorImpl.generateDiet();
     }
 
     private Map<MealType, List<Recipe>> getAllSegregatedRecipes(DietType dietType) {

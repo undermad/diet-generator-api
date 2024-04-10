@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator.presentation.api.mapper;
 
-import org.ectimel.dietgenerator.domain.generator.Dish;
+import org.ectimel.dietgenerator.domain.model.Dish;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.presentation.api.dto.DishDto;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,11 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class DishMapper {
 
-    private NutrientDtoMapper nutrientDtoMapper;
+    private final NutrientDtoMapper nutrientDtoMapper;
 
 
     public DishMapper(NutrientDtoMapper nutrientDtoMapper) {

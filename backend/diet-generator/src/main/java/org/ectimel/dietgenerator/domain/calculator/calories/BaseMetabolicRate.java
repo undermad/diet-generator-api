@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.calculator.bmi;
+package org.ectimel.dietgenerator.domain.calculator.calories;
 
 import lombok.AllArgsConstructor;
 

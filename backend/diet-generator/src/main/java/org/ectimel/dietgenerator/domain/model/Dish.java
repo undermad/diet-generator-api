@@ -1,10 +1,8 @@
-package org.ectimel.dietgenerator.domain.generator;
+package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Getter;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
-import org.ectimel.dietgenerator.domain.model.Product;
-import org.ectimel.dietgenerator.domain.model.Recipe;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

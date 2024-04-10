@@ -27,11 +27,10 @@ public class Recipe {
     private List<MealType> mealTypes;
     private Set<Filler> scalableFillers;
 
-
     private Recipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietTypes, List<MealType> mealTypes) {
         validateProducts(ingredientsProportion, isScalable);
         this.ingredientsProportion = ingredientsProportion;
-        this.nutrients = calculateNutrients();
+        this.nutrients = calculateNutrients(ingredientsProportion);
         this.name = name;
         this.basePortionInGrams = basePortionInGrams;
         this.isScalable = isScalable;
@@ -54,18 +53,7 @@ public class Recipe {
         return fillers;
     }
 
-
-    public Nutrients calculateNutrients(BigDecimal grams) {
-        Nutrients calculatedNutrients = Nutrients.createEmptyNutrients();
-        ingredientsProportion.forEach(((product, percentage) -> {
-            BigDecimal productInGrams = percentage.multiply(grams.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP));
-            Nutrients productNutrients = product.calculateNutrients(productInGrams);
-            calculatedNutrients.addNutrients(productNutrients);
-        }));
-        return calculatedNutrients;
-    }
-
-    private Nutrients calculateNutrients() {
+    private Nutrients calculateNutrients(Map<Product, BigDecimal> ingredientsProportion) {
         Nutrients calculatedNutrients = Nutrients.createEmptyNutrients();
 
         ingredientsProportion.forEach((product, percentage) -> {

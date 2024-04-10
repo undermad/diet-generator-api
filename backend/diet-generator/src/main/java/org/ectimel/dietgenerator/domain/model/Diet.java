@@ -2,7 +2,6 @@ package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Data;
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
-import org.ectimel.dietgenerator.domain.generator.Dish;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 

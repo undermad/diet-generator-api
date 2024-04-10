@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.application.service;
+package org.ectimel.dietgenerator.application.usecase;
 
 import org.ectimel.dietgenerator.application.port.in.ProductService;
 import org.ectimel.dietgenerator.domain.model.Product;

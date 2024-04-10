@@ -17,9 +17,10 @@ public class NutrientMapper implements DomainMapper<Nutrients, NutrientInformati
                 .carbohydrates(new Carbohydrates(
                         BigDecimal.valueOf(entityObject.getTotalCarbohydrates()),
                         BigDecimal.valueOf(entityObject.getFiber()),
-                        BigDecimal.valueOf(entityObject.getFiber())))
+                        BigDecimal.valueOf(entityObject.getSugar())))
                 .proteins(new Proteins(
-                        BigDecimal.valueOf(entityObject.getTotalProteins()))).fats(new Fats(
+                        BigDecimal.valueOf(entityObject.getTotalProteins())))
+                .fats(new Fats(
                         BigDecimal.valueOf(entityObject.getTotalFats()),
                         BigDecimal.valueOf(entityObject.getSaturatedFats())))
                 .build();
@@ -31,7 +32,7 @@ public class NutrientMapper implements DomainMapper<Nutrients, NutrientInformati
                 .totalCalories(domainObject.getCalories().getTotalCalories().doubleValue())
                 .totalCarbohydrates(domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue())
                 .fiber(domainObject.getCarbohydrates().getFiber().doubleValue())
-                .sugar(domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue())
+                .sugar(domainObject.getCarbohydrates().getSugar().doubleValue())
                 .totalProteins(domainObject.getProteins().getTotalProteins().doubleValue())
                 .totalFats(domainObject.getFats().getTotalFats().doubleValue())
                 .saturatedFats(domainObject.getFats().getSaturatedFats().doubleValue())

@@ -12,6 +12,4 @@ import java.math.BigDecimal;
 public class Fats {
     private BigDecimal totalFats;
     private BigDecimal saturatedFats;
-
-
 }

@@ -4,6 +4,6 @@ import org.ectimel.dietgenerator.domain.generator.DietAttributes;
 import org.ectimel.dietgenerator.domain.model.Diet;
 
 
-public interface DietService {
-    Diet generateDiet(DietAttributes dietAttributes);
+public interface CreateDiet {
+    Diet createDiet(DietAttributes dietAttributes);
 }

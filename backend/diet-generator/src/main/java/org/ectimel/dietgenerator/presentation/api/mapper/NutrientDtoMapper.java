@@ -13,7 +13,7 @@ public class NutrientDtoMapper {
                 domainObject.getCalories().getTotalCalories().doubleValue(),
                 domainObject.getCarbohydrates().getTotalCarbohydrates().doubleValue(),
                 domainObject.getCarbohydrates().getFiber().doubleValue(),
-                domainObject.getCarbohydrates().getFiber().doubleValue(),
+                domainObject.getCarbohydrates().getSugar().doubleValue(),
                 domainObject.getProteins().getTotalProteins().doubleValue(),
                 domainObject.getFats().getTotalFats().doubleValue(),
                 domainObject.getFats().getSaturatedFats().doubleValue()
