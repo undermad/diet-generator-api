@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.generator;
+package org.ectimel.dietgenerator.domain.generator.diet;
 
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 

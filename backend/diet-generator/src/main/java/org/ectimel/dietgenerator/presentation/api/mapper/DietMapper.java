@@ -22,7 +22,8 @@ public class DietMapper {
                 diet.getDishes().stream()
                         .map(dishMapper::mapFromDomain)
                         .collect(Collectors.toList()),
-                nutrientDtoMapper.mapFromDomain(diet.getNutrients())
+                nutrientDtoMapper.mapFromDomain(diet.getNutrients()),
+                diet.getShoppingList()
         );
     }
 }

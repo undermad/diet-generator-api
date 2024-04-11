@@ -6,7 +6,7 @@ import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
 import org.ectimel.dietgenerator.domain.calculator.calories.BMRCalculator;
 import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalculator;
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.Product;
@@ -100,7 +100,7 @@ public class TestInit {
                 ninjaService.saveProductFromNinjaApi("wholegrain bread", Filler.CARBOHYDRATE), BigDecimal.valueOf(17),
                 ninjaService.saveProductFromNinjaApi("radish", Filler.NONE), BigDecimal.valueOf(15),
                 ninjaService.saveProductFromNinjaApi("tomato", Filler.NONE), BigDecimal.valueOf(15),
-                ninjaService.saveProductFromNinjaApi("natural yogurt", Filler.FAT), BigDecimal.valueOf(13),
+                ninjaService.saveProductFromNinjaApi("greek style yogurt", Filler.FAT), BigDecimal.valueOf(13),
                 ninjaService.saveProductFromNinjaApi("butter", Filler.FAT), BigDecimal.valueOf(2),
                 ninjaService.saveProductFromNinjaApi("chives", Filler.NONE), BigDecimal.valueOf(1)
         );

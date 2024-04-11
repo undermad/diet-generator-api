@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator.infrastructure.persistance.mongo.repositories;
 
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;

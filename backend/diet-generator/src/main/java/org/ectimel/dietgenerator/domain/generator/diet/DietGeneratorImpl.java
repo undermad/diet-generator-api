@@ -1,6 +1,7 @@
-package org.ectimel.dietgenerator.domain.generator;
+package org.ectimel.dietgenerator.domain.generator.diet;
 
 import org.ectimel.dietgenerator.domain.calculator.macro.Macronutrient;
+import org.ectimel.dietgenerator.domain.generator.shopping_list.ShoppingListGenerator;
 import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.domain.model.Dish;
 import org.ectimel.dietgenerator.domain.model.MealType;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class DietGeneratorImpl implements DietGenerator{
+public class DietGeneratorImpl implements DietGenerator {
 
     private final Random random;
 
@@ -43,6 +44,7 @@ public class DietGeneratorImpl implements DietGenerator{
         Diet diet = new Diet();
         addDishes(diet);
         adjustMacronutrients(diet);
+        diet.setShoppingList(ShoppingListGenerator.generateShoppingList(diet));
         return diet;
     }
 

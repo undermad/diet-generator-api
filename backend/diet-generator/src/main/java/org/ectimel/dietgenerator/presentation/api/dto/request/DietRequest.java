@@ -1,8 +1,8 @@
 package org.ectimel.dietgenerator.presentation.api.dto.request;
 
 import org.ectimel.dietgenerator.domain.calculator.Gender;
-import org.ectimel.dietgenerator.domain.generator.DietAttributes;
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietAttributes;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 
 import java.math.BigDecimal;
 

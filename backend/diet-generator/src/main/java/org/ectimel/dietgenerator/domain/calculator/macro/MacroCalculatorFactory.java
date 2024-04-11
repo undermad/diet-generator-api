@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator.domain.calculator.macro;
 
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 
 public class MacroCalculatorFactory {
     public static MacroCalculator getMacroCalculator(DietType dietType) {

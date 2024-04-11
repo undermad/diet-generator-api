@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Getter
 public class Dish {
@@ -29,7 +30,7 @@ public class Dish {
     private Map<Filler, Integer> populateFillers() {
         Map<Filler, Integer> fillers = new HashMap<>();
         Arrays.stream(Filler.values()).forEach(filler -> {
-            if(!filler.equals(Filler.NONE)) {
+            if (!filler.equals(Filler.NONE)) {
                 fillers.put(filler, countFillers(filler));
             }
         });
@@ -66,7 +67,7 @@ public class Dish {
     public Nutrients increaseFiller(Filler filler, BigDecimal grams) {
         Nutrients totalAddedNutrients = Nutrients.createEmptyNutrients();
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return totalAddedNutrients;
+        if (fillerPopulation == null) return totalAddedNutrients;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
@@ -88,15 +89,21 @@ public class Dish {
     public Nutrients reduceFiller(Filler filler, BigDecimal grams) {
         Nutrients totalReducedNutrients = Nutrients.createEmptyNutrients();
         Integer fillerPopulation = numberOfFillers.get(filler);
-        if(fillerPopulation == null) return totalReducedNutrients;
+        if (fillerPopulation == null) return totalReducedNutrients;
 
         BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
         if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
             BigDecimal gramsFraction = grams.divide(numberOfProductFillers, 2, RoundingMode.HALF_DOWN);
-            productToGrams.forEach(((product, bigDecimal) -> {
-                if (product.getFiller().equals(filler)) {
-                    BigDecimal currentGrams = productToGrams.get(product);
-                    BigDecimal productGramsToRemove = product.calculateProductGrams(filler, gramsFraction);
+
+            Map<Product, BigDecimal> fillersToGrams = productToGrams.entrySet().stream()
+                    .filter(entry -> entry.getKey().getFiller().equals(filler))
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            Map.Entry::getValue));
+
+            fillersToGrams.forEach(((product, currentGrams) -> {
+                BigDecimal productGramsToRemove = product.calculateProductGrams(filler, gramsFraction);
+                if (currentGrams.subtract(productGramsToRemove).doubleValue() > 0) {
                     productToGrams.put(product, currentGrams.subtract(productGramsToRemove));
                     Nutrients subtractedNutrients = product.calculateNutrients(productGramsToRemove);
                     nutrients.subtractNutrients(subtractedNutrients);
@@ -106,7 +113,6 @@ public class Dish {
         }
         return totalReducedNutrients;
     }
-
 
 
     private int countFillers(Filler filler) {

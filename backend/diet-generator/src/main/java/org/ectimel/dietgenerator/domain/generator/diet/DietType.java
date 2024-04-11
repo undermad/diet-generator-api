@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.domain.generator;
+package org.ectimel.dietgenerator.domain.generator.diet;
 
 import lombok.Getter;
 

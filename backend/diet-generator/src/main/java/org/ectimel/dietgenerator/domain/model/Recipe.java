@@ -1,12 +1,11 @@
 package org.ectimel.dietgenerator.domain.model;
 
 import lombok.*;
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 

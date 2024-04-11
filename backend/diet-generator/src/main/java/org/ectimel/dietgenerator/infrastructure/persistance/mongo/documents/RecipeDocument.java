@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.ectimel.dietgenerator.domain.generator.DietType;
+import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -9,12 +9,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class Diet {
 
     private List<Dish> dishes;
     private Nutrients nutrients;
+    private Map<String, Double> shoppingList;
 
     public Diet() {
         this.dishes = new ArrayList<>();
