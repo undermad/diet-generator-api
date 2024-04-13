@@ -12,13 +12,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DietGeneratorApplication implements CommandLineRunner {
 
     private final TestInit testInit;
+
     @Qualifier("mongoRecipeRepositoryImpl")
     private final RecipeRepository recipeRepository;
 
+    private final RecipeInit recipeInit;
 
-    public DietGeneratorApplication(TestInit testInit, RecipeRepository recipeRepository) {
+    public DietGeneratorApplication(TestInit testInit, RecipeRepository recipeRepository, RecipeInit recipeInit) {
         this.testInit = testInit;
         this.recipeRepository = recipeRepository;
+        this.recipeInit = recipeInit;
     }
 
 
@@ -28,6 +31,9 @@ public class DietGeneratorApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+
+        recipeInit.initRecipesFromFile();
 
 //        testInit.printBmi();
 //        testInit.initProductsFromFile();

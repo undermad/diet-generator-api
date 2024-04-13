@@ -1,6 +1,7 @@
 package org.ectimel.dietgenerator.presentation.api.mapper;
 
 import org.ectimel.dietgenerator.domain.model.Product;
+import org.ectimel.dietgenerator.domain.model.nutrient.Nutrients;
 import org.ectimel.dietgenerator.presentation.api.dto.ProductDto;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,9 @@ public class ProductDtoMapper {
     }
 
     public ProductDto mapFromDomain(Product product) {
+        if(product == null) {
+            return new ProductDto("", "", nutrientDtoMapper.mapFromDomain(Nutrients.createEmptyNutrients()));
+        }
         return new ProductDto(
                 product.getId().toString(),
                 product.getName(),

@@ -4,13 +4,12 @@ import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.Prod
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface SpringDataMongoProductRepository extends MongoRepository<ProductDocument, UUID> {
 
     @Query("{ 'name' : ?0 }")
-    ProductDocument findByName(String name);
+    Optional<ProductDocument> findByName(String name);
 
-    @Query("{ '' :  ?}")
-    ProductDocument findByUUID(UUID uuid);
 }

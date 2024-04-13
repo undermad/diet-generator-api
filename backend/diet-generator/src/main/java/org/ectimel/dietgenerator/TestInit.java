@@ -33,6 +33,8 @@ public class TestInit {
     private Resource productsFile;
 
 
+
+
     public TestInit(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
     }
@@ -50,6 +52,8 @@ public class TestInit {
         }
 
     }
+
+
 
 
     public Recipe initRyzZKurwczakiem() {

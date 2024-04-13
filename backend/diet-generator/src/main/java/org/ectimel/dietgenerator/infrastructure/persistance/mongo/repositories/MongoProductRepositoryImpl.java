@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -32,8 +33,8 @@ public class MongoProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Product getProduct(String productName) {
-        ProductDocument productDocument = productRepository.findByName(productName);
-        return productMapper.mapToDomain(productDocument);
+        Optional<ProductDocument> productDocument = productRepository.findByName(productName);
+        return productDocument.map(productMapper::mapToDomain).orElse(null);
     }
 
     @Override

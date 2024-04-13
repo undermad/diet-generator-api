@@ -1,0 +1,13 @@
+*
+Name:Test Recipe
+HowTo:Just testing
+DietType:Protein
+MealType:Lunch
+Scalable:true
+**
+milk:300/None
+protein powder:30/Protein
+banana:120/None
+**
+***
+
