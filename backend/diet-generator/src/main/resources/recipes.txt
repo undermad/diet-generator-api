@@ -1,13 +1,16 @@
 *
-Name:Test Recipe
-HowTo:Just testing
+Name:Overnight oats I
+HowTo:Put oats into the jar, add milk and protein powder and wait 10min before you add rest of the ingredients. Add peanut butter, cashew nuts, honey.
 DietType:Protein
-MealType:Lunch
+MealType:Lunch/Snack
 Scalable:true
 **
-milk:300/None
+milk:250/None
+oats:85/None
 protein powder:30/Protein
-banana:120/None
+peanut butter:10/Fat
+cashew nuts:10/Fat
+honey:5/None
 **
 ***
 
