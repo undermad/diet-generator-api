@@ -113,7 +113,7 @@ public class RecipeInit {
         BigDecimal percentageOffSet = BigDecimal.valueOf(100).subtract(calculateSum(ingredientProportion));
         Product product = ingredientProportion.keySet().iterator().next();
         for(Map.Entry<Product,BigDecimal> entry : ingredientProportion.entrySet()){
-            if(entry.getValue().doubleValue() > 3){
+            if(entry.getValue().doubleValue() > percentageOffSet.doubleValue()){
                 product = entry.getKey();
                 break;
             }
