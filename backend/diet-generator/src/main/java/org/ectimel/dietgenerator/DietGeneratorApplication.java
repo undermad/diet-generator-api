@@ -38,20 +38,20 @@ public class DietGeneratorApplication implements CommandLineRunner {
 //        testInit.printBmi();
 //        testInit.initProductsFromFile();
 
-//        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
-//        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
-//
-//        Recipe omlette = testInit.initBreakfast();
-//        Recipe savedOmlette = recipeRepository.save(omlette);
-//
-//        Recipe cottageRadish = testInit.initDinner();
-//        Recipe savedCottageRadish = recipeRepository.save(cottageRadish);
-//
-//        Dish dish = Dish.createDish(savedCottageRadish);
-//        System.out.println("Calories in omlet dish: " + dish.getNutrients().getCalories().getTotalCalories());
-//        System.out.println("Proteins: " + dish.getNutrients().getProteins().getTotalProteins());
-//        System.out.println("Fats: " + dish.getNutrients().getFats().getTotalFats());
-//        System.out.println("Carbohydrates: " + dish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
+        Recipe ryzZKurwczakiem = testInit.initRyzZKurwczakiem();
+        Recipe recipe = recipeRepository.save(ryzZKurwczakiem);
+
+        Recipe omlette = testInit.initBreakfast();
+        Recipe savedOmlette = recipeRepository.save(omlette);
+
+        Recipe cottageRadish = testInit.initDinner();
+        Recipe savedCottageRadish = recipeRepository.save(cottageRadish);
+
+        Dish dish = Dish.createDish(savedCottageRadish);
+        System.out.println("Calories in omlet dish: " + dish.getNutrients().getCalories().getTotalCalories());
+        System.out.println("Proteins: " + dish.getNutrients().getProteins().getTotalProteins());
+        System.out.println("Fats: " + dish.getNutrients().getFats().getTotalFats());
+        System.out.println("Carbohydrates: " + dish.getNutrients().getCarbohydrates().getTotalCarbohydrates());
 
     }
 }

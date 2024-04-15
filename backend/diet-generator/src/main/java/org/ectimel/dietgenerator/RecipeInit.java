@@ -19,10 +19,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Component
@@ -114,8 +111,14 @@ public class RecipeInit {
 
     private Map<Product, BigDecimal> adjustOffSet(Map<Product, BigDecimal> ingredientProportion) {
         BigDecimal percentageOffSet = BigDecimal.valueOf(100).subtract(calculateSum(ingredientProportion));
-        Product firstProduct = ingredientProportion.keySet().iterator().next();
-        ingredientProportion.put(firstProduct, ingredientProportion.get(firstProduct).add(percentageOffSet));
+        Product product = ingredientProportion.keySet().iterator().next();
+        for(Map.Entry<Product,BigDecimal> entry : ingredientProportion.entrySet()){
+            if(entry.getValue().doubleValue() > 3){
+                product = entry.getKey();
+                break;
+            }
+        }
+        ingredientProportion.put(product, ingredientProportion.get(product).add(percentageOffSet));
 
         return ingredientProportion;
     }
