@@ -6,7 +6,7 @@ MealType:Lunch/Snack
 Scalable:true
 **
 milk:250/None
-oats:85/None
+oats:85/Carbohydrate
 protein powder:30/Protein
 peanut butter:10/Fat
 cashew nuts:10/Fat
@@ -31,6 +31,27 @@ garlic:10/None
 sesame oil:5/None
 spring onion:5/None
 rice:100/Carbohydrate
+**
+***
+*
+Name:Crispy chilli turkey noodles
+HowTo:Heat 1 tbsp oil in a large non-stick frying pan over a high heat. Once hot, add the turkey to the pan and fry for 10-12 mins until golden brown and crispy, breaking up the meat with a wooden spoon as you go. Add the ginger and garlic to the pan and cook for 1 min. Stir in the honey, soy and chilli sauce and cook for 2 mins. Meanwhile, bring a large pan of water to the boil, add the noodles and cook following pack instructions. Drain and toss the noodles with the remaining 1 tbsp oil and all the lime juice. Top with the crispy turkey mince, carrot, onion and coriander. Serve with extra lime wedges for squeezing over, if you like.
+DietType:Protein
+MealType:Lunch
+Scalable:true
+**
+turkey:300/Protein
+udon noodles:100/Carbohydrate
+ginger:3/None
+sesame oil:5/None
+garlic:10/None
+honey:10/None
+soy sauce:30/None
+sriracha sauce:10/None
+lime juice:5/None
+carrot:120/None
+spring onion:10/None
+fresh coriander:5/None
 **
 ***
 
