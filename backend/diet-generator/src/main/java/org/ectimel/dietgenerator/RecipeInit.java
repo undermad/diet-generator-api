@@ -102,7 +102,7 @@ public class RecipeInit {
         BigDecimal onePercentValue = calculateOnePercentValue(productToAmount);
         Map<Product, BigDecimal> ingredientProportion = new HashMap<>();
         productToAmount.forEach((product, amount) -> {
-            BigDecimal percentage = amount.divide(onePercentValue, 2, RoundingMode.HALF_DOWN);
+            BigDecimal percentage = amount.divide(onePercentValue, 1, RoundingMode.HALF_DOWN);
             ingredientProportion.put(product, percentage);
         });
 
