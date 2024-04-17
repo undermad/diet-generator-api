@@ -54,4 +54,18 @@ spring onion:10/None
 fresh coriander:5/None
 **
 ***
+*
+Name:Pasta with cottage cheese and cinnamon
+HowTo:Boil the past for 10min, make sure is al dente. Add cheese, and top with cinnamon, maple syrup and erythritol.
+DietType:Protein
+MealType:Lunch
+Scalable:true
+**
+cottage cheese:300/Protein
+pasta:100/Carbohydrate
+cinnamon:3/None
+maple syrup:5/None
+erythritol:5/None
+**
+***
 

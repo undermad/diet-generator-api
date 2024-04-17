@@ -25,6 +25,7 @@ public class Nutrients {
     }
 
     public void addNutrients(Nutrients nutrients) {
+        if(nutrients == null) return;
         addCalories(nutrients.getCalories());
         addCarbohydrates(nutrients.getCarbohydrates());
         addFats(nutrients.getFats());
@@ -32,6 +33,7 @@ public class Nutrients {
     }
 
     public void subtractNutrients(Nutrients nutrients) {
+        if(nutrients == null) return;
         subtractCalories(nutrients.getCalories());
         subtractCarbohydrates(nutrients.getCarbohydrates());
         subtractFats(nutrients.getFats());
