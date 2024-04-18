@@ -75,7 +75,7 @@ public class Dish {
             productToGrams.forEach(((product, bigDecimal) -> {
                 if (product.getFiller().equals(filler)) {
                     BigDecimal currentGrams = productToGrams.get(product);
-                    BigDecimal productGramsToAdd = product.calculateProductGrams(filler, gramsFraction);
+                    BigDecimal productGramsToAdd = product.calculateProductGramsForRequiredFiller(filler, gramsFraction);
                     productToGrams.put(product, currentGrams.add(productGramsToAdd));
                     Nutrients subtractedNutrients = product.calculateNutrients(productGramsToAdd);
                     nutrients.addNutrients(subtractedNutrients);
@@ -102,7 +102,7 @@ public class Dish {
                             Map.Entry::getValue));
 
             fillersToGrams.forEach(((product, currentGrams) -> {
-                BigDecimal productGramsToRemove = product.calculateProductGrams(filler, gramsFraction);
+                BigDecimal productGramsToRemove = product.calculateProductGramsForRequiredFiller(filler, gramsFraction);
                 if (currentGrams.subtract(productGramsToRemove).doubleValue() > 0) {
                     productToGrams.put(product, currentGrams.subtract(productGramsToRemove));
                     Nutrients subtractedNutrients = product.calculateNutrients(productGramsToRemove);

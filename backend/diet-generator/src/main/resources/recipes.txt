@@ -68,4 +68,23 @@ maple syrup:5/None
 erythritol:5/None
 **
 ***
+*
+Name:Protein pancakes
+HowTo:Whizz the banana, oats, eggs, milk, baking powder, cinnamon and protein powder in a blender for 1-2 mins until smooth. Check the oats have broken down, if not, blend for another minute. Heat a drizzle of oil in a pan. Pour or ladle in 2-3 rounds of batter, leaving a little space between each to spread. Cook for 1-2 minutes, until bubbles start to appear on the surface and the underside is golden. Flip over and cook for another minute until cooked through. Transfer to a warmed oven and repeat with the remaining batter. Serve in stacks maple syrup and fruit.
+DietType:Protein
+MealType:Breakfast
+Scalable:true
+**
+banana:120/None
+oats:75/Carbohydrate
+eggs:150/None
+milk:30/None
+baking powder:5/None
+cinnamon:3/None
+protein powder:30/Protein
+coconut oil:5/Fat
+maple syrup:10/None
+berries:30/None
+**
+***
 

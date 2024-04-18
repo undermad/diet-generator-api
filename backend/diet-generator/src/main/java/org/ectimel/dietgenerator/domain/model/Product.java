@@ -21,16 +21,34 @@ public class Product {
     private Filler filler;
 
     public Nutrients calculateNutrients(BigDecimal grams) {
+        if (grams == null || grams.doubleValue() <= 0) {
+            return Nutrients.createEmptyNutrients();
+        }
         return new Nutrients(calculateCalories(grams),
                 calculateCarbohydrates(grams),
                 calculateProteins(grams),
                 calculateFats(grams));
     }
 
+    public BigDecimal calculateProductGramsForRequiredFiller(Filler filler, BigDecimal grams) {
+        if (filler.equals(Filler.PROTEIN)) {
+            return calculateProductGramsForRequiredProteins(grams);
+        } else if (filler.equals(Filler.CARBOHYDRATE)) {
+            return calculateProductGramsForRequiredCarbohydrates(grams);
+        } else if (filler.equals(Filler.FAT)) {
+            return calculateProductGramsForRequiredFats(grams);
+        }
+        return BigDecimal.valueOf(0);
+    }
+
+    public boolean isFiller() {
+        return !this.getFiller().equals(Filler.NONE);
+    }
+
     private Calories calculateCalories(BigDecimal grams) {
         BigDecimal totalCaloriesInGram = this.nutrients.getCalories().getTotalCalories()
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-        return new Calories(totalCaloriesInGram.multiply((grams)));
+        return new Calories(totalCaloriesInGram.multiply((grams)).setScale(0, RoundingMode.HALF_DOWN));
     }
 
     private Carbohydrates calculateCarbohydrates(BigDecimal grams) {
@@ -42,13 +60,15 @@ public class Product {
         BigDecimal sugarInGram = this.nutrients.getCarbohydrates().getSugar()
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
 
-        return new Carbohydrates(totalCarbohydratesInGram.multiply(grams), fibreInGram.multiply(grams), sugarInGram.multiply(grams));
+        return new Carbohydrates(totalCarbohydratesInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN),
+                fibreInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN),
+                sugarInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN));
     }
 
     private Proteins calculateProteins(BigDecimal grams) {
         BigDecimal totalProteinsInGram = this.nutrients.getProteins().getTotalProteins()
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-        return new Proteins(totalProteinsInGram.multiply(grams));
+        return new Proteins(totalProteinsInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN));
     }
 
     private Fats calculateFats(BigDecimal grams) {
@@ -56,18 +76,8 @@ public class Product {
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
         BigDecimal saturatedFatInGram = this.nutrients.getFats().getSaturatedFats()
                 .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
-        return new Fats(totalFatsInGram.multiply(grams), saturatedFatInGram.multiply(grams));
-    }
-
-    public BigDecimal calculateProductGrams(Filler filler, BigDecimal grams) {
-        if (filler.equals(Filler.PROTEIN)) {
-            return calculateProductGramsForRequiredProteins(grams);
-        } else if (filler.equals(Filler.CARBOHYDRATE)) {
-            return calculateProductGramsForRequiredCarbohydrates(grams);
-        } else if (filler.equals(Filler.FAT)) {
-            return calculateProductGramsForRequiredFats(grams);
-        }
-        return BigDecimal.valueOf(0);
+        return new Fats(totalFatsInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN),
+                saturatedFatInGram.multiply(grams).setScale(0, RoundingMode.HALF_DOWN));
     }
 
     private BigDecimal calculateProductGramsForRequiredCarbohydrates(BigDecimal requiredCarbohydrates) {
@@ -87,10 +97,5 @@ public class Product {
         return requiredFats.divide(totalFats, 2, RoundingMode.HALF_DOWN)
                 .multiply(BigDecimal.valueOf(100));
     }
-
-    public boolean isFiller() {
-        return !this.getFiller().equals(Filler.NONE);
-    }
-
 
 }

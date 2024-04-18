@@ -29,6 +29,7 @@ class NutrientsTest {
         Nutrients zeroNutrients = Nutrients.createEmptyNutrients();
         baseNutrients.addNutrients(zeroNutrients);
 
+
         assertAll("Should remain unchanged",
                 () -> assertEquals(new BigDecimal("650"), baseNutrients.getCalories().getTotalCalories()),
                 () -> assertEquals(new BigDecimal("20"), baseNutrients.getCarbohydrates().getTotalCarbohydrates()),
