@@ -30,18 +30,23 @@ public class Product {
                 calculateFats(grams));
     }
 
-    public BigDecimal calculateProductGramsForRequiredFiller(Filler filler, BigDecimal grams) {
+    public BigDecimal calculateProductGramsForRequiredFiller(Filler filler, BigDecimal fillerGrams) {
+        if (filler == null || fillerGrams == null || fillerGrams.doubleValue() <= 0) {
+            return BigDecimal.valueOf(0);
+        }
+
         if (filler.equals(Filler.PROTEIN)) {
-            return calculateProductGramsForRequiredProteins(grams);
+            return calculateProductGramsForRequiredProteins(fillerGrams).setScale(0, RoundingMode.HALF_DOWN);
         } else if (filler.equals(Filler.CARBOHYDRATE)) {
-            return calculateProductGramsForRequiredCarbohydrates(grams);
+            return calculateProductGramsForRequiredCarbohydrates(fillerGrams).setScale(0, RoundingMode.HALF_DOWN);
         } else if (filler.equals(Filler.FAT)) {
-            return calculateProductGramsForRequiredFats(grams);
+            return calculateProductGramsForRequiredFats(fillerGrams).setScale(0, RoundingMode.HALF_DOWN);
         }
         return BigDecimal.valueOf(0);
     }
 
     public boolean isFiller() {
+        if(filler == null) return false;
         return !this.getFiller().equals(Filler.NONE);
     }
 

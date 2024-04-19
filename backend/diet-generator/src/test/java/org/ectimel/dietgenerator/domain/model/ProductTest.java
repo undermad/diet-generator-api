@@ -67,17 +67,58 @@ class ProductTest {
                 () -> assertEquals(new BigDecimal("0"), result.getFats().getTotalFats()));
     }
 
-
-
-
-
-
-
     @Test
-    void calculateProductGramsForRequiredFiller() {
+    void calculateProductGramsForRequiredFiller_positiveValues() {
+        BigDecimal resultNone = product.calculateProductGramsForRequiredFiller(Filler.NONE, BigDecimal.valueOf(1));
+        BigDecimal resultFat = product.calculateProductGramsForRequiredFiller(Filler.FAT, BigDecimal.valueOf(1));
+        BigDecimal resultProteins = product.calculateProductGramsForRequiredFiller(Filler.PROTEIN, BigDecimal.valueOf(1));
+        BigDecimal resultCarbohydrates = product.calculateProductGramsForRequiredFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(1));
+
+        assertAll("Should return 0",
+                () -> assertEquals(BigDecimal.valueOf(0), resultNone),
+                () -> assertEquals(BigDecimal.valueOf(10), resultFat),
+                () -> assertEquals(BigDecimal.valueOf(10), resultProteins),
+                () -> assertEquals(BigDecimal.valueOf(10), resultCarbohydrates));
     }
 
     @Test
-    void isFiller() {
+    void calculateProductGramsForRequiredFiller_negativeValue() {
+        BigDecimal result = product.calculateProductGramsForRequiredFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(-999));
+        assertEquals(BigDecimal.valueOf(0), result);
+    }
+
+    @Test
+    void calculateProductGramsForRequiredFiller_nullFirstParam() {
+        BigDecimal result = product.calculateProductGramsForRequiredFiller(null, BigDecimal.valueOf(123));
+        assertEquals(BigDecimal.valueOf(0), result);
+    }
+
+    @Test
+    void calculateProductGramsForRequiredFiller_nullSecondParam() {
+        BigDecimal result = product.calculateProductGramsForRequiredFiller(Filler.CARBOHYDRATE, null);
+        assertEquals(BigDecimal.valueOf(0), result);
+    }
+
+    @Test
+    void calculateProductGramsForRequiredFiller_zeroValue() {
+        BigDecimal result = product.calculateProductGramsForRequiredFiller(Filler.CARBOHYDRATE, BigDecimal.valueOf(0));
+        assertEquals(BigDecimal.valueOf(0), result);
+    }
+
+    @Test
+    void isFiller_true() {
+        assertTrue(product.isFiller());
+    }
+
+    @Test
+    void isFiller_false() {
+        product.setFiller(Filler.NONE);
+        assertFalse(product.isFiller());
+    }
+
+    @Test
+    void isFiller_nullFalse() {
+        product.setFiller(null);
+        assertFalse(product.isFiller());
     }
 }

@@ -56,7 +56,7 @@ fresh coriander:5/None
 ***
 *
 Name:Pasta with cottage cheese and cinnamon
-HowTo:Boil the past for 10min, make sure is al dente. Add cheese, and top with cinnamon, maple syrup and erythritol.
+HowTo:Boil the pasta for 10min, make sure is al dente. Add cheese, and top with cinnamon, maple syrup and erythritol.
 DietType:Protein
 MealType:Lunch
 Scalable:true
@@ -85,6 +85,23 @@ protein powder:30/Protein
 coconut oil:5/Fat
 maple syrup:10/None
 berries:30/None
+**
+***
+*
+Name:Tuna salad I
+HowTo:Put pearl barley into the boiling water and cook for at least 25min. Drain water from the tuna can and mix all ingredients together.
+DietType:Protein
+MealType:Dinner/Breakfast
+Scalable:true
+**
+tuna:120/Protein
+pearl barley:80/Carbohydrate
+cucumber:100/None
+tomato:100/None
+feta cheese:50/Fat
+chickpea:50/Carbohydrate
+salt:1/None
+greek yogurt:50/None
 **
 ***
 
