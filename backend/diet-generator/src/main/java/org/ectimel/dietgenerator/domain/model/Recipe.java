@@ -40,14 +40,17 @@ public class Recipe {
     }
 
     @Builder
-    public static Recipe createRecipe(Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
+    @NonNull
+    public static Recipe createRecipe( Map<Product, BigDecimal> ingredientsProportion, BigDecimal basePortionInGrams, boolean isScalable, String name, String howToPrepare, List<DietType> dietType, List<MealType> mealTypes){
         return new Recipe(ingredientsProportion, basePortionInGrams, isScalable, name, howToPrepare, dietType, mealTypes);
     }
 
     private static Set<Filler> findScalableFillers(Map<Product, BigDecimal> products) {
         Set<Filler> fillers = new HashSet<>();
         products.forEach((product, bigDecimal) -> {
-            if(product.isFiller()) fillers.add(product.getFiller());
+            if(product.isFiller() && product.getFiller() != Filler.NONE) {
+                fillers.add(product.getFiller());
+            }
         });
         return fillers;
     }

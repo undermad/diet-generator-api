@@ -135,4 +135,17 @@ milk:300/None
 chia seeds:5/None
 **
 ***
+*
+Name:Protein shake III
+HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
+DietType:Protein
+MealType:Dinner/Breakfast/Snack
+Scalable:true
+**
+banana:460/None
+protein powder:30/None
+milk:300/None
+cashew nuts:20/Fat
+**
+***
 
