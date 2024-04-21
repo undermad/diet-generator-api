@@ -121,4 +121,18 @@ peanut butter:15/Fat
 chia seeds:5/None
 **
 ***
+*
+Name:Protein shake II
+HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
+DietType:Protein
+MealType:Dinner/Breakfast/Snack
+Scalable:true
+**
+blueberry:300/None
+oats:50/Carbohydrate
+protein powder:30/None
+milk:300/None
+chia seeds:5/None
+**
+***
 
