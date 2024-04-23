@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator.domain.model.nutrient;
 
+import org.ectimel.dietgenerator.domain.TestObjects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +15,7 @@ class NutrientsTest {
 
     @BeforeEach
     void setUp() {
-        baseNutrients = new Nutrients(
-                new Calories(new BigDecimal("650")),
-                new Carbohydrates(new BigDecimal("20"), new BigDecimal("5"), new BigDecimal("10")),
-                new Proteins(new BigDecimal("30")),
-                new Fats(new BigDecimal("50"), new BigDecimal("20"))
-        );
-
+        baseNutrients = TestObjects.createTestNutrients();
         modifyNutrients = Nutrients.createEmptyNutrients();
     }
 
