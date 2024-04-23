@@ -66,6 +66,10 @@ public class Dish {
 
     public Nutrients increaseFiller(Filler filler, BigDecimal grams) {
         Nutrients totalAddedNutrients = Nutrients.createEmptyNutrients();
+        if (grams == null || filler == null || filler == Filler.NONE || grams.doubleValue() <= 0){
+            return totalAddedNutrients;
+        }
+
         Integer fillerPopulation = numberOfFillers.get(filler);
         if (fillerPopulation == null) return totalAddedNutrients;
 
@@ -88,6 +92,10 @@ public class Dish {
 
     public Nutrients reduceFiller(Filler filler, BigDecimal grams) {
         Nutrients totalReducedNutrients = Nutrients.createEmptyNutrients();
+        if (grams == null ||  filler == null || grams.doubleValue() <= 0 || filler == Filler.NONE ){
+            return totalReducedNutrients;
+        }
+
         Integer fillerPopulation = numberOfFillers.get(filler);
         if (fillerPopulation == null) return totalReducedNutrients;
 
