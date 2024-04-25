@@ -148,4 +148,18 @@ milk:300/None
 cashew nuts:20/Fat
 **
 ***
+*
+Name:Vegan spinach omelette
+HowTo:Whisk the gram flour, oregano and nutritional yeast in a bowl with 80ml water. Heat the oil in a 19cm non-stick frying pan. Pour in the omelette batter and swirl the pan around to cover the base. Pile the fresh spinach over the top, then cover the pan and cook over a low heat for 5-6 mins until the spinach has wilted and the base of the omelette is cooked but still moist. Roll the omelette over in the pan to enclose the spinach, then slide onto a plate and serve.
+DietType:Protein
+MealType:Breakfast
+Scalable:true
+**
+gram flour:30/Carbohydrate
+dried oregano:5/None
+nutrition yeast:3/None
+rapeseed oil:10/Fat
+baby spinach:80/None
+**
+***
 
