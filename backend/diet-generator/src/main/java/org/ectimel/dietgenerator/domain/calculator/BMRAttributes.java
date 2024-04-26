@@ -11,8 +11,8 @@ import java.math.BigDecimal;
 public class BMRAttributes {
     private BigDecimal bodyWeightInKg;
     private BigDecimal heightInCm;
-    BigDecimal age;
-    ActiveLevel activeLevel;
-    Gender gender;
+    private BigDecimal age;
+    private ActiveLevel activeLevel;
+    private Gender gender;
 
 }

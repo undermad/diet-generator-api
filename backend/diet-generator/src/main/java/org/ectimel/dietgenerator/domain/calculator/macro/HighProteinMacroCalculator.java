@@ -10,6 +10,9 @@ public final class HighProteinMacroCalculator implements MacroCalculator {
 
     @Override
     public Macronutrient calculate(MacroCalculatorAttributes attributes) {
+        if(attributes == null || attributes.requiredCalories() == null || attributes.bodyWeightInKg() == null || attributes.gender() == null) {
+            return new Macronutrient(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
+        }
         BigDecimal totalProtein = calculateTotalProtein(attributes.bodyWeightInKg(), attributes.gender());
         BigDecimal totalFats = calculateTotalFats(attributes.requiredCalories());
         BigDecimal totalCarbohydrates = calculateCarbohydrates(attributes.requiredCalories(), totalProtein, totalFats);
