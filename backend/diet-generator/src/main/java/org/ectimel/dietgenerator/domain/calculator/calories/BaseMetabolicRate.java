@@ -1,9 +1,11 @@
 package org.ectimel.dietgenerator.domain.calculator.calories;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
+@Getter
 @AllArgsConstructor
 public class BaseMetabolicRate {
     private BigDecimal baseBMR;

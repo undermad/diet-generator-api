@@ -125,7 +125,6 @@ public class TestInit {
                 .bodyWeightInKg(new BigDecimal("120"))
                 .heightInCm(new BigDecimal("174"))
                 .age(new BigDecimal("30"))
-                .activeLevel(ActiveLevel.MODERATELY_ACTIVE)
                 .gender(Gender.MALE)
                 .build();
 
@@ -133,7 +132,7 @@ public class TestInit {
 
         System.out.println("Required calories per day: " + mifflinStJeorCalculator
                 .calculate(bmrAttributes)
-                .calculateTDEE(bmrAttributes.getActiveLevel()));
+                .calculateTDEE(ActiveLevel.MODERATELY_ACTIVE));
 
         System.out.println("BMI" + BMICalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
     }

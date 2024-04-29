@@ -11,6 +11,7 @@ public class MifflinStJeorCalculator implements BMRCalculator {
 
     @Override
     public BaseMetabolicRate calculate(BMRAttributes bmrAttributes) {
+        if(bmrAttributes == null) return new BaseMetabolicRate(BigDecimal.valueOf(0));
         if (bmrAttributes.getGender() == Gender.MALE)
             return calculateUsingMaleEquation(bmrAttributes);
         else return calculateUsingFemaleEquation(bmrAttributes);
@@ -32,7 +33,7 @@ public class MifflinStJeorCalculator implements BMRCalculator {
                         .add(extra));
     }
 
-    public BaseMetabolicRate calculateUsingFemaleEquation(BMRAttributes bmrAttributes) {
+    private BaseMetabolicRate calculateUsingFemaleEquation(BMRAttributes bmrAttributes) {
         BigDecimal weightMultiplayer = new BigDecimal("10");
         BigDecimal heightMultiplayer = new BigDecimal("6.25");
         BigDecimal ageMultiplayer = new BigDecimal("5");

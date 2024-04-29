@@ -12,7 +12,6 @@ public class BMRAttributes {
     private BigDecimal bodyWeightInKg;
     private BigDecimal heightInCm;
     private BigDecimal age;
-    private ActiveLevel activeLevel;
     private Gender gender;
 
 }
