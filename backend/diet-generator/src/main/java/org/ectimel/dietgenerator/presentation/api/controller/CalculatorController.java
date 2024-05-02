@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/calculator")
 public class CalculatorController {
 
-    private final CalculateTDEE calculateTDEE;
+    private final CalculateTDEE TDEECalculator;
 
-    public CalculatorController(CalculateTDEE calculateTDEE) {
-        this.calculateTDEE = calculateTDEE;
+    public CalculatorController(CalculateTDEE TDEECalculator) {
+        this.TDEECalculator = TDEECalculator;
     }
 
 
-    @PostMapping
+    @PostMapping("/tdee")
     public ResponseEntity<TDEEResponse> calculateTDEE(@RequestBody TDEERequest TDEERequest) {
-
-        return null;
+        Double TDEE = TDEECalculator.calculateTDEE(TDEERequest.mapToDomain()).doubleValue();
+        return ResponseEntity.ok(new TDEEResponse(TDEE));
     }
 }

@@ -3,6 +3,7 @@ package org.ectimel.dietgenerator.infrastructure.configuration;
 import org.apache.coyote.BadRequestException;
 import org.ectimel.dietgenerator.infrastructure.exceptions.ResourceNotFoundException;
 import org.ectimel.dietgenerator.presentation.api.dto.response.ExceptionResponse;
+import org.ectimel.dietgenerator.domain.exception.WrongInputException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -58,6 +59,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 webRequest.getDescription(false));
 
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(WrongInputException.class)
+    public ResponseEntity<ExceptionResponse> handleWrongInputException(WrongInputException exception, WebRequest webRequest) {
+
+        ExceptionResponse errorDto = new ExceptionResponse(
+                exception.getMessage(),
+                new Date(),
+                webRequest.getDescription(false));
+
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
 

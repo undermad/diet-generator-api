@@ -41,25 +41,25 @@ class BaseMetabolicRateTest {
 
     @Test
     void calculateTDEE_LIGHTLY_ACTIVE() {
-        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.LIGHTLY_ACTIVE);
+        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.LIGHTLY);
         assertEquals(new BigDecimal("2808.44"), TDEE);
     }
 
     @Test
     void calculateTDEE_MODERATELY_ACTIVE() {
-        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.MODERATELY_ACTIVE);
+        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.MODERATELY);
         assertEquals(new BigDecimal("3165.87"), TDEE);
     }
 
     @Test
     void calculateTDEE_VERY_ACTIVE() {
-        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.VERY_ACTIVE);
+        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.VERY);
         assertEquals(new BigDecimal("3523.31"), TDEE);
     }
 
     @Test
     void calculateTDEE_SUPER_ACTIVE() {
-        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.SUPER_ACTIVE);
+        BigDecimal TDEE = bmrCalculator.calculate(attributes).calculateTDEE(ActiveLevel.SUPER);
         assertEquals(new BigDecimal("3880.75"), TDEE);
     }
 }

@@ -132,7 +132,7 @@ public class TestInit {
 
         System.out.println("Required calories per day: " + mifflinStJeorCalculator
                 .calculate(bmrAttributes)
-                .calculateTDEE(ActiveLevel.MODERATELY_ACTIVE));
+                .calculateTDEE(ActiveLevel.MODERATELY));
 
         System.out.println("BMI" + BMICalculator.calculate(bmrAttributes.getBodyWeightInKg(), bmrAttributes.getHeightInCm()));
     }

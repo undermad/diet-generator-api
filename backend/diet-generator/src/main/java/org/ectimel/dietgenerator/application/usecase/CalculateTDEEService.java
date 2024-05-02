@@ -18,6 +18,6 @@ public class CalculateTDEEService implements CalculateTDEE {
 
     @Override
     public BigDecimal calculateTDEE(BMRAttributes bmrAttributes) {
-        return null;
+        return bmrCalculator.calculate(bmrAttributes).calculateTDEE(bmrAttributes.getActiveLevel());
     }
 }
