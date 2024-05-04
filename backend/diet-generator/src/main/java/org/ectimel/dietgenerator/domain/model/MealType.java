@@ -1,6 +1,7 @@
 package org.ectimel.dietgenerator.domain.model;
 
 import lombok.Getter;
+import org.ectimel.dietgenerator.domain.exception.WrongInputException;
 
 @Getter
 public enum MealType {
@@ -22,7 +23,7 @@ public enum MealType {
             if(mealType.getName().equalsIgnoreCase(value))
                 return mealType;
         }
-        throw new IllegalArgumentException("Unknown meal type");
+        throw new WrongInputException("Unknown meal type");
     }
 
 
