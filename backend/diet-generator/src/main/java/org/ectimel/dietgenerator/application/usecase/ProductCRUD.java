@@ -6,11 +6,11 @@ import org.ectimel.dietgenerator.application.repositories.ProductRepository;
 
 import java.util.UUID;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductCRUD implements ProductService {
 
     private final ProductRepository productRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductCRUD(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

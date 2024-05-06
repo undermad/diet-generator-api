@@ -6,8 +6,6 @@ import org.ectimel.dietgenerator.infrastructure.exceptions.ResourceNotFoundExcep
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.mappers.ProductMapper;
 import org.ectimel.dietgenerator.infrastructure.persistance.mongo.documents.ProductDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

@@ -41,6 +41,12 @@ public class MongoRecipeRepositoryImpl implements RecipeRepository {
     }
 
     @Override
+    public List<Recipe> findByName(String name) {
+        List<RecipeDocument> recipeDocument = springDataMongoRecipeRepository.findByName(name);
+        return recipeDocument.stream().map(recipeMapper::mapToDomain).collect(Collectors.toList());
+    }
+
+    @Override
     public Recipe save(Recipe recipe) {
         RecipeDocument savedRecipeDocument = springDataMongoRecipeRepository.save(recipeMapper.mapFromDomain(recipe));
 

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface SpringDataMongoRecipeRepository extends MongoRepository<RecipeDocument, UUID>{
@@ -16,5 +17,8 @@ public interface SpringDataMongoRecipeRepository extends MongoRepository<RecipeD
 
     @Query("{ 'dietTypes' : ?0, 'mealTypes' : ?1}")
     List<RecipeDocument> findAllByDietAndMealTypes(DietType dietType, MealType mealType);
+
+    @Query("{ 'name' :  ?0}")
+    List<RecipeDocument> findByName(String recipeName);
 
 }

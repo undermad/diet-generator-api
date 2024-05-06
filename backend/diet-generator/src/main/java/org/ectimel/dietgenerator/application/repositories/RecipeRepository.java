@@ -10,4 +10,5 @@ public interface RecipeRepository {
     List<Recipe> findAllByDietType(DietType dietType);
     Recipe save(Recipe recipe);
     List<Recipe> findAllByDietAndMealTypes(DietType dietType, MealType mealType);
+    List<Recipe> findByName(String name);
 }
