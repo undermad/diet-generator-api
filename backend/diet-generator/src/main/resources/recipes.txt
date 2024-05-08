@@ -162,4 +162,22 @@ rapeseed oil:10/Fat
 baby spinach:80/None
 **
 ***
+*
+Name:Turkey with potatoes and salad
+HowTo:Cook potatoes for 40min. Add favourite spices to your turkey and bake for 16min in 180 deg. Mix natural yogurt with cucumber, sweetcorn, tomato, black olives
+DietType:Protein
+MealType:Lunch
+Scalable:true
+**
+potato:400/Carbohydrate
+olive oil:10/Fat
+turkey:300/Protein
+greek yogurt:40/None
+cucumber:60/None
+sweetcorn:60/None
+tomato:120/None
+black olives:40/None
+salt:2/None
+**
+***
 

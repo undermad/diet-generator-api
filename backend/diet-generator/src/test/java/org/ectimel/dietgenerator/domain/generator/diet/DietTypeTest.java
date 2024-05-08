@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator.domain.generator.diet;
 
+import org.ectimel.dietgenerator.domain.exception.WrongInputException;
 import org.ectimel.dietgenerator.domain.model.MealType;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,12 +12,12 @@ class DietTypeTest {
 
     @Test
     void fromValue_wrongValues() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(WrongInputException.class, () -> {
 
             DietType.fromValue(null);
         }, "Should throw IllegalArgumentException");
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(WrongInputException.class, () -> {
 
             DietType.fromValue("Abc");
         }, "Should throw IllegalArgumentException");
