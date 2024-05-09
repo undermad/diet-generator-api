@@ -180,4 +180,19 @@ black olives:40/None
 salt:2/None
 **
 ***
+*
+Name:Turkey with potatoes and salad
+HowTo:Cut potatoes into the fries shape and bake for 40min. Add olive oil. Add favourite spices to your chicken and bake for 16min in 180 deg. Serve with salted sliced onion and tomato.
+DietType:Protein
+MealType:Lunch
+Scalable:true
+**
+potato:400/Carbohydrate
+olive oil:10/Fat
+chicken breast:300/Protein
+tomato:120/None
+onion:120/None
+salt:2/None
+**
+***
 
