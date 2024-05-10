@@ -1,13 +1,18 @@
 import './App.css'
-import {MuiTypography} from "./components/MuiTypography.tsx";
+import {Route, Routes} from "react-router";
+import {AppLayout} from "./AppLayout.tsx";
 
 function App() {
 
-  return (
-      <div>
-        <MuiTypography/>
-      </div>
-  )
+    return (
+        <Routes>
+            <Route path="/" element={<AppLayout/>}>
+
+
+
+            </Route>
+        </Routes>
+    )
 }
 
 export default App
