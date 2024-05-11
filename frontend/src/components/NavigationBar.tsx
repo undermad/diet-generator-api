@@ -1,38 +1,36 @@
-import {AppBar, Container, CssBaseline, Stack, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, CssBaseline, Stack, Toolbar} from "@mui/material";
+import {LogoIcon} from "./LogoIcon.tsx";
 
 export const NavigationBar = () => {
 
     return (
         <>
             <CssBaseline/>
-            <AppBar>
-                <Container maxWidth={"md"}>
+            <AppBar position={"sticky"}>
+                <Container maxWidth={"lg"}>
                     <Toolbar>
 
-                        <Stack direction={"row"} spacing={10}>
-                            <Typography component={"a"} href="http://localhost:5173/" style={{color: "white"}}>
-                                Fatatu
-                            </Typography>
+                        <Stack direction={"row"} spacing={{xs: 5, md: 10}}>
+                            <Stack direction={"row"}>
+                                <LogoIcon/>
+                                <Button component={"a"} href="http://localhost:5173/" sx={{color: "white"}}>
+                                    Fatatu
+                                </Button>
+                            </Stack>
 
-                            <Stack direction={"row"} spacing={3}>
-                                <Typography component={"a"} href="http://localhost:5173/" style={{color: "white"}}>
+                            <Stack direction={"row"} spacing={{ xs: 1, sm: 2, md: 3}}>
+                                <Button href="http://localhost:5173/" sx={{color: "white"}}>
                                     About
-                                </Typography>
-                                <Typography component={"a"} href="http://localhost:5173/" style={{color: "white"}}>
+                                </Button>
+                                <Button href="https://github.com/undermad/diet-generator-api" style={{color: "white"}}>
                                     GitHub
-                                </Typography>
+                                </Button>
                             </Stack>
                         </Stack>
                     </Toolbar>
                 </Container>
             </AppBar>
-            <main>
-                <Container maxWidth={"md"}>
-                    <Typography variant="subtitle1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-                        architecto culpa, debitis delectus eaque laborum minus omnis placeat rerum, sequi tenetur
-                        voluptatibus? Ab aliquid assumenda possimus quod veniam voluptatibus! Numquam!</Typography>
-                </Container>
-            </main>
+
         </>
     )
 }
