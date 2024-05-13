@@ -1,5 +1,17 @@
-import {Box, Button, Container, Stack, TextField, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    Container,
+    FormControl,
+    FormControlLabel,
+    FormLabel, Radio,
+    RadioGroup,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
 import fatatu from "../assets/images/Default_gwnerate_diet_generator_logo_with_chicken_and_fork_and_2.jpg";
+
 export const Home = () => {
     return (
         <Container maxWidth={"lg"}>
@@ -30,15 +42,63 @@ export const Home = () => {
                     <img src={fatatu} alt={"Fatatu logo"} style={{width: '100%', borderRadius: '5px'}}/>
                 </Box>
             </Stack>
+            
+            
             <Stack sx={{marginTop: '35px'}}>
 
+                <Box component={"section"}
+                     sx={{p: 2, width: '400px', alignSelf: 'center', border: '1px solid grey', borderRadius: '5px'}}>
 
-                <TextField
-                    id="outlined-error"
-                    label="Kcal"
-                    defaultValue="Hello World"/>
+                    <Stack direction={"column"} spacing={2}>
 
+                        <TextField id={"outlined-basic"}
+                                   type={"number"}
+                                   label={"Kcal"}
+                                   variant="outlined"/>
+
+                        <TextField id={"outlined-basic"}
+                                   type={"number"}
+                                   label={"Number of meals"}
+                                   variant="outlined"/>
+
+                        <TextField id={"outlined-basic"}
+                                   type={"number"}
+                                   label={"Body weight in kg"}
+                                   variant="outlined"/>
+
+
+                        <FormControl>
+                            <FormLabel id={"diet-type"}>Select Diet</FormLabel>
+                            <RadioGroup
+                                aria-labelledby={"diet type radio buttons"}
+                                defaultValue={"High Protein"}
+                                name={"radio-buttons-group"}
+                            >
+                                <FormControlLabel value={"High Protein"}  control={<Radio/>}
+                                                  label={"High Protein"}/>
+                            </RadioGroup>
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel id={"gender"}>Select Gender</FormLabel>
+                            <RadioGroup
+                                aria-labelledby={"gender radio buttons"}
+                                defaultValue={"Male"}
+                                name={"radio-buttons-group"}
+                            >
+                                <FormControlLabel value={"Male"} control={<Radio/>} label={"Male"}/>
+                                <FormControlLabel value={"Female"} control={<Radio/>} label={"Female"}/>
+                            </RadioGroup>
+                        </FormControl>
+
+                        <Button variant={"contained"} sx={{width: '100%'}}>Generate</Button>
+                    </Stack>
+
+                </Box>
                 
+                {/*what if number of proteins will be less than the number of required calories*/}
+
+
             </Stack>
 
         </Container>
