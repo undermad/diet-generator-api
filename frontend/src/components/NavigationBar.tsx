@@ -1,5 +1,4 @@
 import {AppBar, Button, Container, CssBaseline, Stack, Toolbar} from "@mui/material";
-import {LogoIcon} from "./LogoIcon.tsx";
 
 export const NavigationBar = () => {
 
@@ -12,7 +11,7 @@ export const NavigationBar = () => {
 
                         <Stack direction={"row"} spacing={{xs: 5, md: 10}}>
                             <Stack direction={"row"}>
-                                <LogoIcon/>
+                                {/*<LogoIcon/>*/}
                                 <Button component={"a"} href="http://localhost:5173/" sx={{color: "white"}}>
                                     Fatatu
                                 </Button>
