@@ -1,7 +1,6 @@
 package org.ectimel.dietgenerator.presentation.api.mapper;
 
 import org.ectimel.dietgenerator.domain.model.Recipe;
-import org.ectimel.dietgenerator.presentation.api.dto.ProductDto;
 import org.ectimel.dietgenerator.presentation.api.dto.RecipeDto;
 import org.springframework.stereotype.Component;
 

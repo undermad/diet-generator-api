@@ -7,7 +7,7 @@ import org.ectimel.dietgenerator.domain.generator.diet.DietType;
 import java.math.BigDecimal;
 
 public record DietRequest(
-        Integer requiredCalories,
+        Integer kcal,
         String dietType,
         Integer numberOfMeals,
         Double bodyWeightInKg,
@@ -16,7 +16,7 @@ public record DietRequest(
 
     public DietAttributes mapToDomain() {
         return new DietAttributes(
-                BigDecimal.valueOf(this.requiredCalories()),
+                BigDecimal.valueOf(this.kcal()),
                 DietType.fromValue(this.dietType()),
                 BigDecimal.valueOf(this.numberOfMeals()),
                 BigDecimal.valueOf(this.bodyWeightInKg()),
