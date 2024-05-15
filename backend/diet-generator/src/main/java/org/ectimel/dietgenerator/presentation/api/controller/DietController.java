@@ -1,5 +1,6 @@
 package org.ectimel.dietgenerator.presentation.api.controller;
 
+import jakarta.validation.Valid;
 import org.ectimel.dietgenerator.presentation.api.dto.request.DietRequest;
 import org.ectimel.dietgenerator.domain.model.Diet;
 import org.ectimel.dietgenerator.application.port.in.CreateDiet;
@@ -22,7 +23,7 @@ public class DietController {
     }
 
     @PostMapping
-    public ResponseEntity<DietResponse> generateDiet(@RequestBody DietRequest dietRequest) {
+    public ResponseEntity<DietResponse> generateDiet(@Valid @RequestBody DietRequest dietRequest) {
         Diet diet = createDiet.createDiet(dietRequest.mapToDomain());
         return ResponseEntity.ok(dietMapper.mapToDietResponse(diet));
     }

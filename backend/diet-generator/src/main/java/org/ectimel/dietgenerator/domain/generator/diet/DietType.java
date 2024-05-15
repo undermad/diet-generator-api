@@ -5,7 +5,7 @@ import org.ectimel.dietgenerator.domain.exception.WrongInputException;
 
 @Getter
 public enum DietType {
-    PROTEIN("Protein"),
+    PROTEIN("High Protein"),
     VEGETARIAN("Vegetarian");
 
     private final String name;

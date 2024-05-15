@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {useState} from "react";
 import {axiosBase} from "../api/axios.ts";
+import {useNavigate} from "react-router";
 
 export enum Gender {
     Male = "Male",
@@ -44,6 +45,8 @@ export const DietForm = () => {
         numberOfMeals: false,
         bodyWeightInKg: false,
     });
+    
+    const navigate = useNavigate();
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,10 +68,11 @@ export const DietForm = () => {
 
         axiosBase.post("/diet", formData)
             .then((response) => {
-                console.log(response);
+                navigate("/response", {state: { data: response.data }});
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error)
+                navigate("/response", {state: { data: error.response.data }});
             });
 
     };

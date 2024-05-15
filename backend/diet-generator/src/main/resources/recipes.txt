@@ -1,7 +1,7 @@
 *
 Name:Overnight oats I
 HowTo:Put oats into the jar, add milk and protein powder and wait 10min before you add rest of the ingredients. Add peanut butter, cashew nuts, honey.
-DietType:Protein
+DietType:High Protein
 MealType:Lunch/Snack
 Scalable:true
 **
@@ -17,7 +17,7 @@ honey:5/None
 *
 Name:Crispy shredded chicken
 HowTo:Slice the chicken into thin strips. Pour over 2 tbsp of the soy and marinate in the fridge, covered, for 1 hr. Meanwhile, heat 1 tbsp of the oil in a wok or deep frying pan over a medium heat and cook the peppers for 3-4 mins until just beginning to soften. Remove with a slotted spoon and set aside. Spread the cornflour out in a shallow bowl. Season, then add the marinated chicken strips and toss to coat well. Fill a wok or deep frying pan with the oil so it’s about ½cm deep, then heat to medium-high. Carefully add the chicken in batches, cooking for 3-4 mins, using tongs to turn regularly until golden and crispy. Remove with a slotted spoon and place on a plate lined with kitchen paper to drain. Mix together the remaining soy, sweet chilli, garlic paste and sesame oil in a large bowl. Add the cooked peppers, crispy chicken and toss together until coated all over and sticky. Serve sprinkled with the spring onions and rice.
-DietType:Protein
+DietType:High Protein
 MealType:Lunch
 Scalable:true
 **
@@ -37,7 +37,7 @@ rice:100/Carbohydrate
 *
 Name:Crispy chilli turkey noodles
 HowTo:Heat 1 tbsp oil in a large non-stick frying pan over a high heat. Once hot, add the turkey to the pan and fry for 10-12 mins until golden brown and crispy, breaking up the meat with a wooden spoon as you go. Add the ginger and garlic to the pan and cook for 1 min. Stir in the honey, soy and chilli sauce and cook for 2 mins. Meanwhile, bring a large pan of water to the boil, add the noodles and cook following pack instructions. Drain and toss the noodles with the remaining 1 tbsp oil and all the lime juice. Top with the crispy turkey mince, carrot, onion and coriander. Serve with extra lime wedges for squeezing over, if you like.
-DietType:Protein
+DietType:High Protein
 MealType:Lunch
 Scalable:true
 **
@@ -58,7 +58,7 @@ fresh coriander:5/None
 *
 Name:Pasta with cottage cheese and cinnamon
 HowTo:Boil the pasta for 10min, make sure is al dente. Add cheese, and top with cinnamon, maple syrup and erythritol.
-DietType:Protein
+DietType:High Protein
 MealType:Lunch
 Scalable:true
 **
@@ -72,7 +72,7 @@ erythritol:5/None
 *
 Name:Protein pancakes
 HowTo:Whizz the banana, oats, eggs, milk, baking powder, cinnamon and protein powder in a blender for 1-2 mins until smooth. Check the oats have broken down, if not, blend for another minute. Heat a drizzle of oil in a pan. Pour or ladle in 2-3 rounds of batter, leaving a little space between each to spread. Cook for 1-2 minutes, until bubbles start to appear on the surface and the underside is golden. Flip over and cook for another minute until cooked through. Transfer to a warmed oven and repeat with the remaining batter. Serve in stacks maple syrup and fruit.
-DietType:Protein
+DietType:High Protein
 MealType:Breakfast
 Scalable:true
 **
@@ -91,7 +91,7 @@ berries:30/None
 *
 Name:Tuna salad I
 HowTo:Put pearl barley into the boiling water and cook for at least 25min. Drain water from the tuna can and mix all ingredients together.
-DietType:Protein
+DietType:High Protein
 MealType:Dinner/Breakfast
 Scalable:true
 **
@@ -108,7 +108,7 @@ greek yogurt:50/None
 *
 Name:Protein shake I
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
-DietType:Protein
+DietType:High Protein
 MealType:Dinner/Breakfast/Snack
 Scalable:true
 **
@@ -124,7 +124,7 @@ chia seeds:5/None
 *
 Name:Protein shake II
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
-DietType:Protein
+DietType:High Protein
 MealType:Dinner/Breakfast/Snack
 Scalable:true
 **
@@ -138,7 +138,7 @@ chia seeds:5/None
 *
 Name:Protein shake III
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
-DietType:Protein
+DietType:High Protein
 MealType:Dinner/Breakfast/Snack
 Scalable:true
 **
@@ -151,7 +151,7 @@ cashew nuts:20/Fat
 *
 Name:Vegan spinach omelette
 HowTo:Whisk the gram flour, oregano and nutritional yeast in a bowl with 80ml water. Heat the oil in a 19cm non-stick frying pan. Pour in the omelette batter and swirl the pan around to cover the base. Pile the fresh spinach over the top, then cover the pan and cook over a low heat for 5-6 mins until the spinach has wilted and the base of the omelette is cooked but still moist. Roll the omelette over in the pan to enclose the spinach, then slide onto a plate and serve.
-DietType:Protein
+DietType:High Protein
 MealType:Breakfast
 Scalable:true
 **
@@ -165,7 +165,7 @@ baby spinach:80/None
 *
 Name:Turkey with potatoes and salad
 HowTo:Cook potatoes for 40min. Add favourite spices to your turkey and bake for 16min in 180 deg. Mix natural yogurt with cucumber, sweetcorn, tomato, black olives
-DietType:Protein
+DietType:High Protein
 MealType:Lunch
 Scalable:true
 **
@@ -183,7 +183,7 @@ salt:2/None
 *
 Name:Turkey with potatoes and salad
 HowTo:Cut potatoes into the fries shape and bake for 40min. Add olive oil. Add favourite spices to your chicken and bake for 16min in 180 deg. Serve with salted sliced onion and tomato.
-DietType:Protein
+DietType:High Protein
 MealType:Lunch
 Scalable:true
 **

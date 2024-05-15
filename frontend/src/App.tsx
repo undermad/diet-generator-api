@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router";
 import {AppLayout} from "./AppLayout.tsx";
 import {Home} from "./components/Home.tsx";
 import {About} from "./components/About.tsx";
+import {JsonResponse} from "./components/JsonResponse.tsx";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
                 
                 <Route path={"/"} element={<Home/>}/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/response" element={<JsonResponse/>}/>
                 
             </Route>
         </Routes>
