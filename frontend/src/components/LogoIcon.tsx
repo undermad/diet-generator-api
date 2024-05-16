@@ -3,8 +3,9 @@ import {IconButton} from "@mui/material";
 
 export const LogoIcon = () => {
     return (
-        <IconButton size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
-            <img src={fatatu} alt={"Logo Icon"} style={{width: 28, height: 28, borderRadius: '50%'}}/>
+
+        <IconButton href={"http://localhost:5173"} size={"large"} edge={"start"} color={"inherit"} aria-label={"logo"}>
+                <img src={fatatu} alt={"Logo Icon"} style={{width: 28, height: 28, borderRadius: '50%'}}/>
         </IconButton>
     )
 }

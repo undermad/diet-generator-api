@@ -1,3 +1,3 @@
 1. Add cors.        DONE
-2. Add validation   
-3. Add rounding to the response
+2. Add validation   Part Done
+3. Add rounding to the response DONE <- diet <- check other repsonses

@@ -6,6 +6,7 @@ import org.ectimel.dietgenerator.presentation.api.dto.DishDto;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,9 @@ public class DishMapper {
     private Map<String, Double> mapProductToGrams(Map<Product, BigDecimal> productToGrams) {
         Map<String, Double> nameToGrams = new HashMap<>();
         productToGrams.keySet().forEach(key -> {
-            nameToGrams.put(key.getName(), productToGrams.get(key).doubleValue());
+            nameToGrams.put(key.getName(), productToGrams.get(key)
+                    .setScale(1, RoundingMode.HALF_DOWN)
+                    .doubleValue());
         });
         return nameToGrams;
     }

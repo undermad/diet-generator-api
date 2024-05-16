@@ -1,6 +1,5 @@
 import {
     Box,
-    Button,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -9,6 +8,10 @@ import {
     Stack,
     TextField
 } from "@mui/material";
+
+import {LoadingButton} from "@mui/lab";
+
+
 import {useState} from "react";
 import {axiosBase} from "../api/axios.ts";
 import {useNavigate} from "react-router";
@@ -45,7 +48,9 @@ export const DietForm = () => {
         numberOfMeals: false,
         bodyWeightInKg: false,
     });
-    
+
+    const [loading, setLoading] = useState<boolean>(false);
+
     const navigate = useNavigate();
 
 
@@ -65,14 +70,18 @@ export const DietForm = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!validateData()) return;
+        setLoading(true);
 
         axiosBase.post("/diet", formData)
             .then((response) => {
-                navigate("/response", {state: { data: response.data }});
+                navigate("/response", {state: {data: response.data}});
             })
             .catch((error) => {
                 console.log(error)
-                navigate("/response", {state: { data: error.response.data }});
+                navigate("/response", {state: {data: error.response.data}});
+            })
+            .finally(() => {
+                setLoading(false);
             });
 
     };
@@ -161,11 +170,13 @@ export const DietForm = () => {
                         </RadioGroup>
                     </FormControl>
 
-                    <Button variant={"contained"}
-                            sx={{width: '100%'}}
-                            form={"generate-diet"}
-                            type={"submit"}>
-                        Generate</Button>
+
+                    <LoadingButton variant={"contained"}
+                                   sx={{width: '100%'}}
+                                   form={"generate-diet"}
+                                   type={"submit"}
+                                   loading={loading}>
+                        Generate</LoadingButton>
 
                 </Stack>
             </form>

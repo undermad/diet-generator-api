@@ -25,7 +25,7 @@ class DietTypeTest {
 
     @Test
     void fromValue_correctValue() {
-        assertEquals(DietType.PROTEIN, DietType.fromValue("pRotEin"));
+        assertEquals(DietType.PROTEIN, DietType.fromValue("hIGh pRotEin"));
     }
 
 }
