@@ -69,6 +69,7 @@ export const DietForm = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        
         if (!validateData()) return;
         setLoading(true);
 
@@ -152,6 +153,7 @@ export const DietForm = () => {
                             aria-labelledby={"diet type radio buttons"}
                             defaultValue={DietType.HighProtein}
                             name={"dietType"}
+                            onChange={handleChange}
                         >
                             <FormControlLabel value={DietType.HighProtein} control={<Radio/>}
                                               label={"High Protein"}/>
@@ -164,6 +166,7 @@ export const DietForm = () => {
                             aria-labelledby={"gender radio buttons"}
                             defaultValue={Gender.Male}
                             name={"gender"}
+                            onChange={handleChange}
                         >
                             <FormControlLabel value={Gender.Male} control={<Radio/>} label={"Male"}/>
                             <FormControlLabel value={Gender.Female} control={<Radio/>} label={"Female"}/>

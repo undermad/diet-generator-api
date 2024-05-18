@@ -5,13 +5,12 @@ import {
     CssBaseline,
     Drawer, IconButton,
     List,
-    ListItem, ListItemButton,
-    ListItemText,
+    ListItem,
     Stack,
     Typography
 } from "@mui/material";
 import {LogoIcon} from "./LogoIcon.tsx";
-import React, {useState} from "react";
+import {useState} from "react";
 import {IoMdMenu} from "react-icons/io";
 import {IoCloseSharp} from "react-icons/io5";
 import {Link} from "react-router-dom";
