@@ -106,14 +106,13 @@ export const DietForm = () => {
 
     return (
 
-
         <Box component={"section"}
              sx={{
                  p: 2,
-                 width: {xs: '100%', md: '400px', lg: '550px'},
-                 alignSelf: 'center',
+                 width: {xs: '100%'},
                  border: '1px solid grey',
-                 borderRadius: '5px'
+                 borderRadius: '5px',
+                 alignSelf: {md: 'flex-start', xs: 'flex-start'}
              }}>
 
             <form noValidate autoComplete={"off"} onSubmit={handleSubmit} id={"generate-diet"}>

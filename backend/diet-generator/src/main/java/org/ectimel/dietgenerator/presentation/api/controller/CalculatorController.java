@@ -31,14 +31,14 @@ public class CalculatorController {
     @PostMapping("/tdee")
     public ResponseEntity<TDEEResponse> calculateTDEE(@RequestBody TDEERequest TDEERequest) {
         Double TDEE = TDEECalculator.calculateTDEE(TDEERequest.mapToDomain()).doubleValue();
-        return ResponseEntity.ok(new TDEEResponse(TDEE));
+        return ResponseEntity.ok(new TDEEResponse(TDEE + "kcal"));
     }
 
     @PostMapping("/bmi")
     public ResponseEntity<BMIResponse> calculateBMI(@RequestBody BMIRequest BMIRequest) {
         Double result = calculateBMI.calculate(
-                BigDecimal.valueOf(BMIRequest.weight()),
-                BigDecimal.valueOf(BMIRequest.height()))
+                BigDecimal.valueOf(BMIRequest.bodyWeightInKg()),
+                BigDecimal.valueOf(BMIRequest.heightInCm()))
                 .doubleValue();
 
         return ResponseEntity.ok(new BMIResponse(result));

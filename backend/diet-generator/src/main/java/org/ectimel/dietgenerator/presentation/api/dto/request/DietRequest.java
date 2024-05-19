@@ -24,7 +24,7 @@ public record DietRequest(
         Integer numberOfMeals,
 
         @Min(value = 0, message = "Value can not be less than 0.")
-        @Max(value = 220,  message = "You should see the doctor.")
+        @Max(value = 999,  message = "Your bodyWeightInKg is to big.")
         @NotNull(message = "Can not be empty")
         Double bodyWeightInKg,
         
