@@ -1,4 +1,4 @@
-# Fatatu - Diet Generator 
+# Fatatu - Diet Generator
 
 ![C2 screenshot](/screenshots/fatatu_logo.png)
 
@@ -11,31 +11,33 @@ and comprehensive documentation. It is also part of the [100commits](https://100
 
 ### 1.1 What is Fatatu?
 
-Fatatu is diet generator application that will generate list of the meals with all ingredients and nutrition's information
-based on given criteria such as required kcal, diet targets, diet type etc.
-As addition, each diet will provide shopping list.
+Fatatu is a diet generator application that will generate a list of meals with all ingredients and nutrition information
+based on provided criteria such as required kcal, diet targets, diet type, etc.
+In addition, each diet will provide a shopping list.
 
-With one click you can get diet and go straight to the shop and buy what you need, you don't need to wast time on
-browsing for recipe or adjusting macros. This application will do it for you.
+With one click you can get a diet and go straight to the shop and buy what you need, you don't need to waste time on
+browsing for recipes or adjusting macros. This application will do it for you.
 
 ### 1.2 Why this repository exists?
 
-**First reason:** This application is created as a idea that I have in mind for a couple of months/years, and finally I
+**First reason:** This application was created as an idea that I had in mind for a couple of months/years, and finally I
 decided to create it.
 
 **Second reason:** [100commits](https://100commitow.pl/) competitive event gave me motivation to begin this project and
 push my skills to the next level.
 
-**Third reason:** I found that creating application from beginning to the end including deployment is extremely
+**Third reason:** I found that creating applications from beginning to the end including deployment is extremely
 beneficial in
-improving my skills as Software Developer. With this repository I decided to learn MongoDB, apply clean architecture and
+improving my skills as a Software Developer. With this repository, I decided to learn MongoDB, apply clean architecture,
+and
 implement comprehensive documentation.
 
 ### 1.3 Disclaimer
 
-I am beginner software developer with less than 2 years experience who do it as a hobby. I never work in professional
+I am a beginner software developer with less than 2 years of experience who do it as a hobby. I never work in a
+professional
 environment. I learn everything from books, online courses,
-documentation, blogs, forums, Youtube and AI. Forgive me if something isn't okay in this repo.
+documentation, blogs, forums, YouTube, and AI. Forgive me if something isn't okay in this repo.
 
 ### 1.4 Star and share
 
@@ -51,7 +53,7 @@ Calories are a measure of energy, and when we talk about food energy, we use the
 referred to simply as "calories" in everyday language. The concept of calorie intake, expenditure, and deficit is
 central to understanding weight management.
 
-### How kcal Works:
+### 2.1 How kcal Works:
 
 **Energy Source**: The food we eat provides energy measured in kcal. This energy fuels our body's basic functions (like
 breathing and blood circulation), physical activities, and the processing of food itself.
@@ -59,9 +61,8 @@ breathing and blood circulation), physical activities, and the processing of foo
 **Energy Expenditure**: Our body uses the energy in several ways:
 
 * Basal Metabolic Rate (BMR): The energy needed for basic functions at rest.
-* Physical Activity: The energy expended through exercise and routine daily movements. 
-* Thermic Effect of Food (TEF): The energy used to digest, absorb, and metabolize food. 
-
+* Physical Activity: The energy expended through exercise and routine daily movements.
+* Thermic Effect of Food (TEF): The energy used to digest, absorb, and metabolize food.
 
 Weight management depends on the balance between energy intake (the calories you consume) and energy
 expenditure (the calories you burn).
@@ -71,13 +72,22 @@ expenditure (the calories you burn).
 The number of calories (kcal) required for a person depends on various factors
 such as age, gender, weight, height, and physical activity level.
 
-This application curently support Mifflin-St Jeor equation
+### 2.2 BMI
 
-Male equation `BMR = (10 × weight in kg) + (6.25 × height in cm)  −(5 × age in years) + 5`
+Calculating your Basal Metabolic Rate (BMR) helps you understand how many calories your body needs at rest to maintain
+basic physiological functions. The BMR can be estimated using several formulas, with the Harris-Benedict Equation and
+the Mifflin-St Jeor Equation being the most commonly used.
+
+This application currently supports the Mifflin-St Jeor equation
+
+Male equation `BMR = (10 × weight in kg) + (6.25 × height in cm)  − (5 × age in years) + 5`
 
 Female equation `BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age in years) − 161`
 
-To calculate the total daily energy expenditure (TDEE), which represents the total number of calories needed to maintain your current weight, you multiply your Basal Metabolic Rate (BMR) by an activity factor:
+### 2.3 TDEE
+
+To calculate the total daily energy expenditure (TDEE), which represents the total number of calories needed to maintain
+your current weight, you multiply your Basal Metabolic Rate (BMR) by an activity factor:
 
 - Sedentary (little or no exercise): BMR × 1.2
 - Lightly active (light exercise/sports 1-3 days/week): BMR × 1.375
@@ -85,19 +95,21 @@ To calculate the total daily energy expenditure (TDEE), which represents the tot
 - Very active (hard exercise/sports 6-7 days a week): BMR × 1.725
 - Super active (very hard exercise/sports & a physical job): BMR × 1.9
 
-Calculating TEF is not necessary for average person, but it will be supported in the future.
-- [ ] TEF support (coming soon)
+### 2.4 TEF
+
+Calculating thermic effect of food (TEF) is not necessary for average person and currently is not supported. This may change in the future.
 
 ### Diet
 
-Main business entities are `Diet` and `Dish` that is created by `DietGenerator` using required calories, number of meals, `Macronutrient` and list of recipes.
+The main business entities are `Diet` and `Dish` that is created by `DietGenerator` using the required calories, number
+of meals, `Macronutrient`, and list of recipes.
 `Macronutrient` is generated by `MacroCalculator`.
-`MacroCalculatorFactory` create `MacroCalculator` implementation using `DietType`. Possible outcome is for example  
-`HighProteinMacroCalculator`. Each macro calculator consist of its own values that are used to calculate required 
-`Macronutrient` object. 
-Each `Recipie` is set `Product`
-items in strictly defined % ratio and calculated nutrients per 100g of the product.
-`Product` consist of `Nutrients` information such as `Carbohydrates`, `Fats`, `Proteins`.
+`MacroCalculatorFactory` creates `MacroCalculator` implementation using `DietType`. Possible outcomes are for example  
+`HighProteinMacroCalculator`. Each macro calculator consists of its own values that are used to calculate required
+`Macronutrient` object.
+Each `Recipe` is set `Product`
+items in a strictly defined % ratio and calculated nutrients per 100g of the product.
+`Product` consist of `Nutrients` information such as `Carbohydrates`, `Fats`, and `Proteins`.
 
 
 
@@ -109,7 +121,7 @@ items in strictly defined % ratio and calculated nutrients per 100g of the produ
 
 ### 3.1 C4 Model
 
-The C4 model is a simple way to visualise the software system. Simon Brown made this model to help people who make
+The C4 model is a simple way to visualize the software system. Simon Brown made this model to help people who make
 software to explain and show how their systems are built. This can be useful when planning a system or explaining one
 that already exists.
 
