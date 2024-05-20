@@ -137,10 +137,8 @@ export const About = () => {
                         <Typography variant={"h5"} sx={{fontWeight: '600'}}>TEF</Typography>
                         <Stack spacing={2}>
                             <Typography variant={'body1'}>
-                                <Typography variant={'body1'}>
-                                    Calculating thermic effect of food (TEF) is not necessary for average person and
-                                    currently is not supported. This may change in the future.
-                                </Typography>
+                                Calculating thermic effect of food (TEF) is not necessary for average person and
+                                currently is not supported. This may change in the future.
                             </Typography>
 
                         </Stack>
@@ -151,7 +149,7 @@ export const About = () => {
 
 
             </Stack>
-            
+
         </Container>
     )
 }
