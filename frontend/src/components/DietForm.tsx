@@ -93,7 +93,7 @@ export const DietForm = () => {
             setErrors(prevState => ({...prevState, kcal: true}));
             valid = false;
         }
-        if (formData.numberOfMeals <= 0) {
+        if (formData.numberOfMeals <= 1) {
             setErrors(prevState => ({...prevState, numberOfMeals: true}));
             valid = false;
         }
@@ -135,7 +135,7 @@ export const DietForm = () => {
                                variant="outlined"
                                onChange={handleChange}
                                error={errors.numberOfMeals}
-                               helperText={errors.numberOfMeals ? "You need at least 1 meal per day." : ""}/>
+                               helperText={errors.numberOfMeals ? "You need at least 2 meal per day." : ""}/>
 
                     <TextField id={"outlined-basic"}
                                name={"bodyWeightInKg"}

@@ -28,7 +28,7 @@ export const About = () => {
 
                 <BottomBorder/>
                 <Stack spacing={3}>
-                    <Typography variant={"h4"} sx={{fontWeight: '600'}}>How this application works?</Typography>
+                    <Typography variant={"h4"} sx={{fontWeight: '600'}}>How human body works?</Typography>
                     <Stack spacing={2}>
                         <Typography variant={'body1'}>
                             To understand this application first we need to possess the knowledge how human bodies
@@ -144,6 +144,115 @@ export const About = () => {
                         </Stack>
 
                     </Stack>
+
+                </Stack>
+
+                <BottomBorder/>
+
+                <Stack spacing={3}>
+                    <Typography variant={"h4"} sx={{fontWeight: '600'}}>How this application works?</Typography>
+                    <Stack spacing={2}>
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Product</Typography>
+                        <Typography variant={'body1'}>
+                            The application features a database of products and recipes. Each product includes
+                            nutritional information such as calories (kcal), carbohydrates, proteins, and fats.
+                            Additionally, products are categorized based on their suitability as specific macronutrient
+                            fillers.
+                        </Typography>
+
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Recipes</Typography>
+                        <Typography variant={'body1'}>
+                            Each recipe consists of a defined percentage ratio of products, serving as a baseline for
+                            diet generation. The algorithm then adjusts the quantities of certain products marked as
+                            fillers to meet the required macronutrient targets.
+                        </Typography>
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Diet Plan Creation</Typography>
+                        <Stack>
+                            <Typography variant={'body1'}>The application generates a diet plan based on mandatory
+                                criteria:</Typography>
+                            <Box sx={{marginLeft: '20px'}}>
+                                <List sx={{listStyleType: 'disc', marginTop: '0px'}}>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Caloric intake
+                                        (kcal)</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Diet type</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Number of meals</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Current body weight</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Gender</ListItem>
+                                </List>
+                            </Box>
+                        </Stack>
+
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Macronutrient Calculation</Typography>
+                        <Stack>
+                            <Typography variant={'body1'}>The application first calculates the macronutrients, which
+                                include calories, proteins, fats, and carbohydrates, based on the chosen diet type.
+                                Currently, the application supports a High Protein diet. Each gram of protein and
+                                carbohydrate equates to 4 kcal, while each gram of fat equates to 9 kcal.
+                            </Typography>
+                            <Box sx={{marginLeft: '20px'}}>
+                                <List sx={{listStyleType: 'disc', marginTop: '0px'}}>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Proteins: <Code>(2.2g MALE,
+                                        1.6g FEMALE) x Body Weight</Code></ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Fats: <Code>30% of total
+                                        caloric intake</Code></ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Carbohydrates: <Code>Calculated
+                                        as
+                                        the remaining calories after proteins and fats</Code></ListItem>
+                                </List>
+                            </Box>
+
+                            <Stack spacing={1}>
+                                <Typography variant={'body1'}><span style={{fontWeight: '600'}}>Example:</span> Male
+                                    100kg
+                                    that requested 3000kcal diet.</Typography>
+                                <div>Proteins: <Code>2.2 x 100 = 220g</Code> per day that are <Code> 220g x 4kcal =
+                                    880kcal</Code> of total daily intake.
+                                </div>
+                                <div>Fats: <Code>0.3 x 3000kcal = 900kcal</Code> of total daily intake that are <Code>900
+                                    /
+                                    9kcal = 100g</Code> of fats.
+                                </div>
+                                <div>Carbohydrates: <Code>3000 - (880kcal + 900kcal) = 1220kcal</Code> of total daily
+                                    intake
+                                    that are <Code>1220 / 4kcal = 305g</Code> of carbohydrates per day.
+                                </div>
+                            </Stack>
+                        </Stack>
+
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Meal Planning</Typography>
+                        <Stack>
+                            <Typography variant={'body1'}>The diet plan is populated with specific meal types based on
+                                the requested number of meals:</Typography>
+                            <Box sx={{marginLeft: '20px'}}>
+                                <List sx={{listStyleType: 'disc', marginTop: '0px'}}>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>First Meal: Always
+                                        Breakfast</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Last Meal: Always
+                                        Dinner</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Fourth Meal (if applicable):
+                                        Snack</ListItem>
+                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Middle Meals: Lunch-type
+                                        meals</ListItem>
+                                </List>
+                            </Box>
+                            <Typography variant={'body1'}>
+                                The application selects random recipes from the database to fill the diet plan. Since
+                                each recipe has a strictly defined percentage ratio of products, the <span
+                                style={{fontWeight: '600'}}>algorithm adjusts
+                                these to meet macronutrient requirements.</span> It uses filler products to uniformly
+                                distribute the necessary macronutrient adjustments across the entire diet.
+                            </Typography>
+                        </Stack>
+
+                        <Typography variant={"h5"} sx={{fontWeight: '600'}}>Shopping List</Typography>
+                        <Typography variant={'body1'}>
+                            As the final step, the application generates a shopping list of required products for the
+                            diet plan. Each product's quantity is provided in grams, each meal includes its own
+                            nutritional information same as whole diet itself.
+                        </Typography>
+
+                    </Stack>
+
 
                 </Stack>
 

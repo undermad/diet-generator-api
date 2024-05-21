@@ -18,7 +18,7 @@ public record DietRequest(
         @NotEmpty(message = "Can not be empty")
         String dietType,
 
-        @Min(value = 0, message = "Value can not be less than 0.")
+        @Min(value = 2, message = "Value can not be less than 2.")
         @Max(value = 12,  message = "Value can not be more than 12.")
         @NotNull(message = "Can not be empty")
         Integer numberOfMeals,
