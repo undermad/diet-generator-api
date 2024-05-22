@@ -4,7 +4,7 @@ import {Code} from "./Code.tsx";
 
 export const About = () => {
     return (
-        <Container>
+        <Container sx={{marginBottom: '40px'}}>
             <Stack spacing={5}>
 
                 <Stack spacing={3}>
@@ -184,10 +184,10 @@ export const About = () => {
 
                         <Typography variant={"h5"} sx={{fontWeight: '600'}}>Macronutrient Calculation</Typography>
                         <Stack>
-                            <Typography variant={'body1'}>The application first calculates the macronutrients, which
-                                include calories, proteins, fats, and carbohydrates, based on the chosen diet type.
-                                Currently, the application supports a High Protein diet. Each gram of protein and
-                                carbohydrate equates to 4 kcal, while each gram of fat equates to 9 kcal.
+                            <Typography variant={'body1'}>The application first calculates the macronutrients (which
+                                include calories, proteins, fats, and carbohydrates), based on the chosen diet type.
+                                Each gram of protein and carbohydrate equates to 4 kcal, while each gram of fat equates to 9 kcal.
+                                Currently, the application supports a High Protein diet and the macronutrient formula is given below:
                             </Typography>
                             <Box sx={{marginLeft: '20px'}}>
                                 <List sx={{listStyleType: 'disc', marginTop: '0px'}}>
@@ -239,8 +239,8 @@ export const About = () => {
                                 The application selects random recipes from the database to fill the diet plan. Since
                                 each recipe has a strictly defined percentage ratio of products, the <span
                                 style={{fontWeight: '600'}}>algorithm adjusts
-                                these to meet macronutrient requirements.</span> It uses filler products to uniformly
-                                distribute the necessary macronutrient adjustments across the entire diet.
+                                these to meet macronutrient requirements.</span> It uses products marked as fillers to uniformly
+                                distribute the necessary macronutrient across the entire diet.
                             </Typography>
                         </Stack>
 
@@ -252,6 +252,11 @@ export const About = () => {
                         </Typography>
 
                     </Stack>
+
+                    <Typography variant={"h5"} sx={{fontWeight: '600'}}>More information</Typography>
+                    <Typography variant={'body1'}>
+                        For technical documentation, please visit <a href={"https://github.com/undermad/diet-generator-api"}>GitHub</a>.
+                    </Typography>
 
 
                 </Stack>
