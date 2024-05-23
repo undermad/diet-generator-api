@@ -1,5 +1,0 @@
-1. Add cors.        DONE
-2. Add validation   DONE
-3. Add rounding to the response DONE <- diet <- DONE
-
-inform user that all response is in grams

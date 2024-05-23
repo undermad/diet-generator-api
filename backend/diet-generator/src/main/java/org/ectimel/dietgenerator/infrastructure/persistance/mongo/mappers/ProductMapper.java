@@ -20,7 +20,6 @@ public class ProductMapper implements DomainMapper<Product, ProductDocument> {
                 .id(entityObject.getId())
                 .name(entityObject.getName())
                 .nutrients(nutrientMapper.mapToDomain(entityObject.getNutrientInformation()))
-                .productType(entityObject.getProductType())
                 .filler(entityObject.getFiller())
                 .build();
     }
@@ -30,7 +29,6 @@ public class ProductMapper implements DomainMapper<Product, ProductDocument> {
         return ProductDocument.builder()
                 .id(domainObject.getId())
                 .name(domainObject.getName())
-                .productType(domainObject.getProductType())
                 .filler(domainObject.getFiller())
                 .nutrientInformation(nutrientMapper.mapFromDomain(domainObject.getNutrients()))
                 .build();

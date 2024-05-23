@@ -23,7 +23,7 @@ class ProductTest {
                 new Fats(BigDecimal.valueOf(10),
                         BigDecimal.valueOf(2)));
 
-        product = new Product(null, "Test Product", ProductType.FAT, nutrients, Filler.FAT);
+        product = new Product(null, "Test Product", nutrients, Filler.FAT);
 
     }
 

@@ -10,13 +10,11 @@ import java.util.UUID;
 
 @Data
 @ToString
-@Setter
 @Builder
 public class Product {
 
     private UUID id;
     private String name;
-    private ProductType productType;
     private Nutrients nutrients;
     private Filler filler;
 

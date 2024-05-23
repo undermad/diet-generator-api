@@ -19,7 +19,6 @@ public class ProductDocument extends MongoUUIDEntity {
     private String name;
 
     private NutrientInformation nutrientInformation;
-    private ProductType productType;
     private Filler filler;
 
 }
