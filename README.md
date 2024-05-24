@@ -108,8 +108,21 @@ The main business entities are `Diet`, `Dish`, `Product` and `Recipe`. The appli
 of multiple
 `Dish` objects. Those dishes are created from `Recipe` and `Product` objects using `DietGenerator` where special
 algorithm is implemented to adjust the `Macronutrient` requirements.
-First, lets look closer at `Recipe` and `Product` objects and their sub-objects to understood better how fundamental data is
+First, lets look closer at `Recipe` and `Product` objects and their sub-objects to understood better how fundamental
+data is
 represented.
+
+### BigDecimal
+
+In domain application layer, build in Java class `BigDecimal` is used to perform calculation instead of primitive
+variables.
+This class support basic math operations including very useful `RoundingMode` enum and `MathContext`. Example usage:
+
+![BigDecimal Code Usage screenshot](/screenshots/bigdecimal_code_example_ss.png)
+
+Presented method is located in `HighProteinMacroCalculator` and contains chain subtraction, multiplication and division.
+Note that scale 1 with `RoundingMode.HALF_UP` has been used to round result to 1 decimal place. Result of multiplication
+is used as subtrahend for subtraction.
 
 ### Product
 
@@ -125,7 +138,8 @@ the products and is described below.
 
 ![Nutrients Code screenshot](/screenshots/nutrients_code_ss.png)
 
-The `Nutrients` object contains 3 basic public methods - addNutrients, subtractNutrients and createEmptyNutrients. First two
+The `Nutrients` object contains 3 basic public methods - addNutrients, subtractNutrients and createEmptyNutrients. First
+two
 return void and take another Nutrients object as parameter.
 Those one are widely use across the application to perform subtraction and addition of the nutrients. The last method is
 static and is used as starting point for new nutrient calculations.
@@ -133,6 +147,15 @@ static and is used as starting point for new nutrient calculations.
 ### Recipe
 
 ![Recipe Code screenshot](/screenshots/recipe_code_ss.png)
+
+The `Recipe` object that are used to create base dish during diet creation. It has some useful information such as
+dietType that indicate for which diet it can be used, mealTypes that indicate for which meal it can be used. The
+ingredientsProportion field store the information about percentage ratio of each `Product` in the recipe. This will
+guarantee
+the same taste of the base portion when ever we decide to create large or small portion. When we adjust the
+macronutrients using
+product marked as fillers the ingredients ratio will change but the starting point will be always the same.
+It also has a `Nutrients` object that represent nutrition information per 100g of the product.
 
 
 
