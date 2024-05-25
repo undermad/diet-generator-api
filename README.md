@@ -226,7 +226,7 @@ methods that are used to adjust macronutrients.
 ### Diet
 
 The `Diet` class is final diet representation class and it is returned by `DietGenerator` generateDiet method. It
-contains list of dishes that are adjusted to the given `Macronutrient`. Total `Nutrients` for the whole diet and
+contains list of dishes that are adjusted to the given `Macronutrient`, total `Nutrients` for the whole diet and
 shoppingList that is simple name of the product to the amount in grams. The `Diet` class also contains some methods to
 adjust macronutrients.
 
