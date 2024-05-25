@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 @Getter
 public class Dish {
 
-    private Map<Product, BigDecimal> productToGrams;
-    private Nutrients nutrients;
-    private Recipe recipe;
-    private Map<Filler, Integer> numberOfFillers;
+    private final Map<Product, BigDecimal> productToGrams;
+    private final Nutrients nutrients;
+    private final Recipe recipe;
+    private final Map<Filler, Integer> numberOfFillers;
 
     private Dish(Map<Product, BigDecimal> productToGrams, Recipe recipe) {
         this.productToGrams = productToGrams;

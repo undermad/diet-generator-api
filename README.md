@@ -104,7 +104,8 @@ change in the future.
 
 ## 2.2 Data representation
 
-The main business entities are `Diet`, `Dish`, `Product` and `Recipe`. The application create `Diet` object that consist
+The main business entities are `Diet`, `Dish`, `Product`, `Recipe` and `Nutrients`. The application create `Diet` object
+that consist
 of multiple
 `Dish` objects. Those dishes are created from `Recipe` and `Product` objects using `DietGenerator` where special
 algorithm is implemented to adjust the `Macronutrient` requirements.
@@ -117,7 +118,8 @@ represented.
 ![Product Code screenshot](/screenshots/product_code_ss.png)
 
 The Product object is depicted as shown in the screenshot. Besides the obvious fields - name and id (1:1 database
-representation), there are two important fields - Nutrients and Filler. During database initialization, products are fetched from CalorieNinjas
+representation), there are two important fields - Nutrients and Filler. During database initialization, products are
+fetched from CalorieNinjas
 and marked with the appropriate filler. Based on this Filler, the DietGenerator decides if a product can be used to
 increase or decrease macronutrients. `Nutrients` is representation of calories, carbohydrates, fats and proteins per
 100g of the products.
@@ -127,7 +129,7 @@ increase or decrease macronutrients. `Nutrients` is representation of calories, 
 The `Filler` enum is used to mark products to indicate if a product can be used to adjust macronutrients. In this
 application
 fillers are set up manually for best and controlled result, but algorithm can be implemented to decide if product is
-suitable to be a Filler. 
+suitable to be a Filler.
 
 ![Filler Code screenshot](/screenshots/filler_code_ss.png)
 
@@ -193,7 +195,7 @@ appropriate `Recipe` for requested diet.
 
 The `DietType` is simple enum that contain supported diets. In `DietGenerator` class, algorithm use it choose
 appropriate `Recipe` for requested diet. Currently, application support only one type: "High Protein". This can be very
-easily extended.
+easily extended. Each `DietType` has its own `MacroCalculator`.
 
 ![MealType Code screenshot](/screenshots/diettype_code_ss.png)
 
@@ -208,6 +210,33 @@ This class support basic math operations including very useful rounding by `Roun
 Presented method is located in `HighProteinMacroCalculator` and contains chain subtraction, multiplication and division.
 Note that scale 1 with `RoundingMode.HALF_UP` has been used to round result to 1 decimal place. Result of multiplication
 is used as subtrahend for subtraction.
+
+### Dish
+
+The `Dish` class is final meal representation class and it is result of `DietGenerator`. This class has factory method
+that take `Recipe` and amount of
+calories that dish has to has. The productsToGram holds the `Product` to actual value in grams required for that dish
+as `BigDecimal`.
+`Nutrients` object in this class holds the information about the total nutrients information for the whole meal(--->NOT
+PER 100g<---). The recipe filed is the recipe that this dish has been created from. The `Dish` class also contains some
+methods that are used to adjust macronutrients.
+
+![Dish Code screenshot](/screenshots/dish_code_ss.png)
+
+### Diet
+
+The `Diet` class is final diet representation class and it is returned by `DietGenerator` generateDiet method. It
+contains list of dishes that are adjusted to the given `Macronutrient`. Total `Nutrients` for the whole diet and
+shoppingList that is simple name of the product to the amount in grams. The `Diet` class also contains some methods to
+adjust macronutrients.
+
+![Diet Code screenshot](/screenshots/diet_code_ss.png)
+
+
+
+
+
+
 
 
 
