@@ -112,29 +112,26 @@ First, lets look closer at `Recipe` and `Product` objects and their sub-objects 
 data is
 represented.
 
-### BigDecimal
-
-In domain application layer, build in Java class `BigDecimal` is used to perform calculation instead of primitive
-variables.
-This class support basic math operations including very useful `RoundingMode` enum and `MathContext`. Example usage:
-
-![BigDecimal Code Usage screenshot](/screenshots/bigdecimal_code_example_ss.png)
-
-Presented method is located in `HighProteinMacroCalculator` and contains chain subtraction, multiplication and division.
-Note that scale 1 with `RoundingMode.HALF_UP` has been used to round result to 1 decimal place. Result of multiplication
-is used as subtrahend for subtraction.
-
 ### Product
 
 ![Product Code screenshot](/screenshots/product_code_ss.png)
 
 The Product object is depicted as shown in the screenshot. Besides the obvious fields - name and id (1:1 database
-representation), there are two important fields - Nutrients and Filler. The Filler field is a simple enum with four
-values: PROTEIN, FAT, CARBOHYDRATE, and NONE. During database initialization, products are fetched from CalorieNinjas
+representation), there are two important fields - Nutrients and Filler. During database initialization, products are fetched from CalorieNinjas
 and marked with the appropriate filler. Based on this Filler, the DietGenerator decides if a product can be used to
 increase or decrease macronutrients. `Nutrients` is representation of calories, carbohydrates, fats and proteins per
-100g of
-the products and is described below.
+100g of the products.
+
+### Filler
+
+The `Filler` enum is used to mark products to indicate if a product can be used to adjust macronutrients. In this
+application
+fillers are set up manually for best and controlled result, but algorithm can be implemented to decide if product is
+suitable to be a Filler. 
+
+![Filler Code screenshot](/screenshots/filler_code_ss.png)
+
+### Nutrients
 
 ![Nutrients Code screenshot](/screenshots/nutrients_code_ss.png)
 
@@ -143,6 +140,34 @@ two
 return void and take another Nutrients object as parameter.
 Those one are widely use across the application to perform subtraction and addition of the nutrients. The last method is
 static and is used as starting point for new nutrient calculations.
+
+Calories, Carbohydrates, Proteins and Fats are the classes that holds more specific information and are some kind of
+wrappers.
+
+Calories:
+
+![Calories Code screenshot](/screenshots/calories_code_ss.png)
+
+Carbohydrates:
+
+![Carbohydrates Code screenshot](/screenshots/carbohydrates_code_ss.png)
+
+Proteins:
+
+![Proteins Code screenshot](/screenshots/proteins_code_ss.png)
+
+Fats:
+
+![Fats Code screenshot](/screenshots/fats_code_ss.png)
+
+Every of those wrappers contain totalValue field and that is actual field that is used to perform calculations. Let's
+look at `Fats` wrapper.
+It has totalFats and saturatedFats fields. The saturatedFats amount is part of totalFats value and as you can see the "
+normal" fats are not listed in the structure.
+If you want to get the value of fats WITHOUT saturatedFats you need to perform your own
+subtraction `totalFats - saturatedFats`. Knowing this may be useful if you decide to implement glycemic load where you
+use value of carbohydrates excluding fiber. For now, glycemic load is not supported in this application and this may
+change in the future.
 
 ### Recipe
 
@@ -157,7 +182,32 @@ macronutrients using
 product marked as fillers the ingredients ratio will change but the starting point will be always the same.
 It also has a `Nutrients` object that represent nutrition information per 100g of the product.
 
+### MealType
 
+The `MealType` is simple enum that contain supported meals. In `DietGenerator` class, algorithm use it choose
+appropriate `Recipe` for requested diet.
+
+![MealType Code screenshot](/screenshots/mealtype_code_ss.png)
+
+### DietType
+
+The `DietType` is simple enum that contain supported diets. In `DietGenerator` class, algorithm use it choose
+appropriate `Recipe` for requested diet. Currently, application support only one type: "High Protein". This can be very
+easily extended.
+
+![MealType Code screenshot](/screenshots/diettype_code_ss.png)
+
+### BigDecimal
+
+In domain application layer, build in Java class `BigDecimal` is used to perform calculation instead of primitive
+variables.
+This class support basic math operations including very useful rounding by `RoundingMode` enum. Example usage:
+
+![BigDecimal Code Usage screenshot](/screenshots/bigdecimal_code_example_ss.png)
+
+Presented method is located in `HighProteinMacroCalculator` and contains chain subtraction, multiplication and division.
+Note that scale 1 with `RoundingMode.HALF_UP` has been used to round result to 1 decimal place. Result of multiplication
+is used as subtrahend for subtraction.
 
 
 
