@@ -7,8 +7,7 @@ import org.ectimel.dietgenerator.domain.calculator.Gender;
 import java.math.BigDecimal;
 
 public class MifflinStJeorCalculator implements BMRCalculator {
-
-
+    
     @Override
     public BaseMetabolicRate calculate(BMRAttributes bmrAttributes) {
         if(bmrAttributes == null) return new BaseMetabolicRate(BigDecimal.valueOf(0));
@@ -18,7 +17,6 @@ public class MifflinStJeorCalculator implements BMRCalculator {
     }
 
     private BaseMetabolicRate calculateUsingMaleEquation(BMRAttributes bmrAttributes) {
-
         BigDecimal weightMultiplayer = new BigDecimal("10");
         BigDecimal heightMultiplayer = new BigDecimal("6.25");
         BigDecimal ageMultiplayer = new BigDecimal("5");
@@ -47,6 +45,4 @@ public class MifflinStJeorCalculator implements BMRCalculator {
                         .subtract(ageMultiplayer.multiply(bmrAttributes.getAge()))
                         .subtract(extra));
     }
-
-
 }

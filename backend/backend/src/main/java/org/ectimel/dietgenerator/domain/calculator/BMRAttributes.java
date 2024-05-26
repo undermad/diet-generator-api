@@ -14,5 +14,4 @@ public class BMRAttributes {
     private BigDecimal age;
     private ActiveLevel activeLevel;
     private Gender gender;
-
 }

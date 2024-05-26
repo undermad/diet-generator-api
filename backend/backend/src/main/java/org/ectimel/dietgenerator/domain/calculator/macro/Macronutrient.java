@@ -33,7 +33,5 @@ public class Macronutrient {
         setCarbohydrates(carbohydrates.add(nutrients.getCarbohydrates().getTotalCarbohydrates()));
     }
 
-
-
-
+    
 }

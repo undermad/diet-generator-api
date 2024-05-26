@@ -1,13 +1,12 @@
 package org.ectimel.dietgenerator.domain.generator.shopping_list;
 
-import org.ectimel.dietgenerator.domain.generator.Generator;
 import org.ectimel.dietgenerator.domain.model.Diet;
 
 import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface ShoppingListGenerator extends Generator {
+public interface ShoppingListGenerator {
 
     static Map<String, Double> generateShoppingList(Diet diet) {
         Map<String, Double> shoppingList = new HashMap<>();

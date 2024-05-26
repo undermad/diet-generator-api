@@ -2,7 +2,6 @@ package org.ectimel.dietgenerator.domain.calculator.calories;
 
 import org.ectimel.dietgenerator.domain.calculator.BMRAttributes;
 import org.ectimel.dietgenerator.domain.calculator.Gender;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +32,7 @@ class MifflinStJeorCalculatorTest {
                 .build();
 
          BaseMetabolicRate baseMetabolicRate = bmrCalculator.calculate(attributes);
-         assertEquals(new BigDecimal("2042.50"), baseMetabolicRate.getBaseBMR());
+         assertEquals(new BigDecimal("2042.50"), baseMetabolicRate.getBMR());
     }
 
     @Test
@@ -46,12 +45,12 @@ class MifflinStJeorCalculatorTest {
                 .build();
 
         BaseMetabolicRate baseMetabolicRate = bmrCalculator.calculate(attributes);
-        assertEquals(new BigDecimal("1314.00"), baseMetabolicRate.getBaseBMR());
+        assertEquals(new BigDecimal("1314.00"), baseMetabolicRate.getBMR());
     }
 
     @Test
     void calculate_null() {
         BaseMetabolicRate baseMetabolicRate = bmrCalculator.calculate(null);
-        assertEquals(new BigDecimal("0"), baseMetabolicRate.getBaseBMR());
+        assertEquals(new BigDecimal("0"), baseMetabolicRate.getBMR());
     }
 }

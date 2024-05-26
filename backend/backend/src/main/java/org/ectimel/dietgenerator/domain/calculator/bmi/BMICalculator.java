@@ -15,3 +15,5 @@ public interface BMICalculator {
         return bodyWeightInKg.divide(heightCubed, new MathContext(3, RoundingMode.HALF_UP));
     }
 }
+
+

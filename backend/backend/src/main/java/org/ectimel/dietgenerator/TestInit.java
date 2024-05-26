@@ -89,7 +89,7 @@ public class TestInit {
         return Recipe.builder()
                 .name("Omelette")
                 .howToPrepare("Prepare")
-                .dietType(List.of(DietType.PROTEIN, DietType.VEGETARIAN))
+                .dietType(List.of(DietType.PROTEIN))
                 .mealTypes(List.of(MealType.BREAKFAST))
                 .ingredientsProportion(breakfastIngredients)
                 .basePortionInGrams(BigDecimal.valueOf(756))

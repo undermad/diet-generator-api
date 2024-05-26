@@ -232,13 +232,101 @@ adjust macronutrients.
 
 ![Diet Code screenshot](/screenshots/diet_code_ss.png)
 
+## 2.3 Calculators
+
+The application features three distinct calculators: `BMICalculator`, `BMRCalculator`, and `MacroCalculator`. The first
+two, are standalone calculators. The application includes a dedicated controller
+`CalculatorController`, with two endpoints to facilitate their use. The third calculator, `MacroCalculator`, is
+particularly important as it is used to create the `Macronutrient` object for the `DietGenerator`.
+
+### BMICalculator
+
+The `BMICalculator` is simple calculator that return BMI value for given parameters. It has only one static default
+method calculate that take 2 parameters - bodyWeightInKg and heightInCm.
+
+![BMICalculator Code screenshot](/screenshots/bigdecimal_code_example_ss.png)
+
+### BMRCalculator
+
+The `BMRCalculator` is the interface that has one method calculate and return `BaseMetabolicRate` object. This method
+take one parameter
+`BMRAttributes`, and is implemented by `MifflinStJeorCalculator`. Other equation also may be implemented
+using `BMRCalculator` interface.
+
+![BMRCalculator Code screenshot](/screenshots/bmrcalculator_code_ss.png)
+
+This application currently support MifflinStJeor equations which is:
+
+Male: `BMR = ( 10 × bodyWeightInKg in kg ) + ( 6.25 × heightInCm in cm ) − ( 5 × age in years ) + 5`
+
+Female: `BMR=( 10 × bodyWeightInKg in kg ) + ( 6.25 × heightInCm in cm ) − ( 5 × age in years ) − 161`
+
+![MifflinCalculator Code screenshot](/screenshots/mifflinstjeorcalculator_code_ss.png)
+
+The `BMRAttributes` are presented below:
+
+![BMRAttributes Code screenshot](/screenshots/bmrattributes_code_ss.png)
+
+The `BaseMetabolicRate` object created by `MacroCalculator` contains actual value and the one method calculateTDEE that
+take one parameter `ActiveLevel`. Based on provided activity level base metabolic rated is multiplied and the result is
+returned as `BigDecimal`.
+
+![BaseMetabolicRate Code screenshot](/screenshots/basemetabolicrate_code_ss.png)
+
+The `ActiveLevel` enum is presented below:
+
+![ActiveLevel Code screenshot](/screenshots/activelevel_code_ss.png)
+
+### MacroCalculator
+
+The `MacroCalculator` is the sealed interface that has one method calculate that return `Macronutrient` object and take
+one parameter `MacroCalculatorAttributes`. Each `DietType` need to have its own `MacroCalculator` implementation as each
+diet should have different approach to macronutrient. Average person who don't train shouldn't eat same amount of
+protein as someone who do 3 resistant trainings per week.
+
+![MacroCalculator Code screenshot](/screenshots/macrocalculator_code_ss.png)
+
+The `MacroCalculator` is created by `MacroCalculatorFactory`.
+
+![MacroCalculatorFactory Code screenshot](/screenshots/macrocalculatorfactory_code_ss.png)
+
+The `MacroCalculatorAttributes` is simple record that holds necessary information.
+
+![MacroCalculator Code screenshot](/screenshots/macrocalculatorattributes_code_ss.png)
+
+The `HighProteinMacroCalculator` is actual implementation of `MacroCalculator` and utilize its own equation.
+Macronutrients are calculated in the flow protein -> fats -> carbohydrates.
+
+It is essential to note that each gram of protein and carbohydrates equals 4 kcal, and each gram of fat equals 9 kcal.
+These values remain consistent across all diet types.
+
+Proteins: `(2.2g MALE or 1.6g FEMALE) x Body Weight`
+
+Fats: `30% of total caloric intake`
+
+Carbohydrates: `Calculated as the remaining calories after proteins and fats`
+
+Example: Male 100kg that requested 3000kcal diet.
+
+Proteins: `2.2 x 100 = 220g` per day that are `220g x 4kcal = 880kcal` of total daily intake.
+
+Fats: `0.3 x 3000kcal = 900kcal` of total daily intake that are `900 / 9kcal = 100g` of fats.
+
+Carbohydrates: `3000 - (880kcal + 900kcal) = 1220kcal` of total daily intake that are `1220 / 4kcal = 305g`of
+carbohydrates per day.
+
+![HighProteinMacroCalculator Code screenshot](/screenshots/highproteinmacrocalculator_code_ss.png)
+
+The `Macronutrient` is holder for calculated values and is used in `DietGenerator` as reference to decide if values need
+to be increased or decreased in the diet. It also has two methods - reduceValues and increaseValues that
+take `Nutrients` as parameter.
+
+![Macronutrient Code screenshot](/screenshots/macronutrient_code_ss.png)
 
 
+### 2.4 Generators
 
-
-
-
-
+The application 2 generators - `ShoppingListGenerator` and `DietGenerator`. 
 
 
 

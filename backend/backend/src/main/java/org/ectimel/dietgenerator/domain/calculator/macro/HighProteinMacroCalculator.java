@@ -6,8 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public final class HighProteinMacroCalculator implements MacroCalculator {
-
-
+    
     @Override
     public Macronutrient calculate(MacroCalculatorAttributes attributes) {
         if(attributes == null || attributes.requiredCalories() == null || attributes.bodyWeightInKg() == null || attributes.gender() == null) {
