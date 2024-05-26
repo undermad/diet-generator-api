@@ -11,8 +11,8 @@ public interface BMICalculator {
             return BigDecimal.valueOf(0);
 
         BigDecimal heightInMeters = heightInCm.divide(new BigDecimal("100"), new MathContext(3, RoundingMode.HALF_DOWN));
-        BigDecimal heightCubed = heightInMeters.multiply(heightInMeters, new MathContext(3, RoundingMode.HALF_DOWN));
-        return bodyWeightInKg.divide(heightCubed, new MathContext(3, RoundingMode.HALF_UP));
+        BigDecimal heightSquared = heightInMeters.multiply(heightInMeters, new MathContext(3, RoundingMode.HALF_DOWN));
+        return bodyWeightInKg.divide(heightSquared, new MathContext(3, RoundingMode.HALF_UP));
     }
 }
 
