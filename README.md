@@ -242,7 +242,13 @@ particularly important as it is used to create the `Macronutrient` object for th
 ### BMICalculator
 
 The `BMICalculator` is simple calculator that return BMI value for given parameters. It has only one static default
-method calculate that take 2 parameters - bodyWeightInKg and heightInCm.
+method calculate that take 2 parameters - bodyWeightInKg and heightInCm. 
+
+The BMI formula utilize metric system and is as follows: 
+
+`BMI = bodyWeightInKg / heightInMeters^2`
+
+As you can see on the screen, heightInCm is converted to meters.
 
 ![BMICalculator Code screenshot](/screenshots/bmicalculator_code_ss.png)
 
