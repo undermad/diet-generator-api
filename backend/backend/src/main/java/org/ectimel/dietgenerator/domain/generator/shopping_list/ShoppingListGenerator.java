@@ -23,5 +23,6 @@ public interface ShoppingListGenerator {
         }));
         return shoppingList;
     }
-
 }
+
+

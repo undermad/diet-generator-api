@@ -242,9 +242,9 @@ particularly important as it is used to create the `Macronutrient` object for th
 ### BMICalculator
 
 The `BMICalculator` is simple calculator that return BMI value for given parameters. It has only one static default
-method calculate that take 2 parameters - bodyWeightInKg and heightInCm. 
+method calculate that take 2 parameters - bodyWeightInKg and heightInCm.
 
-The BMI formula utilize metric system and is as follows: 
+The BMI formula utilize metric system and is as follows:
 
 `BMI = bodyWeightInKg / heightInMeters^2`
 
@@ -329,12 +329,37 @@ take `Nutrients` as parameter.
 
 ![Macronutrient Code screenshot](/screenshots/macronutrient_code_ss.png)
 
+## 2.4 Generators
 
-### 2.4 Generators
+The application has 2 generators - `ShoppingListGenerator` and `DietGenerator`. First one is very simple, where the
+second is rather complex.
 
-The application 2 generators - `ShoppingListGenerator` and `DietGenerator`. 
+### ShoppingListGenerator
 
+The `ShoppingListGenerator` is simple interface with one default method that will generate map of product names to
+values in grams for the whole diet. It needs only one parameter which is `Diet`.
 
+![ShoppingListGenerator Code screenshot](/screenshots/shoppinglistgenerator_code_ss.png)
+
+### DietGenerator
+
+The `DietGenerator` is interface that has one method generateDiet, doesn't take any parameters and return `Diet` object.
+It can be implemented to provide new generator. In this application currently `DietGenerator` is implemented
+by `DietGeneratorImpl` class and in this section is dedicated for that implementation.
+
+The `DietGeneratorImpl` is object that is created separately for each diet and garbage collected after the request is
+done.
+To create it you need numberOfMeals as `BigDecimal`, `Macronutrient`, and `Map<MealType, List<Recipe>>`.
+Apart from basic initialisation in constructor, 10% of total requested calories is reserved for macronutrient
+adjustment. The baseCaloriesPerMeal field is created based on calories from the reserved calories ware subtracted.
+
+![DietGeneratorImpl members and constructor Code screenshot](/screenshots/dietgeneratorfieldconstructor_code_ss.png)
+
+After `DietGeneratorImpl` is created we have all necessary information in it to create the diet. List of `Recipe` for
+each `MealType`, required
+`Macronutrient`, requested `numberOfMeals`, `baseCaloriesPerMeal` and `Random` object that we will use later. Object is ready to generate diet.
+
+![DietGeneratorImpl generate Code screenshot](/screenshots/dietgeneratorgenerate_code_ss.png)
 
 
 

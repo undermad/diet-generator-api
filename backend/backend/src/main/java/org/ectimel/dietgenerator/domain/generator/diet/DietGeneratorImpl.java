@@ -17,13 +17,8 @@ import java.util.Random;
 public class DietGeneratorImpl implements DietGenerator {
 
     private final Random random;
-
-    private Map<MealType, List<Recipe>> recipes;
-
-    private Macronutrient missingMacronutrients;
-
-    private final BigDecimal reservedCalories;
-    private final BigDecimal requiredCaloriesAfterReservation;
+    private final Map<MealType, List<Recipe>> recipes;
+    private final Macronutrient missingMacronutrients;
     private final BigDecimal numberOfMeals;
     private final BigDecimal baseCaloriesPerMeal;
 
@@ -31,9 +26,8 @@ public class DietGeneratorImpl implements DietGenerator {
     public DietGeneratorImpl(BigDecimal numberOfMeals, Macronutrient missingMacronutrients, Map<MealType, List<Recipe>> recipes) {
         this.missingMacronutrients = missingMacronutrients;
         this.numberOfMeals = numberOfMeals;
-
-        this.reservedCalories = missingMacronutrients.getCalories().multiply(BigDecimal.valueOf(0.1));
-        this.requiredCaloriesAfterReservation = missingMacronutrients.getCalories().subtract(reservedCalories);
+        BigDecimal reservedCalories = missingMacronutrients.getCalories().multiply(BigDecimal.valueOf(0.1));
+        BigDecimal requiredCaloriesAfterReservation = missingMacronutrients.getCalories().subtract(reservedCalories);
         this.baseCaloriesPerMeal = requiredCaloriesAfterReservation.divide(numberOfMeals, 2, RoundingMode.DOWN);
         this.random = new Random();
         this.recipes = recipes;
