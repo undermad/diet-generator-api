@@ -60,7 +60,6 @@ public class DietGeneratorImpl implements DietGenerator {
                 diet.reduceMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins().abs(), missingMacronutrients);
             else
                 diet.increaseMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins(), missingMacronutrients);
-
         }
     }
 
@@ -77,9 +76,9 @@ public class DietGeneratorImpl implements DietGenerator {
     }
 
     private void addDish(Diet diet, MealType mealType) {
-        Dish breakfast = getRandomDish(mealType);
-        diet.addDish(breakfast);
-        missingMacronutrients.reduceValues(breakfast.getNutrients());
+        Dish dish = getRandomDish(mealType);
+        diet.addDish(dish);
+        missingMacronutrients.reduceValues(dish.getNutrients());
     }
 
     private Dish getRandomDish(MealType mealType) {

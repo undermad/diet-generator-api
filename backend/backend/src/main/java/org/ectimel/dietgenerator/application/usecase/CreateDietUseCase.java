@@ -1,6 +1,5 @@
 package org.ectimel.dietgenerator.application.usecase;
 
-import org.ectimel.dietgenerator.application.port.in.CreateDiet;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculator;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculatorAttributes;
 import org.ectimel.dietgenerator.domain.calculator.macro.MacroCalculatorFactory;

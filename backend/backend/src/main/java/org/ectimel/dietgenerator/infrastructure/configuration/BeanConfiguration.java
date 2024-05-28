@@ -1,6 +1,5 @@
 package org.ectimel.dietgenerator.infrastructure.configuration;
 
-import org.ectimel.dietgenerator.application.port.in.*;
 import org.ectimel.dietgenerator.application.repositories.ProductRepository;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 import org.ectimel.dietgenerator.application.usecase.*;

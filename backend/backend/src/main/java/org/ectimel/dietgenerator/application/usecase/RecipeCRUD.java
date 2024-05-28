@@ -1,6 +1,5 @@
 package org.ectimel.dietgenerator.application.usecase;
 
-import org.ectimel.dietgenerator.application.port.in.RecipeService;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
 import org.ectimel.dietgenerator.domain.model.Recipe;
 

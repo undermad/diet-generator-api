@@ -3,7 +3,7 @@ package org.ectimel.dietgenerator.infrastructure.ninja;
 import org.ectimel.dietgenerator.application.repositories.ProductRepository;
 import org.ectimel.dietgenerator.domain.model.Product;
 import org.ectimel.dietgenerator.domain.model.nutrient.Filler;
-import org.ectimel.dietgenerator.application.port.in.ProductService;
+import org.ectimel.dietgenerator.application.usecase.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 

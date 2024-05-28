@@ -254,10 +254,10 @@ As you can see on the screen, heightInCm is converted to meters.
 
 ### BMRCalculator
 
-The `BMRCalculator` is the interface that has one method calculate and return `BaseMetabolicRate` object. This method
-take one parameter
-`BMRAttributes`, and is implemented by `MifflinStJeorCalculator`. Other equation also may be implemented
-using `BMRCalculator` interface.
+The `BMRCalculator` is an interface with a single method, calculate, which returns a `BaseMetabolicRate` object. This
+method
+takes one parameter, `BMRAttributes`, and is implemented by the `MifflinStJeorCalculator`. Other equations can also be
+implemented using the `BMRCalculator` interface.
 
 ![BMRCalculator Code screenshot](/screenshots/bmrcalculator_code_ss.png)
 
@@ -273,9 +273,10 @@ The `BMRAttributes` are presented below:
 
 ![BMRAttributes Code screenshot](/screenshots/bmrattributes_code_ss.png)
 
-The `BaseMetabolicRate` object created by `MacroCalculator` contains actual value and the one method calculateTDEE that
-take one parameter `ActiveLevel`. Based on provided activity level base metabolic rated is multiplied and the result is
-returned as `BigDecimal`.
+The `BaseMetabolicRate` object, created by the `MacroCalculator`, contains the actual value and has a single method,
+`calculateTDEE`. This method takes one parameter, `ActiveLevel`. Based on the provided activity level, the base
+metabolic
+rate is multiplied, and the result is returned as a `BigDecimal`.
 
 ![BaseMetabolicRate Code screenshot](/screenshots/basemetabolicrate_code_ss.png)
 
@@ -285,10 +286,12 @@ The `ActiveLevel` enum is presented below:
 
 ### MacroCalculator
 
-The `MacroCalculator` is the sealed interface that has one method calculate that return `Macronutrient` object and take
-one parameter `MacroCalculatorAttributes`. Each `DietType` need to have its own `MacroCalculator` implementation as each
-diet should have different approach to macronutrient. Average person who don't train shouldn't eat same amount of
-protein as someone who do 3 resistant trainings per week.
+The `MacroCalculator` is a sealed interface with a single method, `calculate`, which returns a `Macronutrient` object
+and
+takes one parameter, `MacroCalculatorAttributes`. Each `DietType` requires its own `MacroCalculator` implementation, as
+each
+diet needs a different approach to macronutrients. For example, an average person who doesn't train should not consume
+the same amount of protein as someone who engages in three resistance training sessions per week.
 
 ![MacroCalculator Code screenshot](/screenshots/macrocalculator_code_ss.png)
 
@@ -300,10 +303,10 @@ The `MacroCalculatorAttributes` is simple record that holds necessary informatio
 
 ![MacroCalculator Code screenshot](/screenshots/macrocalculatorattributes_code_ss.png)
 
-The `HighProteinMacroCalculator` is actual implementation of `MacroCalculator` and utilize its own equation.
-Macronutrients are calculated in the flow protein -> fats -> carbohydrates.
+The `HighProteinMacroCalculator` is the actual implementation of the `MacroCalculator` and uses its own equation.
+Macronutrients are calculated in the order of protein, fats, and carbohydrates.
 
-It is essential to note that each gram of protein and carbohydrates equals 4 kcal, and each gram of fat equals 9 kcal.
+It is essential to note that each gram of protein and carbohydrate equals 4 kcal, and each gram of fat equals 9 kcal.
 These values remain consistent across all diet types.
 
 Proteins: `(2.2g MALE or 1.6g FEMALE) x Body Weight`
@@ -323,9 +326,10 @@ carbohydrates per day.
 
 ![HighProteinMacroCalculator Code screenshot](/screenshots/highproteinmacrocalculator_code_ss.png)
 
-The `Macronutrient` is holder for calculated values and is used in `DietGenerator` as reference to decide if values need
-to be increased or decreased in the diet. It also has two methods - reduceValues and increaseValues that
-take `Nutrients` as parameter.
+The `Macronutrient` serves as a holder for calculated values and is used in the `DietGenerator` to determine whether the
+values need to be increased or decreased in the diet. It also has two methods, `reduceValues` and `increaseValues`,
+which
+take `Nutrients` as a parameter.
 
 ![Macronutrient Code screenshot](/screenshots/macronutrient_code_ss.png)
 
@@ -334,18 +338,15 @@ take `Nutrients` as parameter.
 The application has 2 generators - `ShoppingListGenerator` and `DietGenerator`. First one is very simple, where the
 second is rather complex.
 
-### ShoppingListGenerator
 
-The `ShoppingListGenerator` is simple interface with one default method that will generate map of product names to
-values in grams for the whole diet. It needs only one parameter which is `Diet`.
-
-![ShoppingListGenerator Code screenshot](/screenshots/shoppinglistgenerator_code_ss.png)
 
 ### DietGenerator
 
-The `DietGenerator` is interface that has one method generateDiet, doesn't take any parameters and return `Diet` object.
-It can be implemented to provide new generator. In this application currently `DietGenerator` is implemented
-by `DietGeneratorImpl` class and in this section is dedicated for that implementation.
+The `DietGenerator` is an interface with a single method, `generateDiet`, which does not take any parameters and returns
+a
+`Diet` object. This interface can be implemented to provide a new generator. In the current application, `DietGenerator`
+is
+implemented by the `DietGeneratorImpl` class, and this section is dedicated to that implementation.
 
 The `DietGeneratorImpl` is object that is created separately for each diet and garbage collected after the request is
 done.
@@ -353,17 +354,101 @@ To create it you need numberOfMeals as `BigDecimal`, `Macronutrient`, and `Map<M
 Apart from basic initialisation in constructor, 10% of total requested calories is reserved for macronutrient
 adjustment. The baseCaloriesPerMeal field is created based on calories from the reserved calories ware subtracted.
 
+The `DietGeneratorImpl` is an object created separately for each diet and is garbage collected after the request is
+completed. To create it, you need `numberOfMeals` as a `BigDecimal`, a `Macronutrient`, and
+a `Map<MealType, List<Recipe>>`. In addition to basic initialization in the constructor, 10% of the total requested
+calories is reserved for
+macronutrient adjustment. The baseCaloriesPerMeal field is created by subtracting the reserved calories from the total
+calories.
+
 ![DietGeneratorImpl members and constructor Code screenshot](/screenshots/dietgeneratorfieldconstructor_code_ss.png)
 
-After `DietGeneratorImpl` is created we have all necessary information in it to create the diet. List of `Recipe` for
-each `MealType`, required
-`Macronutrient`, requested `numberOfMeals`, `baseCaloriesPerMeal` and `Random` object that we will use later. Object is ready to generate diet.
+After the `DietGeneratorImpl` is created, it contains all the necessary information to generate the diet. This includes
+a
+lists of `Recipe` for each `MealType`, the required `Macronutrient`, the
+requested `numberOfMeals`, `baseCaloriesPerMeal`, and a
+`Random` object for later use.
 
 ![DietGeneratorImpl generate Code screenshot](/screenshots/dietgeneratorgenerate_code_ss.png)
 
+There are three main steps in diet creation, `addDishes`, `adjustMacronutrients` and `generateShoppingList`.
 
+The `addDishes` method:
 
+![DietGeneratorImpl addDishes Code screenshot](/screenshots/adddishesmethod_code_ss.png)
 
+The diet plan is populated with specific meal types based on the requested number of meals:
+
+- First Meal: Always Breakfast
+- Last Meal: Always Dinner
+- Fourth Meal (if applicable): Snack
+- Middle Meals: Lunch-type meals
+
+Random `Recipe` is picked from the list of given `MealType` and then added to the `Diet` object. The `Dish` is created
+using
+static factory method. The nutrients information and required products in grams are calculated from given `Recipe`
+and `baseCaloriesPerMeal`.
+As `Recipe` holds `Nutrients` information per 100g of the products, `totalCalories` are divided by `baseCaloriesPerMeal`
+to create the factor.
+This factor is multiplied by each product proportion value to get the actual required grams of the product.
+
+![Dish createDish Code screenshot](/screenshots/dishcreate_code_ss.png)
+
+It is important to note that immediately after a `Dish` is added to the `Diet`, the macronutrients in
+the `Macronutrient`
+object are reduced by the total `Nutrients` value of the generated `Dish`. Once all requested dishes are added to
+the `Diet`,
+the `Macronutrient` object retains its `calories` field as 10% of the total requested calories, which is our reserved
+calories value. The remaining fields — `proteins`, `fats`, and `carbohydrates` — are incorrect.
+
+`Recipe` objects have strictly defined percentage ratios of `Product`, making it impossible to create a perfectly
+macronutrient-balanced diet plan with randomly chosen recipes. While we can control the calories, the
+specific macronutrient values must be adjusted accordingly.
+
+The `adjustMacronutrients` method:
+
+![DietGenerator adjustMacronutrient Code screenshot](/screenshots/adjustmacronutrient_code_ss.png)
+
+This method check `Macronutrient`'s `carbohydrates`, `fats` and `proteins` fields. If the value is negative it means
+there
+is too much of the given macronutrient in the diet, if the value is positive it means there are missing macronutrient in
+the diet and respectively `reduceMacronutrient` and `increaseMacronutrient` method are called on `Diet` object using
+those offsets. Target
+is to bring those values as close to 0 as possible. Appropriate method is called.
+
+As you can see on the screen, this operation is performed 3 times. It has to be done to generate diet accurately.
+Each of missing macronutrients is adjusted separately, once we set our carbohydrates then during fats adjustment we may
+break carbohydrates amount in the diet. Let's assume that we want to add 20g proteins to the diet, algorithm look for
+all `Product` marked with `Filler.PROTEIN` and add calculated amount of those products to satisfy missing 20g of
+proteins. Unfortunately, very likely this method is going to add also some carbohydrates and fats with those products.
+
+Every iteration required macronutrients that need to be adjusted are closer to the 0 and three iterations is sufficient.
+
+![Diet increase macro Code screenshot](/screenshots/increasemacro_code_ss.png)
+
+Those method first look for `Dish` in the `Diet` object that can be scaled with the given `Filler`. Then the amount of
+requested grams are distributed uniformly across the all suitable dishes and `Product`s in those `Dish`es by calling `increaseFiller` or `reduceFiller`
+methods.
+
+Mentioned methods perform similar operation, but they iterate over `Product` list in the `Dish` and also updates
+the `Nutrients`.
+The difference in `Nutrients` is returned and subtracted or added from `Macronutrient` object.
+
+The `increaseFiller` method:
+
+![Dish increaseFiller Code screenshot](/screenshots/increasefiller_code_ss.png)
+
+The `reduceFiller` method:
+
+![Dish reduceFiller Code screenshot](/screenshots/reducefiller_code_ss.png)
+
+### ShoppingListGenerator
+
+The `ShoppingListGenerator` is a simple interface with one default method that generates a `Map<String, Double>` of
+product names to values
+in grams for the entire diet. It requires only one parameter, which is `Diet`.
+
+![ShoppingListGenerator Code screenshot](/screenshots/shoppinglistgenerator_code_ss.png)
 
 
 

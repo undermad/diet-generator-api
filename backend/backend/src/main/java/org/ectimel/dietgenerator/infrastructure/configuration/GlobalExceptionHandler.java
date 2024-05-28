@@ -2,7 +2,7 @@ package org.ectimel.dietgenerator.infrastructure.configuration;
 
 import org.apache.coyote.BadRequestException;
 import org.ectimel.dietgenerator.infrastructure.exceptions.ResourceNotFoundException;
-import org.ectimel.dietgenerator.presentation.api.dto.response.ExceptionResponse;
+import org.ectimel.dietgenerator.presentation.dto.response.ExceptionResponse;
 import org.ectimel.dietgenerator.domain.exception.WrongInputException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
