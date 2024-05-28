@@ -348,18 +348,14 @@ a
 is
 implemented by the `DietGeneratorImpl` class, and this section is dedicated to that implementation.
 
-The `DietGeneratorImpl` is object that is created separately for each diet and garbage collected after the request is
-done.
-To create it you need numberOfMeals as `BigDecimal`, `Macronutrient`, and `Map<MealType, List<Recipe>>`.
-Apart from basic initialisation in constructor, 10% of total requested calories is reserved for macronutrient
-adjustment. The baseCaloriesPerMeal field is created based on calories from the reserved calories ware subtracted.
-
 The `DietGeneratorImpl` is an object created separately for each diet and is garbage collected after the request is
 completed. To create it, you need `numberOfMeals` as a `BigDecimal`, a `Macronutrient`, and
 a `Map<MealType, List<Recipe>>`. In addition to basic initialization in the constructor, 10% of the total requested
 calories is reserved for
 macronutrient adjustment. The baseCaloriesPerMeal field is created by subtracting the reserved calories from the total
-calories.
+calories and dividing it by numberOfMeals.
+
+`baseCaloriesPerMeal = (totalCalories - (totalCalories * 0.1)) / numberOfMeals`
 
 ![DietGeneratorImpl members and constructor Code screenshot](/screenshots/dietgeneratorfieldconstructor_code_ss.png)
 
@@ -367,7 +363,7 @@ After the `DietGeneratorImpl` is created, it contains all the necessary informat
 a
 lists of `Recipe` for each `MealType`, the required `Macronutrient`, the
 requested `numberOfMeals`, `baseCaloriesPerMeal`, and a
-`Random` object for later use.
+`Random` object for later usage.
 
 ![DietGeneratorImpl generate Code screenshot](/screenshots/dietgeneratorgenerate_code_ss.png)
 
@@ -384,7 +380,7 @@ The diet plan is populated with specific meal types based on the requested numbe
 - Fourth Meal (if applicable): Snack
 - Middle Meals: Lunch-type meals
 
-Random `Recipe` is picked from the list of given `MealType` and then added to the `Diet` object. The `Dish` is created
+Random `Recipe` is picked from the list of given `MealType` to create a `Dish` and then added to the `Diet` object. The `Dish` is created
 using
 static factory method. The nutrients information and required products in grams are calculated from given `Recipe`
 and `baseCaloriesPerMeal`.
@@ -414,7 +410,7 @@ there
 is too much of the given macronutrient in the diet, if the value is positive it means there are missing macronutrient in
 the diet and respectively `reduceMacronutrient` and `increaseMacronutrient` method are called on `Diet` object using
 those offsets. Target
-is to bring those values as close to 0 as possible. Appropriate method is called.
+is to bring those values as close to 0 as possible. 
 
 As you can see on the screen, this operation is performed 3 times. It has to be done to generate diet accurately.
 Each of missing macronutrients is adjusted separately, once we set our carbohydrates then during fats adjustment we may
@@ -431,7 +427,7 @@ requested grams are distributed uniformly across the all suitable dishes and `Pr
 methods.
 
 Mentioned methods perform similar operation, but they iterate over `Product` list in the `Dish` and also updates
-the `Nutrients`.
+its own `Nutrients` to correct the changes.
 The difference in `Nutrients` is returned and subtracted or added from `Macronutrient` object.
 
 The `increaseFiller` method:
