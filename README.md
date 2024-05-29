@@ -338,8 +338,6 @@ take `Nutrients` as a parameter.
 The application has 2 generators - `ShoppingListGenerator` and `DietGenerator`. First one is very simple, where the
 second is rather complex.
 
-
-
 ### DietGenerator
 
 The `DietGenerator` is an interface with a single method, `generateDiet`, which does not take any parameters and returns
@@ -380,7 +378,8 @@ The diet plan is populated with specific meal types based on the requested numbe
 - Fourth Meal (if applicable): Snack
 - Middle Meals: Lunch-type meals
 
-Random `Recipe` is picked from the list of given `MealType` to create a `Dish` and then added to the `Diet` object. The `Dish` is created
+Random `Recipe` is picked from the list of given `MealType` to create a `Dish` and then added to the `Diet` object.
+The `Dish` is created
 using
 static factory method. The nutrients information and required products in grams are calculated from given `Recipe`
 and `baseCaloriesPerMeal`.
@@ -410,7 +409,7 @@ there
 is too much of the given macronutrient in the diet, if the value is positive it means there are missing macronutrient in
 the diet and respectively `reduceMacronutrient` and `increaseMacronutrient` method are called on `Diet` object using
 those offsets. Target
-is to bring those values as close to 0 as possible. 
+is to bring those values as close to 0 as possible.
 
 As you can see on the screen, this operation is performed 3 times. It has to be done to generate diet accurately.
 Each of missing macronutrients is adjusted separately, once we set our carbohydrates then during fats adjustment we may
@@ -423,7 +422,8 @@ Every iteration required macronutrients that need to be adjusted are closer to t
 ![Diet increase macro Code screenshot](/screenshots/increasemacro_code_ss.png)
 
 Those method first look for `Dish` in the `Diet` object that can be scaled with the given `Filler`. Then the amount of
-requested grams are distributed uniformly across the all suitable dishes and `Product`s in those `Dish`es by calling `increaseFiller` or `reduceFiller`
+requested grams are distributed uniformly across the all suitable dishes and `Product`s in those `Dish`es by
+calling `increaseFiller` or `reduceFiller`
 methods.
 
 Mentioned methods perform similar operation, but they iterate over `Product` list in the `Dish` and also updates
@@ -452,7 +452,53 @@ in grams for the entire diet. It requires only one parameter, which is `Diet`.
 
 ## 3. Architecture
 
----
+TECH STACK is HERE: <<<<<<
+
+This application is simple monolith that utilize clean architecture approach.
+
+Clean Architecture, introduced by Robert C. Martin, offers numerous benefits for backend applications. It enforces a
+clear separation of concerns, enhancing code manageability and comprehension. This structure improves testability by
+decoupling business logic from external dependencies, leading to more robust code. The modularity of Clean Architecture
+increases flexibility and maintainability, allowing changes in one part of the application without impacting others. It
+also promotes independence from specific frameworks.
+
+On diagram below we can clearly see that domain layer doesn't know anything about the application layer. Same apply to
+the application layer, it has knowledge about domain but doesn't know anything about infrastructure or presentation
+layers.
+
+![CleanArchitecture Diagram screenshot](/screenshots/clean-architecture-layer-diagram.png)
+
+Here is another popular diagram that describe clean architecture.
+
+![CleanArchitecture Diagram screenshot](/screenshots/clean-architecture-circle-diagram.webp)
+
+Apart the separation of concerns, another main goal is to keep domain and application layer completely clear from any
+frameworks or libraries.
+This was nearly archived. The application use lombok library in domain and application layers. Lombok is
+lightweight library and allow us to reduce lots of boilerplate code. On the screen we can see usage of lombok
+in `Recipe` class where is 10 fields in total. We literally reduced 100 lines of code just to 4 lines.
+
+![Lombok Diagram screenshot](/screenshots/lombok_ss.png)
+
+You may wonder how application layer receive data from database without knowing anything about the infrastructure layer.
+The solution is quite interesting. In application layer we create interfaces that are templates and doesn't have any
+logic.
+Those interfaces are implemented by the infrastructure layer and application layer doesn't need to know how it was done.
+
+[//]: # (As we need to keep our core away from frameworks, we can not annotate use cases&#40;services&#41; with `@Service`.)
+
+[//]: # (To achieve dependency inversion we add `@Repository` annotation to actual repository implementation, and we register)
+
+[//]: # (use cases with `@Bean` in `@Configuration` class in)
+
+[//]: # (infrastructure layer.)
+
+![Bean Registration Diagram screenshot](/screenshots/beanregistration_diagram.png)
+
+This approach give us lots of flexibility. We can change our database or the whole framework.
+We can rewrite whole infrastructure layer without changing even 1 line in application or domain layers.
+Well, in fact our core still depends on infrastructure and presentation layers, those need to be there, but the borders
+are clearly created.
 
 ### 3.1 C4 Model
 

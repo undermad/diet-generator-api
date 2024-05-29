@@ -10,14 +10,15 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
+    public RecipeService recipeRepository(RecipeRepository recipeRepository) {
+        return new RecipeCRUD(recipeRepository);
+    }
+
+    @Bean
     public ProductService productCRUD(ProductRepository productRepository) {
         return new ProductCRUD(productRepository);
     }
 
-    @Bean
-    public RecipeService recipeCRUD(RecipeRepository recipeRepository) {
-        return new RecipeCRUD(recipeRepository);
-    }
 
     @Bean
     public CreateDiet dietService(RecipeRepository recipeRepository) {

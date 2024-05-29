@@ -25,14 +25,6 @@ public class MongoRecipeRepositoryImpl implements RecipeRepository {
     }
 
     @Override
-    public List<Recipe> findAllByDietType(DietType dietType) {
-        List<RecipeDocument> recipes = springDataMongoRecipeRepository.findAllByDietType(dietType);
-        return recipes.stream()
-                .map(recipeMapper::mapToDomain)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Recipe> findAllByDietAndMealTypes(DietType dietType, MealType mealType) {
         List<RecipeDocument> recipes = springDataMongoRecipeRepository.findAllByDietAndMealTypes(dietType, mealType);
         return recipes.stream()
