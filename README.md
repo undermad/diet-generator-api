@@ -2,8 +2,23 @@
 
 ![C2 screenshot](/screenshots/fatatu_logo.png)
 
-Diet generator is monolith application written in Java with clean architecture principles
-and comprehensive documentation. It is also part of the [100commits](https://100commitow.pl/) competitive event.
+## Technology Stack
+
+### Backend
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+### Frontend
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![MaterialUI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
+
+
 
 # 1. Introduction
 
@@ -452,7 +467,6 @@ in grams for the entire diet. It requires only one parameter, which is `Diet`.
 
 ## 3. Architecture
 
-TECH STACK is HERE: <<<<<<
 
 This application is simple monolith that utilize clean architecture approach.
 
@@ -484,21 +498,25 @@ You may wonder how application layer receive data from database without knowing 
 The solution is quite interesting. In application layer we create interfaces that are templates and doesn't have any
 logic.
 Those interfaces are implemented by the infrastructure layer and application layer doesn't need to know how it was done.
+UseCase implementation belong to application layer, and usually it need some data from the database. To solve that problem we simply register
+`UseCaseImpl` with `@Bean` in infrastructure layer in `BeanConfiguration` class where we also inject our implementation of required repository.
+As you can see we separate application and domain layers from framework (Spring in this case) completely.
 
-[//]: # (As we need to keep our core away from frameworks, we can not annotate use cases&#40;services&#41; with `@Service`.)
-
-[//]: # (To achieve dependency inversion we add `@Repository` annotation to actual repository implementation, and we register)
-
-[//]: # (use cases with `@Bean` in `@Configuration` class in)
-
-[//]: # (infrastructure layer.)
+Diagram below show tha basic sample implementation.
 
 ![Bean Registration Diagram screenshot](/screenshots/beanregistration_diagram.png)
 
 This approach give us lots of flexibility. We can change our database or the whole framework.
-We can rewrite whole infrastructure layer without changing even 1 line in application or domain layers.
+We can rewrite whole infrastructure layer without changing even 1 line in application or domain layers. 
 Well, in fact our core still depends on infrastructure and presentation layers, those need to be there, but the borders
-are clearly created.
+are clearly created. 
+
+Packages according to the clean architecture are presented below:
+
+![Packages screenshot](/screenshots/package_structure_ss.png)
+
+
+
 
 ### 3.1 C4 Model
 
