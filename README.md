@@ -5,6 +5,7 @@
 ## Technology Stack
 
 ### Backend
+
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
@@ -12,13 +13,12 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 ### Frontend
+
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![MaterialUI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
-
-
 
 # 1. Introduction
 
@@ -467,7 +467,6 @@ in grams for the entire diet. It requires only one parameter, which is `Diet`.
 
 ## 3. Architecture
 
-
 This application is simple monolith that utilize clean architecture approach.
 
 Clean Architecture, introduced by Robert C. Martin, offers numerous benefits for backend applications. It enforces a
@@ -476,9 +475,32 @@ decoupling business logic from external dependencies, leading to more robust cod
 increases flexibility and maintainability, allowing changes in one part of the application without impacting others. It
 also promotes independence from specific frameworks.
 
-On diagram below we can clearly see that domain layer doesn't know anything about the application layer. Same apply to
-the application layer, it has knowledge about domain but doesn't know anything about infrastructure or presentation
-layers.
+Sure, here's a concise overview of each layer in Clean Architecture:
+
+1. Presentation Layer
+    - Responsibility: Manages user interactions.
+    - Components: UIs, Views, Controllers.
+    - Function: Interprets user inputs, displays data.
+    - Dependency: Depends on the Application layer.
+2. Domain Layer
+    - Responsibility: Core business logic and rules.
+    - Components: Entities, Value Objects, Domain Services.
+    - Function: Defines business concepts and rules.
+    - Dependency: Independent, no dependencies.
+3. Application Layer
+    - Responsibility: Orchestrates business operations.
+    - Components: Use Cases, Application Services.
+    - Function: Executes operations and coordinates data flow.
+    - Dependency: Depends on the Domain layer.
+4. Infrastructure Layer
+    - Responsibility: Provides technical implementations.
+    - Components: Databases, External APIs, Frameworks.
+    - Function: Handles technical details and concrete implementations.
+    - Dependency: Depends on all other layers.
+
+In the diagram below, we can clearly see that the domain layer doesn't know anything about the application layer. The
+same applies to the application layer; it has knowledge about the domain but doesn't know anything about the
+infrastructure or presentation layers.
 
 ![CleanArchitecture Diagram screenshot](/screenshots/clean-architecture-layer-diagram.png)
 
@@ -498,8 +520,10 @@ You may wonder how application layer receive data from database without knowing 
 The solution is quite interesting. In application layer we create interfaces that are templates and doesn't have any
 logic.
 Those interfaces are implemented by the infrastructure layer and application layer doesn't need to know how it was done.
-UseCase implementation belong to application layer, and usually it need some data from the database. To solve that problem we simply register
-`UseCaseImpl` with `@Bean` in infrastructure layer in `BeanConfiguration` class where we also inject our implementation of required repository.
+UseCase implementation belong to application layer, and usually it need some data from the database. To solve that
+problem we simply register
+`UseCaseImpl` with `@Bean` in infrastructure layer in `BeanConfiguration` class where we also inject our implementation
+of required repository.
 As you can see we separate application and domain layers from framework (Spring in this case) completely.
 
 Diagram below show tha basic sample implementation.
@@ -507,22 +531,22 @@ Diagram below show tha basic sample implementation.
 ![Bean Registration Diagram screenshot](/screenshots/beanregistration_diagram.png)
 
 This approach give us lots of flexibility. We can change our database or the whole framework.
-We can rewrite whole infrastructure layer without changing even 1 line in application or domain layers. 
+We can rewrite whole infrastructure layer without changing even 1 line in application or domain layers.
 Well, in fact our core still depends on infrastructure and presentation layers, those need to be there, but the borders
-are clearly created. 
+are clearly created.
 
 Packages according to the clean architecture are presented below:
 
 ![Packages screenshot](/screenshots/package_structure_ss.png)
 
-
-
-
 ### 3.1 C4 Model
 
-The C4 model is a simple way to visualize the software system. Simon Brown made this model to help people who make
-software to explain and show how their systems are built. This can be useful when planning a system or explaining one
-that already exists.
+"The C4 model was created as a way to help software development teams describe and communicate software architecture,
+both during up-front design sessions and when retrospectively documenting an existing codebase. It's a way to create
+maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in and
+out of an area you are interested in."
+
+You can read more about C4 Model at this [LINK](https://c4model.com/)
 
 The C4 model has 4 parts:
 
