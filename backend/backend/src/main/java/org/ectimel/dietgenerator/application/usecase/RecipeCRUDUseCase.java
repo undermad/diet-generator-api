@@ -6,11 +6,11 @@ import org.ectimel.dietgenerator.domain.model.Recipe;
 import java.util.List;
 import java.util.UUID;
 
-public class RecipeCRUD implements RecipeService {
+public class RecipeCRUDUseCase implements RecipeService {
 
     private final RecipeRepository recipeRepository;
 
-    public RecipeCRUD(RecipeRepository recipeRepository) {
+    public RecipeCRUDUseCase(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
 

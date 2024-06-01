@@ -4,7 +4,7 @@ import org.ectimel.dietgenerator.domain.calculator.bmi.BMICalculator;
 
 import java.math.BigDecimal;
 
-public class CalculateBMIService implements CalculateBMI {
+public class CalculateBMIUseCase implements CalculateBMI {
 
 
     @Override

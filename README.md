@@ -64,13 +64,13 @@ Happy coding!
 
 To understand this application first we need to possess the knowledge how human bodies works.
 
-Calories are a measure of energy, and when we talk about food energy, we use the term kilocalories (kcal), commonly
-referred to simply as "calories" in everyday language. The concept of calorie intake, expenditure, and deficit is
-central to understanding weight management.
-
 ## 2.1 How human body works
 
 ### How kcal Works:
+
+Calories are a measure of energy, and when we talk about food energy, we use the term kilocalories (kcal), commonly
+referred to simply as "calories" in everyday language. The concept of calorie intake, expenditure, and deficit is
+central to understanding weight management.
 
 **Energy Source**: The food we eat provides energy measured in kcal. This energy fuels our body's basic functions (like
 breathing and blood circulation), physical activities, and the processing of food itself.

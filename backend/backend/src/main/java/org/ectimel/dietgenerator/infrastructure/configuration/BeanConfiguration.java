@@ -11,12 +11,12 @@ public class BeanConfiguration {
 
     @Bean
     public RecipeService recipeRepository(RecipeRepository recipeRepository) {
-        return new RecipeCRUD(recipeRepository);
+        return new RecipeCRUDUseCase(recipeRepository);
     }
 
     @Bean
     public ProductService productCRUD(ProductRepository productRepository) {
-        return new ProductCRUD(productRepository);
+        return new ProductCRUDUseCase(productRepository);
     }
 
 
@@ -27,11 +27,11 @@ public class BeanConfiguration {
 
     @Bean
     public CalculateTDEE calculateTDEE() {
-        return new CalculateTDEEService();
+        return new CalculateTDEEUseCase();
     }
 
     @Bean
     public CalculateBMI calculateBMI() {
-        return new CalculateBMIService();
+        return new CalculateBMIUseCase();
     }
 }

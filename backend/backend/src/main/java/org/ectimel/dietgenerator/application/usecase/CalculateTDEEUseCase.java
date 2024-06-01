@@ -6,11 +6,11 @@ import org.ectimel.dietgenerator.domain.calculator.calories.MifflinStJeorCalcula
 
 import java.math.BigDecimal;
 
-public class CalculateTDEEService implements CalculateTDEE {
+public class CalculateTDEEUseCase implements CalculateTDEE {
 
     BMRCalculator bmrCalculator;
 
-    public CalculateTDEEService() {
+    public CalculateTDEEUseCase() {
         this.bmrCalculator = new MifflinStJeorCalculator();
     }
 
