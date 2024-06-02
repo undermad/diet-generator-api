@@ -653,7 +653,8 @@ The format is as follows:
 
 `name:grams/Filler`
 
-The `name` in this format will be requested by the api.
+The `name` in this format will be requested by the api. For `Filler` see the domain layer documentation. The `grams`
+properties need to be given as integer.
 
 The last line `***` indicate end of the recipe to parse.
 
