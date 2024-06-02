@@ -550,18 +550,26 @@ You can read more about C4 Model at this [LINK](https://c4model.com/)
 
 The C4 model has 4 parts:
 
-1) C1 System Context
+### 3.1.1 C1 System Context
+
    ![C1 screenshot](/screenshots/c1planning.png)
 
-2) C2 Container
+### 3.1.2 C2 Container
+
    ![C2 screenshot](/screenshots/c2planning.png)
 
-3) C3 Component
+### 3.1.3 C3 Component
+
    ![C3 screenshot](/screenshots/c3planning.png)
 
-4) C4 Code
-   Once application grow, screenshot will appear 
+### 3.1.4 C4 Code - Calculator Component
 
+   ![C4 screenshot](/screenshots/calculator_component_diagram_ss.png)
 
+### 3.1.4 C4 Code - Diet Generator Component
 
+   ![C4 screenshot](/screenshots/generator_component_ss.png)
 
+### 3.1.4 C4 Code - Ninja Service Component
+
+   ![C4 screenshot](/screenshots/ninja_service_ss.png)
