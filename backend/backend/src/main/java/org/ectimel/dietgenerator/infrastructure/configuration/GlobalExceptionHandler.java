@@ -21,7 +21,18 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(
+            ResourceNotFoundException exception, WebRequest webRequest) {
 
+        ExceptionResponse errorDto = new ExceptionResponse(
+                exception.getMessage(),
+                new Date(),
+                webRequest.getDescription(false));
+
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid
@@ -69,16 +80,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(ResourceNotFoundException exception, WebRequest webRequest) {
 
-        ExceptionResponse errorDto = new ExceptionResponse(
-                exception.getMessage(),
-                new Date(),
-                webRequest.getDescription(false));
-
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
-    }
 
     @ExceptionHandler(WrongInputException.class)
     public ResponseEntity<ExceptionResponse> handleWrongInputException(WrongInputException exception, WebRequest webRequest) {

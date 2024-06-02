@@ -62,6 +62,8 @@ Happy coding!
 
 # 2. Domain
 
+---
+
 To understand this application first we need to possess the knowledge how human bodies works.
 
 ## 2.1 How human body works
@@ -461,11 +463,9 @@ in grams for the entire diet. It requires only one parameter, which is `Diet`.
 
 ![ShoppingListGenerator Code screenshot](/screenshots/shoppinglistgenerator_code_ss.png)
 
-
+# 3. Architecture
 
 ---
-
-## 3. Architecture
 
 This application is simple monolith that utilize clean architecture approach.
 
@@ -552,24 +552,121 @@ The C4 model has 4 parts:
 
 ### 3.1.1 C1 System Context
 
-   ![C1 screenshot](/screenshots/c1planning.png)
+![C1 screenshot](/screenshots/c1planning.png)
 
 ### 3.1.2 C2 Container
 
-   ![C2 screenshot](/screenshots/c2planning.png)
+![C2 screenshot](/screenshots/c2planning.png)
 
 ### 3.1.3 C3 Component
 
-   ![C3 screenshot](/screenshots/c3planning.png)
+![C3 screenshot](/screenshots/c3planning.png)
 
 ### 3.1.4 C4 Code - Calculator Component
 
-   ![C4 screenshot](/screenshots/calculator_component_diagram_ss.png)
+![C4 screenshot](/screenshots/calculator_component_diagram_ss.png)
 
 ### 3.1.4 C4 Code - Diet Generator Component
 
-   ![C4 screenshot](/screenshots/generator_component_ss.png)
+![C4 screenshot](/screenshots/generator_component_ss.png)
 
 ### 3.1.4 C4 Code - Ninja Service Component
 
-   ![C4 screenshot](/screenshots/ninja_service_ss.png)
+![C4 screenshot](/screenshots/ninja_service_ss.png)
+
+# 4. Infrastructure
+
+---
+
+
+In the infrastructure layer, we find all configurations, external API integrations, and persistence connections. This
+application currently uses the Spring Boot 3 framework, so all configurations related to Spring will be kept in this
+layer. In addition to the framework, the application utilizes a MongoDB database and the CalorieNinjas external API to
+populate Products.
+
+## 4.1 Spring Boot configuration
+
+### 4.1.1 Bean Configuration
+
+The application uses a clean architecture approach, meaning that the domain and application layers must be kept separate
+from framework dependencies. As mentioned in the architecture documentation, there is a specific way to achieve this. We
+need to register `UseCases` classes from the application layer with `@Bean` in the `@Configuration` layer. This allows
+us to
+inject these classes into other components within the application while keeping domain and application layers framework
+free.
+
+Since the application is relatively small, the configuration file is also small.
+
+Here is a sample `@Bean` registration method:
+
+![Bean registration screenshot](/screenshots/bean_registration_ss.png)
+
+### 4.1.2 Cors Configuration
+
+Cross-Origin Resource Sharing (CORS) is a security feature implemented by web browsers that allows or restricts web
+pages from making requests to a different domain than the one that served the web page. This is done to prevent
+potentially malicious websites from accessing sensitive data on other sites without the user's knowledge.
+
+To allows users utilize this application from the browser, cors configuration need to be implemented.
+The application has presentation Single-Page Application and endpoints are exposed by Spring MVC, the basic config is
+provided. It is highly
+recommended to
+adjust these settings for your needs.
+
+![CORS config screenshot](/screenshots/cors_config_ss.png)
+
+### 4.1.3 Error Handling
+
+When ever error is thrown in the application, we can catch it and return custom response to the user.
+To achieve this, application utilize `@ControllerAdvice` component and register errors to be handled in this class. In
+all cases `ExceptionResponse` dto is returned to the user with message, date and description. See presentation layer for
+details about dto.
+
+![GlobalExceptionHandler config screenshot](/screenshots/global_exception_handler_ss.png)
+
+## 4.2 Calories Ninjas
+
+This application leverages the CalorieNinjas external API to gather information about `Products`. CalorieNinjas offers a
+straightforward registration process and user-friendly endpoints. The free tier allows for up to 10,000 requests per
+month.
+
+During application startup, the database is populated using data from CalorieNinjas. If a product is already present in
+the database, the API call is skipped to optimize performance and reduce unnecessary requests.
+
+The `Products` to fetch are indicated in the `recipe.txt` list in the resources file. The `RecipeInit` class is the
+parser for that list, and it uses `NinjaService` where `NinjaApi` class is injected.
+Special format need to be kept if you decide to extend that list.
+
+![Recipe List screenshot](/screenshots/recipe_list_ss.png)
+
+First line `*` indicate the beginning of the list, followed by properties always in the same order, each properties need
+to contain `:` and no space:
+
+- Name (name of your recipe)
+- HowTo (preparation steps)
+- DietType (High Protein (the only supported diet right now))
+- MealType (it can be list, each element separated by `/` sign. See domain layer for available meals)
+- Scalable (true or false)
+
+After properties list of products need to appear each in separate line enclosed by `**` from top and bottom line.
+The format is as follows:
+
+`name:grams/Filler`
+
+The `name` in this format will be requested by the api.
+
+The last line `***` indicate end of the recipe to parse.
+
+The `NinjaApi` will fetch data using `RestClient`, provided by the Spring dependency library, from the CaloriesNinja api
+and generate `NinjaReponse` that holds the list of `NinjaItems`.
+First `NinjaItem` found in `NinjaResponse` will be mapped to the `Product` and saved to the database
+using `ProductService`.
+
+## Persistence
+
+This application utilize MongoDB database.
+
+
+
+
+

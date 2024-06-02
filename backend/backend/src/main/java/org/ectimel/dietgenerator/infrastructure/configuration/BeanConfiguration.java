@@ -10,6 +10,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
+    public CreateDiet dietService(RecipeRepository recipeRepository) {
+        return new CreateDietUseCase(recipeRepository);
+    }
+    
+    
+    
+    @Bean
     public RecipeService recipeRepository(RecipeRepository recipeRepository) {
         return new RecipeCRUDUseCase(recipeRepository);
     }
@@ -18,12 +25,7 @@ public class BeanConfiguration {
     public ProductService productCRUD(ProductRepository productRepository) {
         return new ProductCRUDUseCase(productRepository);
     }
-
-
-    @Bean
-    public CreateDiet dietService(RecipeRepository recipeRepository) {
-        return new CreateDietUseCase(recipeRepository);
-    }
+    
 
     @Bean
     public CalculateTDEE calculateTDEE() {
