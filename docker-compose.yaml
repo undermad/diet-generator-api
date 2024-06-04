@@ -42,6 +42,7 @@ services:
     container_name: spring-boot-app
     environment:
       - MONGO_URI=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin
+      - NINJA_API_KEY=${NINJA_API_KEY}
     ports:
       - "8080:8080"
     networks:
