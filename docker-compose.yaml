@@ -1,0 +1,70 @@
+version: "3.5"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: fatatu
+      MONGO_INITDB_ROOT_PASSWORD: fatatu
+    ports:
+      - "27017:27017"
+    networks:
+      - diet-network
+    volumes:
+      - type: volume
+        source: MONGO_DATA
+        target: /data/db
+      - type: volume
+        source: MONGO_CONFIG
+        target: /data/configdb
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: fatatu
+      ME_CONFIG_MONGODB_ADMINPASSWORD: fatatu
+      ME_CONFIG_MONGODB_PORT: "27017"
+    ports:
+      - "8081:8081"
+    networks:
+      - diet-network
+    depends_on:
+      - mongo
+        
+  spring-boot-app:
+    image: diet-generator:latest
+    build:
+      context: ./backend/backend
+      dockerfile: Dockerfile
+    container_name: spring-boot-app
+    environment:
+      - MONGO_URI=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin
+    ports:
+      - "8080:8080"
+    networks:
+      - diet-network
+    depends_on:
+      - mongo
+    volumes:
+      - type: volume
+        source: spring_data
+        target: /app/vol
+
+
+
+
+
+networks:
+  diet-network:
+    name: diet-network
+
+volumes:
+  MONGO_DATA:
+    name: MONGO_DATA
+  MONGO_CONFIG:
+    name: MONGO_CONFIG
+  spring_data:
+    name: spring_data
