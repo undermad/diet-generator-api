@@ -53,6 +53,18 @@ services:
       - type: volume
         source: spring_data
         target: /app/vol
+  
+  react-vite:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: react-vite
+    depends_on:
+      - spring-boot-app
+    ports:
+      - 5173:5173
+    networks:
+      - diet-network
 
 
 

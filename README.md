@@ -20,6 +20,90 @@
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![MaterialUI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
 
+# HOW TO RUN IT ON YOUR LOCAL MACHINE
+
+---
+
+## 1. Make sure you have Docker and Docker Compose installed. Follow the links below.
+
+Install Docker [LINK](https://docs.docker.com/engine/install/)
+
+Install Docker Compose [LINK](https://docs.docker.com/compose/install/)
+
+## 2. Obtain CalorieNinjas API Key
+
+To use this application you need API Key from CalorieNinjas. Registration is straight forward, and very quick. Free tier
+allows
+to perform 10000 requests per month what is definitely sufficient for very large.
+
+Registration under this [LINK](https://www.calorieninjas.com/register)
+
+If you are logged in, go to MyAccount section or click this [LINK](https://calorieninjas.com/profile) and copy the API
+Key after clicking 'Show API Key'.
+
+## 3. Set environment variable
+
+Paste your API key instead of 'YOUR_API_KEY'
+
+### Windows
+
+```
+[System.Environment]::SetEnvironmentVariable("NINJA_API_KEY", "YOUR_API_KEY", "User")
+```
+
+### Linux
+
+```
+sudo nano /etc/environment
+```
+
+Add a new line at the end of the file with the following format:
+
+```
+NINJA_API_KEY="YOUR_API_KEY"
+```
+
+Press Ctrl + X to close, then Y to confirm saving the changes, and Enter to write the changes.
+
+### Mac
+
+```
+nano ~/.bash_profile
+```
+
+Add a new line at the end of the file with the following format:
+
+```
+export NINJA_API_KEY="YOUR_API_KEY"
+```
+
+Press Ctrl + X to close, then Y to confirm saving the changes, and Enter to write the changes.
+
+## 4. Install Git
+
+If Git is not installed yet on your machine just follow the instructions under this [LINK](https://github.com/git-guides/install-git).
+
+## 5. Clone GitHub Repository and run Docker Compose
+
+From command line, navigate to your folder
+
+```
+git clone https://github.com/undermad/diet-generator-api
+```
+
+Move to the cloned repository
+
+```
+cd diet-generator-api
+```
+
+Start Docker Compose (Make sure Docker is running)
+It may take several minutes to download all dependencies, be patient and enjoy the application.
+
+```
+docker compose up
+```
+
 # 1. Introduction
 
 ---
