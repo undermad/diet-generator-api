@@ -1,13 +1,34 @@
-FROM amazoncorretto:21
+FROM maven:3.9 as BUILD
 WORKDIR /app
-COPY . .
-RUN ./mvnw clean install -DskipTests
+COPY pom.xml /app
+RUN mvn dependency:resolve
+COPY . /app
+RUN mvn clean
+RUN mvn package -DskipTests -X
 
-VOLUME /app/vol
-
-COPY target/*.jar /app/vol/app.jar
-
+FROM amazoncorretto:21
+COPY --from=BUILD /app/target/*.jar app.jar
 EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
 
 
-ENTRYPOINT ["java", "-Dspring.data.mongodb.uri=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin", "-jar", "/app/vol/app.jar"]
+#FROM amazoncorretto:21
+#WORKDIR /app
+#COPY . .
+#
+#RUN yum install -y dos2unix
+#
+#RUN dos2unix ./mvnw
+#
+#RUN chmod +x ./mvnw
+#
+#RUN ./mvnw clean install -DskipTests
+#
+#VOLUME /app/vol
+#
+#COPY target/*.jar /app/vol/app.jar
+#
+#EXPOSE 8080
+#
+#
+#ENTRYPOINT ["java", "-Dspring.data.mongodb.uri=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin", "-jar", "/app/vol/app.jar"]
