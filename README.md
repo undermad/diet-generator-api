@@ -32,60 +32,23 @@ Install Docker Compose [LINK](https://docs.docker.com/compose/install/)
 
 ## 2. Obtain CalorieNinjas API Key
 
-To use this application you need API Key from CalorieNinjas. Registration is straight forward, and very quick. Free tier
+To use this application you need API Key from CalorieNinjas. Registration is straight forward, easy and quick. Free tier
 allows
-to perform 10000 requests per month what is definitely sufficient for very large.
+to perform 10000 requests per month what is definitely sufficient.
 
 Registration under this [LINK](https://www.calorieninjas.com/register)
 
 If you are logged in, go to MyAccount section or click this [LINK](https://calorieninjas.com/profile) and copy the API
 Key after clicking 'Show API Key'.
 
-## 3. Set environment variable
+## 3. Install Git
 
-Paste your API key instead of 'YOUR_API_KEY'
+If Git is not installed yet on your machine just follow the instructions under
+this [LINK](https://github.com/git-guides/install-git).
 
-### Windows
+## 4. Clone GitHub Repository
 
-```
-[System.Environment]::SetEnvironmentVariable("NINJA_API_KEY", "YOUR_API_KEY", "User")
-```
-
-### Linux
-
-```
-sudo nano /etc/environment
-```
-
-Add a new line at the end of the file with the following format:
-
-```
-NINJA_API_KEY="YOUR_API_KEY"
-```
-
-Press Ctrl + X to close, then Y to confirm saving the changes, and Enter to write the changes.
-
-### Mac
-
-```
-nano ~/.bash_profile
-```
-
-Add a new line at the end of the file with the following format:
-
-```
-export NINJA_API_KEY="YOUR_API_KEY"
-```
-
-Press Ctrl + X to close, then Y to confirm saving the changes, and Enter to write the changes.
-
-## 4. Install Git
-
-If Git is not installed yet on your machine just follow the instructions under this [LINK](https://github.com/git-guides/install-git).
-
-## 5. Clone GitHub Repository and run Docker Compose
-
-From command line, navigate to your folder
+From command line, navigate to your folder of choose
 
 ```
 git clone https://github.com/undermad/diet-generator-api
@@ -97,12 +60,29 @@ Move to the cloned repository
 cd diet-generator-api
 ```
 
+## 5. Set environment variable
+
+Create `.env` file in root folder (diet-generator-api), open it using any text editor and add the line:
+
+```
+NINJA_API_KEY=YOUR_API_KEY
+```
+
+Replace `YOUR_API_KEY` with the key from CalorieNinjas.
+
+## 6. Start Docker Compose
+
 Start Docker Compose (Make sure Docker is running)
 It may take several minutes to download all dependencies, be patient and enjoy the application.
 
 ```
-docker compose up
+docker compose up --build
 ```
+
+Once docker containers are running you can access the presentation website under this [LINK](http://localhost:5173/) or
+enter directly in your browser `http://localhost:5173/`.
+API endpoints link is under `http://localhost:8080/api/v1/`. See presentation layer documentation to discover available
+endpoints.
 
 # 1. Introduction
 

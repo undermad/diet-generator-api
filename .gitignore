@@ -1,3 +1,5 @@
 backend/backend/src/main/resources/application-dev.properties
 
 backend/backend/.env
+
+.env

@@ -49,10 +49,10 @@ services:
       - diet-network
     depends_on:
       - mongo
-    volumes:
-      - type: volume
-        source: spring_data
-        target: /app/vol
+#    volumes:
+#      - type: volume
+#        source: spring_data
+#        target: /app/vol
   
   react-vite:
     build:
@@ -79,5 +79,5 @@ volumes:
     name: MONGO_DATA
   MONGO_CONFIG:
     name: MONGO_CONFIG
-  spring_data:
-    name: spring_data
+#  spring_data:
+#    name: spring_data
