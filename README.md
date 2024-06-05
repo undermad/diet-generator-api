@@ -84,6 +84,8 @@ enter directly in your browser `http://localhost:5173/`.
 API endpoints link is under `http://localhost:8080/api/v1/`. See presentation layer documentation to discover available
 endpoints.
 
+# DOCUMENTATION
+
 # 1. Introduction
 
 ---
