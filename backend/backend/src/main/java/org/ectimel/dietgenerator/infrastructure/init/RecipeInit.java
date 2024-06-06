@@ -1,4 +1,4 @@
-package org.ectimel.dietgenerator.infrastructure.persistance.mongo.init;
+package org.ectimel.dietgenerator.infrastructure.init;
 
 import lombok.Setter;
 import org.ectimel.dietgenerator.application.repositories.RecipeRepository;
@@ -68,9 +68,7 @@ public class RecipeInit {
                         }
                         recipe.setMealTypes(listOfMealTypes);
                     }
-                    case "Scalable" -> {
-                        recipe.setScalable(choppedLine[1].equals("true"));
-                    }
+                    case "Scalable" -> recipe.setScalable(choppedLine[1].equals("true"));
                     case "**" -> {
                         Map<Product, BigDecimal> ingredientsAmount = new HashMap<>();
                         String ingredient;
@@ -87,18 +85,21 @@ public class RecipeInit {
                         recipe.setBasePortionInGrams(calculateSum(ingredientsAmount));
                         recipe.setIngredientsProportion(calculateProportion(ingredientsAmount));
                     }
-                    case "***" -> recipeRepository.save(recipe.mapToDomain());
+                    case "***" -> {
+                        if (recipeRepository.findByName(recipe.name).isEmpty()) {
+                            recipeRepository.save(recipe.mapToDomain());
+                        }
+                    }
+                    
                 }
-
-
             }
-
+            
         }
+        
     }
 
 
-
-    private Map<Product, BigDecimal> calculateProportion(Map<Product, BigDecimal> productToAmount){
+    private Map<Product, BigDecimal> calculateProportion(Map<Product, BigDecimal> productToAmount) {
         BigDecimal onePercentValue = calculateOnePercentValue(productToAmount);
         Map<Product, BigDecimal> ingredientProportion = new HashMap<>();
         productToAmount.forEach((product, amount) -> {
@@ -112,8 +113,8 @@ public class RecipeInit {
     private Map<Product, BigDecimal> adjustOffSet(Map<Product, BigDecimal> ingredientProportion) {
         BigDecimal percentageOffSet = BigDecimal.valueOf(100).subtract(calculateSum(ingredientProportion));
         Product product = ingredientProportion.keySet().iterator().next();
-        for(Map.Entry<Product,BigDecimal> entry : ingredientProportion.entrySet()){
-            if(entry.getValue().doubleValue() > percentageOffSet.doubleValue()){
+        for (Map.Entry<Product, BigDecimal> entry : ingredientProportion.entrySet()) {
+            if (entry.getValue().doubleValue() > percentageOffSet.doubleValue()) {
                 product = entry.getKey();
                 break;
             }
@@ -128,11 +129,9 @@ public class RecipeInit {
         return sum.divide(BigDecimal.valueOf(100), 1, RoundingMode.HALF_UP);
     }
 
-    private BigDecimal calculateSum(Map<Product, BigDecimal> productToAmount){
+    private BigDecimal calculateSum(Map<Product, BigDecimal> productToAmount) {
         AtomicReference<Double> sum = new AtomicReference<>((double) 0);
-        productToAmount.values().forEach(value -> {
-            sum.updateAndGet(v -> (v + value.doubleValue()));
-        });
+        productToAmount.values().forEach(value -> sum.updateAndGet(v -> (v + value.doubleValue())));
         return BigDecimal.valueOf(sum.get());
     }
 
@@ -148,15 +147,15 @@ public class RecipeInit {
 
 
         public Recipe mapToDomain() {
-           return Recipe.builder()
-                   .name(this.name)
-                   .howToPrepare(this.howToPrepare)
-                   .dietType(this.dietTypes)
-                   .mealTypes(this.mealTypes)
-                   .ingredientsProportion(this.ingredientsProportion)
-                   .isScalable(this.isScalable)
-                   .basePortionInGrams(this.basePortionInGrams)
-                   .build();
+            return Recipe.builder()
+                    .name(this.name)
+                    .howToPrepare(this.howToPrepare)
+                    .dietType(this.dietTypes)
+                    .mealTypes(this.mealTypes)
+                    .ingredientsProportion(this.ingredientsProportion)
+                    .isScalable(this.isScalable)
+                    .basePortionInGrams(this.basePortionInGrams)
+                    .build();
         }
     }
 

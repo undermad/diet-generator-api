@@ -84,6 +84,25 @@ enter directly in your browser `http://localhost:5173/`.
 API endpoints link is under `http://localhost:8080/api/v1/`. See presentation layer documentation to discover available
 endpoints.
 
+# 100 Commits!
+
+![Proteins Code screenshot](/screenshots/100commitow_ss.png)
+
+
+This application was developed for the competitive event "100 Commits" organized by DevMentors.
+
+The primary objective of the competition is to create an original Open Source project over the course of 100 days.
+
+The rules are simple:
+
+Participants must make at least one commit to the main branch of their registered repository every day. There is some flexibility allowed—each participant can take one day off without a commit, referred to as a "JOKER" day.
+
+The grand prize for the winner is a MacBook Pro M3.
+
+For more information, visit the official website.  [LINK](https://100commitow.pl/)
+
+Checkout DevMentors on YouTube. [PL](https://www.youtube.com/@DevMentorsPL) or [ENG](https://www.youtube.com/@DevMentorsEN)
+
 # DOCUMENTATION
 
 # 1. Introduction
@@ -699,7 +718,7 @@ month.
 During application startup, the database is populated using data from CalorieNinjas. If a product is already present in
 the database, the API call is skipped to optimize performance and reduce unnecessary requests.
 
-The `Products` to fetch are indicated in the `recipe.txt` list in the resources file. The `RecipeInit` class is the
+The `Products` to fetch are indicated in the `recipe.txt` list in the resources' folder. The `RecipeInit` class is the
 parser for that list, and it uses `NinjaService` where `NinjaApi` class is injected.
 Special format need to be kept if you decide to extend that list.
 
@@ -729,9 +748,76 @@ and generate `NinjaReponse` that holds the list of `NinjaItems`.
 First `NinjaItem` found in `NinjaResponse` will be mapped to the `Product` and saved to the database
 using `ProductService`.
 
-## Persistence
+## 4.3 Persistence
 
-This application utilize MongoDB database.
+This application utilize MongoDB which is easy to use NoSQL database. As Clean Architecture is used in this project,
+each `@Document` has special implementation flow. Database connection configuration is very simple, it consists of one
+line located in
+`application.properties` file.
+
+``` application.properties
+spring.data.mongodb.uri=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin
+```
+
+Note that Docker Compose is used in this project, which means the uri address is service name
+from `docker-compose.yaml`.
+
+### 4.3.1 Documents
+
+Currently, application has 2 main documents `ProductDocument` and `RecipeDocument`. I decided to use `UUID` as id in
+each
+document in this application. To achieve that, special abstract class `MongoUUIDEntity` that holds id as `UUID` type was
+created.
+It also contains setter method that is used during serialization if id is not presented.
+
+![MongoUUID screenshot](/screenshots/mogouuid_ss.png)
+
+Each actual document need to extend that class to provide `UUID` as ID. Special `@Component` is created that listen
+for `BeforeConvertEvent` and will assign the UUID.
+
+![Before Convert Event screenshot](/screenshots/beforeConvert_event_ss.png)
+
+### 4.3.2 Mappers
+
+Each document need to have its own mapper that will map `@Document` to domain object and from domain to `@Document`.
+This step is mandatory to separate domain and infrastructure layers. `DomainMapper` generic interface is created to be
+implemented by actual mappers. Some inner classes that are used to represent data but are not actual `@Documents` also
+needs mappers. For example `NutrientInformation` class.
+
+![Domain Mapper screenshot](/screenshots/domain_mapper_ss.png)
+
+### 4.3.3 Repositories
+
+As mentioned before, the domain layer expose interfaces that need to be implemented to provide reading from and writing
+to database.
+Those repositories classes are prefixed with `Mongo` and suffixed with `Impl` and those classes are injected into
+the `UseCases` that are registered by `BeanConfiguration` class.
+
+To utilize SpringJDBC we need to perform additional step. For each `@Document` we need to create the interface that will
+extend
+`MongoRepository<T, ID>` interface. This repository extend `CrudRepository` and is adjusted to handle custom
+mongo `@Query`. Those interfaces always have prefix `SpringDataMongo`
+
+![Spring Data Repo screenshot](/screenshots/spring_data_repo_ss.png)
+
+Once we have our interfaces we inject them in to the classes that implement exposed by domain layer interfaces to
+actually perform writing to and reading from database.
+
+![Mongo Impl Repo screenshot](/screenshots/mongo_impl_ss.png)
+
+This way we keep our domain layer free from frameworks. To look at it from another angle see the diagram below.
+
+![Repositories UML screenshot](/screenshots/repositories_uml.png)
+
+
+
+
+
+
+
+
+
+
 
 
 

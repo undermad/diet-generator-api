@@ -1,6 +1,6 @@
 package org.ectimel.dietgenerator;
 
-import org.ectimel.dietgenerator.infrastructure.persistance.mongo.init.RecipeInit;
+import org.ectimel.dietgenerator.infrastructure.init.RecipeInit;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

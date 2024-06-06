@@ -79,5 +79,3 @@ volumes:
     name: MONGO_DATA
   MONGO_CONFIG:
     name: MONGO_CONFIG
-#  spring_data:
-#    name: spring_data

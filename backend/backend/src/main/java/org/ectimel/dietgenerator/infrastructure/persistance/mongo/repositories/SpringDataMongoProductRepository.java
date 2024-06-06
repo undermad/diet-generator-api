@@ -8,8 +8,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SpringDataMongoProductRepository extends MongoRepository<ProductDocument, UUID> {
-
+    
     @Query("{ 'name' : ?0 }")
     Optional<ProductDocument> findByName(String name);
-
+    
 }
+
+

@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface ProductRepository {
 
-    Product save(Product productDocument);
+    Product save(Product product);
     Product getProduct(String productName);
     Product getProduct(UUID uuid);
 

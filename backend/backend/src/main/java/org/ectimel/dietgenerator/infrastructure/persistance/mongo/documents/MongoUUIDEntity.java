@@ -20,6 +20,5 @@ public abstract class MongoUUIDEntity {
 
         this.id = id;
     }
-
 }
 
