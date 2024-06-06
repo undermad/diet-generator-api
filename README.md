@@ -88,20 +88,21 @@ endpoints.
 
 ![Proteins Code screenshot](/screenshots/100commitow_ss.png)
 
-
 This application was developed for the competitive event "100 Commits" organized by DevMentors.
 
 The primary objective of the competition is to create an original Open Source project over the course of 100 days.
 
 The rules are simple:
 
-Participants must make at least one commit to the main branch of their registered repository every day. There is some flexibility allowed—each participant can take one day off without a commit, referred to as a "JOKER" day.
+Participants must make at least one commit to the main branch of their registered repository every day. There is some
+flexibility allowed—each participant can take one day off without a commit, referred to as a "JOKER" day.
 
 The grand prize for the winner is a MacBook Pro M3.
 
 For more information, visit the official website.  [LINK](https://100commitow.pl/)
 
-Checkout DevMentors on YouTube. [PL](https://www.youtube.com/@DevMentorsPL) or [ENG](https://www.youtube.com/@DevMentorsEN)
+Checkout DevMentors on YouTube. [PL](https://www.youtube.com/@DevMentorsPL)
+or [ENG](https://www.youtube.com/@DevMentorsEN)
 
 # DOCUMENTATION
 
@@ -809,14 +810,52 @@ This way we keep our domain layer free from frameworks. To look at it from anoth
 
 ![Repositories UML screenshot](/screenshots/repositories_uml.png)
 
+# Docker
 
+The application uses Docker and Docker Compose to simplyfy deployment and configuration on other machines.
+The `docker-compose.yaml` consist of 4 services - mongo, mongo-express, spring-boot-app, and react-vite.
+First two are database related services where mongo-express allows us to explore database using graphical user
+interface.
 
+Dockerfile for react application:
 
+```dockerfile
+FROM node:18.20.2-alpine
 
+WORKDIR /app
 
+COPY package.json .
 
+RUN npm install -g npm@10.5.1
+RUN npm install -g typescript
+RUN npm install
 
+COPY . .
 
+RUN npm run build
+
+EXPOSE 5173
+
+CMD [ "npm", "run", "preview" ]
+```
+
+Dockerfile for Spring Boot app, note that it use multistage approach. First jar file is built, and secondly application
+is started from that jar file.
+
+```dockerfile
+FROM maven:3.9 as BUILD
+WORKDIR /app
+COPY pom.xml /app
+RUN mvn dependency:resolve
+COPY . /app
+RUN mvn clean
+RUN mvn package -DskipTests -X
+
+FROM amazoncorretto:21
+COPY --from=BUILD /app/target/*.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+```
 
 
 
