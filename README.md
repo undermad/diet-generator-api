@@ -218,7 +218,17 @@ represented.
 
 ### Product
 
-![Product Code screenshot](/screenshots/product_code_ss.png)
+```java
+public class Product {
+    
+    private UUID id;
+    private String name;
+    private Nutrients nutrients;
+    private Filler filler;
+}
+```
+
+[//]: # (![Product Code screenshot]&#40;/screenshots/product_code_ss.png&#41;)
 
 The Product object is depicted as shown in the screenshot. Besides the obvious fields - name and id (1:1 database
 representation), there are two important fields - Nutrients and Filler. During database initialization, products are
@@ -234,11 +244,31 @@ application
 fillers are set up manually for best and controlled result, but algorithm can be implemented to decide if product is
 suitable to be a Filler.
 
-![Filler Code screenshot](/screenshots/filler_code_ss.png)
+```java
+public enum Filler {
+    
+    PROTEIN("Protein"),
+    FAT("Fat"),
+    CARBOHYDRATE("Carbohydrate"),
+    NONE("None");
+}
+```
+
+[//]: # (![Filler Code screenshot]&#40;/screenshots/filler_code_ss.png&#41;)
 
 ### Nutrients
 
-![Nutrients Code screenshot](/screenshots/nutrients_code_ss.png)
+```java
+public class Nutrients {
+
+    private Calories calories;
+    private Carbohydrates carbohydrates;
+    private Proteins proteins;
+    private Fats fats;
+}
+```
+
+[//]: # (![Nutrients Code screenshot]&#40;/screenshots/nutrients_code_ss.png&#41;)
 
 The `Nutrients` object contains 3 basic public methods - addNutrients, subtractNutrients and createEmptyNutrients. First
 two
@@ -251,19 +281,46 @@ wrappers.
 
 Calories:
 
-![Calories Code screenshot](/screenshots/calories_code_ss.png)
+```java
+public class Calories {
+    private BigDecimal totalCalories;
+}
+```
+
+[//]: # (![Calories Code screenshot]&#40;/screenshots/calories_code_ss.png&#41;)
 
 Carbohydrates:
 
-![Carbohydrates Code screenshot](/screenshots/carbohydrates_code_ss.png)
+```java
+public class Carbohydrates {
+    private BigDecimal totalCarbohydrates;
+    private BigDecimal fiber;
+    private BigDecimal sugar;
+}
+```
+
+[//]: # (![Carbohydrates Code screenshot]&#40;/screenshots/carbohydrates_code_ss.png&#41;)
 
 Proteins:
 
-![Proteins Code screenshot](/screenshots/proteins_code_ss.png)
+```java
+public class Proteins {
+    private BigDecimal totalProteins;
+}
+```
+
+[//]: # (![Proteins Code screenshot]&#40;/screenshots/proteins_code_ss.png&#41;)
 
 Fats:
 
-![Fats Code screenshot](/screenshots/fats_code_ss.png)
+```java
+public class Fats {
+    private BigDecimal totalFats;
+    private BigDecimal saturatedFats;
+}
+```
+
+[//]: # (![Fats Code screenshot]&#40;/screenshots/fats_code_ss.png&#41;)
 
 Every of those wrappers contain totalValue field and that is actual field that is used to perform calculations. Let's
 look at `Fats` wrapper.
@@ -276,7 +333,23 @@ change in the future.
 
 ### Recipe
 
-![Recipe Code screenshot](/screenshots/recipe_code_ss.png)
+```java
+public class Recipe {
+
+    private UUID id;
+    private String name;
+    private Map<Product, BigDecimal> ingredientsProportion;
+    private Nutrients nutrients;
+    private BigDecimal basePortionInGrams;
+    private boolean isScalable;
+    private String howToPrepare;
+    private List<DietType> dietTypes;
+    private List<MealType> mealTypes;
+    private Set<Filler> scalableFillers;
+}
+```
+
+[//]: # (![Recipe Code screenshot]&#40;/screenshots/recipe_code_ss.png&#41;)
 
 The `Recipe` object that are used to create base dish during diet creation. It has some useful information such as
 dietType that indicate for which diet it can be used, mealTypes that indicate for which meal it can be used. The
@@ -292,7 +365,17 @@ It also has a `Nutrients` object that represent nutrition information per 100g o
 The `MealType` is simple enum that contain supported meals. In `DietGenerator` class, algorithm use it choose
 appropriate `Recipe` for requested diet.
 
-![MealType Code screenshot](/screenshots/mealtype_code_ss.png)
+```java
+public enum MealType {
+
+    BREAKFAST("Breakfast"),
+    LUNCH("Lunch"),
+    DINNER("Dinner"),
+    SNACK("Snack");
+}
+```
+
+[//]: # (![MealType Code screenshot]&#40;/screenshots/mealtype_code_ss.png&#41;)
 
 ### DietType
 
@@ -300,7 +383,14 @@ The `DietType` is simple enum that contain supported diets. In `DietGenerator` c
 appropriate `Recipe` for requested diet. Currently, application support only one type: "High Protein". This can be very
 easily extended. Each `DietType` has its own `MacroCalculator`.
 
-![MealType Code screenshot](/screenshots/diettype_code_ss.png)
+```java
+public enum DietType {
+
+    PROTEIN("High Protein");
+}
+```
+
+[//]: # (![MealType Code screenshot]&#40;/screenshots/diettype_code_ss.png&#41;)
 
 ### BigDecimal
 
@@ -308,7 +398,16 @@ In domain application layer, build in Java class `BigDecimal` is used to perform
 variables.
 This class support basic math operations including very useful rounding by `RoundingMode` enum. Example usage:
 
-![BigDecimal Code Usage screenshot](/screenshots/bigdecimal_code_example_ss.png)
+```java
+    private BigDecimal calculateCarbohydrates(BigDecimal requiredCalories, BigDecimal totalProteins, BigDecimal totalFats) {
+        BigDecimal caloriesLeft = requiredCalories
+                .subtract(totalProteins.multiply(BigDecimal.valueOf(4)))
+                .subtract(totalFats.multiply(BigDecimal.valueOf(9)));
+        return caloriesLeft.divide(BigDecimal.valueOf(4), 1, RoundingMode.HALF_UP);
+    }
+```
+
+[//]: # (![BigDecimal Code Usage screenshot]&#40;/screenshots/bigdecimal_code_example_ss.png&#41;)
 
 Presented method is located in `HighProteinMacroCalculator` and contains chain subtraction, multiplication and division.
 Note that scale 1 with `RoundingMode.HALF_UP` has been used to round result to 1 decimal place. Result of multiplication
@@ -324,7 +423,17 @@ as `BigDecimal`.
 PER 100g<---). The recipe filed is the recipe that this dish has been created from. The `Dish` class also contains some
 methods that are used to adjust macronutrients.
 
-![Dish Code screenshot](/screenshots/dish_code_ss.png)
+```java
+public class Dish {
+
+    private final Map<Product, BigDecimal> productToGrams;
+    private final Nutrients nutrients;
+    private final Recipe recipe;
+    private final Map<Filler, Integer> numberOfFillers;
+}
+```
+
+[//]: # (![Dish Code screenshot]&#40;/screenshots/dish_code_ss.png&#41;)
 
 ### Diet
 
@@ -333,7 +442,16 @@ contains list of dishes that are adjusted to the given `Macronutrient`, total `N
 shoppingList that is simple name of the product to the amount in grams. The `Diet` class also contains some methods to
 adjust macronutrients.
 
-![Diet Code screenshot](/screenshots/diet_code_ss.png)
+```java
+public class Diet {
+
+    private List<Dish> dishes;
+    private Nutrients nutrients;
+    private Map<String, Double> shoppingList;
+}
+```
+
+[//]: # (![Diet Code screenshot]&#40;/screenshots/diet_code_ss.png&#41;)
 
 ## 2.3 Calculators
 
@@ -353,7 +471,21 @@ The BMI formula utilize metric system and is as follows:
 
 As you can see on the screen, heightInCm is converted to meters.
 
-![BMICalculator Code screenshot](/screenshots/bmicalculator_code_ss.png)
+```java
+public interface BMICalculator {
+
+    static BigDecimal calculate(BigDecimal bodyWeightInKg, BigDecimal heightInCm) {
+        if(bodyWeightInKg == null || bodyWeightInKg.doubleValue() <= 0 || heightInCm == null || heightInCm.doubleValue() <= 0)
+            return BigDecimal.valueOf(0);
+
+        BigDecimal heightInMeters = heightInCm.divide(new BigDecimal("100"), new MathContext(3, RoundingMode.HALF_DOWN));
+        BigDecimal heightSquared = heightInMeters.multiply(heightInMeters, new MathContext(3, RoundingMode.HALF_DOWN));
+        return bodyWeightInKg.divide(heightSquared, new MathContext(3, RoundingMode.HALF_UP));
+    }
+}
+```
+
+[//]: # (![BMICalculator Code screenshot]&#40;/screenshots/bmicalculator_code_ss.png&#41;)
 
 ### BMRCalculator
 
@@ -362,7 +494,13 @@ method
 takes one parameter, `BMRAttributes`, and is implemented by the `MifflinStJeorCalculator`. Other equations can also be
 implemented using the `BMRCalculator` interface.
 
-![BMRCalculator Code screenshot](/screenshots/bmrcalculator_code_ss.png)
+```java
+public interface BMRCalculator {
+    BaseMetabolicRate calculate(BMRAttributes bmrAttributes);
+}
+```
+
+[//]: # (![BMRCalculator Code screenshot]&#40;/screenshots/bmrcalculator_code_ss.png&#41;)
 
 This application currently support MifflinStJeor equations which is:
 
@@ -370,22 +508,68 @@ Male: `BMR = ( 10 × bodyWeightInKg in kg ) + ( 6.25 × heightInCm in cm ) − (
 
 Female: `BMR=( 10 × bodyWeightInKg in kg ) + ( 6.25 × heightInCm in cm ) − ( 5 × age in years ) − 161`
 
-![MifflinCalculator Code screenshot](/screenshots/mifflinstjeorcalculator_code_ss.png)
+```java
+public class MifflinStJeorCalculator implements BMRCalculator {
+
+    @Override
+    public BaseMetabolicRate calculate(BMRAttributes bmrAttributes) {
+        if (bmrAttributes == null) return new BaseMetabolicRate(BigDecimal.valueOf(0));
+        if (bmrAttributes.getGender() == Gender.MALE)
+            return calculateUsingMaleEquation(bmrAttributes);
+        else return calculateUsingFemaleEquation(bmrAttributes);
+    }
+}
+```
+
+[//]: # (![MifflinCalculator Code screenshot]&#40;/screenshots/mifflinstjeorcalculator_code_ss.png&#41;)
 
 The `BMRAttributes` are presented below:
 
-![BMRAttributes Code screenshot](/screenshots/bmrattributes_code_ss.png)
+
+```java
+public class BMRAttributes {
+    private BigDecimal bodyWeightInKg;
+    private BigDecimal heightInCm;
+    private BigDecimal age;
+    private ActiveLevel activeLevel;
+    private Gender gender;
+}
+```
+
+[//]: # (![BMRAttributes Code screenshot]&#40;/screenshots/bmrattributes_code_ss.png&#41;)
 
 The `BaseMetabolicRate` object, created by the `MacroCalculator`, contains the actual value and has a single method,
 `calculateTDEE`. This method takes one parameter, `ActiveLevel`. Based on the provided activity level, the base
 metabolic
 rate is multiplied, and the result is returned as a `BigDecimal`.
 
-![BaseMetabolicRate Code screenshot](/screenshots/basemetabolicrate_code_ss.png)
+```java
+public class BaseMetabolicRate {
+    private BigDecimal BMR;
+
+    public BigDecimal calculateTDEE(ActiveLevel activeLevel) {
+        if(activeLevel == null) return BigDecimal.valueOf(0);
+        BigDecimal multiplayer = BigDecimal.valueOf(activeLevel.getMultiplayer());
+        return multiplayer.multiply(BMR).setScale(2, RoundingMode.HALF_DOWN);
+    }
+}
+```
+
+[//]: # (![BaseMetabolicRate Code screenshot]&#40;/screenshots/basemetabolicrate_code_ss.png&#41;)
 
 The `ActiveLevel` enum is presented below:
 
-![ActiveLevel Code screenshot](/screenshots/activelevel_code_ss.png)
+```java
+public enum ActiveLevel {
+    SEDENTARY(1.2),
+    LIGHTLY(1.375),
+    MODERATELY(1.55),
+    VERY(1.725),
+    SUPER(1.9);
+}
+```
+
+[//]: # (![ActiveLevel Code screenshot]&#40;/screenshots/activelevel_code_ss.png&#41;)
 
 ### MacroCalculator
 
@@ -396,15 +580,37 @@ each
 diet needs a different approach to macronutrients. For example, an average person who doesn't train should not consume
 the same amount of protein as someone who engages in three resistance training sessions per week.
 
-![MacroCalculator Code screenshot](/screenshots/macrocalculator_code_ss.png)
+```java
+public sealed interface MacroCalculator permits HighProteinMacroCalculator {
+    Macronutrient calculate(MacroCalculatorAttributes requiredCalories);
+}
+```
+
+[//]: # (![MacroCalculator Code screenshot]&#40;/screenshots/macrocalculator_code_ss.png&#41;)
 
 The `MacroCalculator` is created by `MacroCalculatorFactory`.
 
-![MacroCalculatorFactory Code screenshot](/screenshots/macrocalculatorfactory_code_ss.png)
+```java
+public class MacroCalculatorFactory {
+    public static MacroCalculator getMacroCalculator(DietType dietType) {
+        return switch (dietType) {
+            case PROTEIN -> new HighProteinMacroCalculator();
+            default -> throw new WrongInputException("Unknown diet type");
+        };
+    }
+}
+```
+
+[//]: # (![MacroCalculatorFactory Code screenshot]&#40;/screenshots/macrocalculatorfactory_code_ss.png&#41;)
 
 The `MacroCalculatorAttributes` is simple record that holds necessary information.
 
-![MacroCalculator Code screenshot](/screenshots/macrocalculatorattributes_code_ss.png)
+
+```java
+public record MacroCalculatorAttributes(BigDecimal requiredCalories, BigDecimal bodyWeightInKg, Gender gender) {}
+```
+
+[//]: # (![MacroCalculator Code screenshot]&#40;/screenshots/macrocalculatorattributes_code_ss.png&#41;)
 
 The `HighProteinMacroCalculator` is the actual implementation of the `MacroCalculator` and uses its own equation.
 Macronutrients are calculated in the order of protein, fats, and carbohydrates.
@@ -427,14 +633,40 @@ Fats: `0.3 x 3000kcal = 900kcal` of total daily intake that are `900 / 9kcal = 1
 Carbohydrates: `3000 - (880kcal + 900kcal) = 1220kcal` of total daily intake that are `1220 / 4kcal = 305g`of
 carbohydrates per day.
 
-![HighProteinMacroCalculator Code screenshot](/screenshots/highproteinmacrocalculator_code_ss.png)
+```java
+public final class HighProteinMacroCalculator implements MacroCalculator {
+    
+    @Override
+    public Macronutrient calculate(MacroCalculatorAttributes attributes) {
+        if(attributes == null || attributes.requiredCalories() == null || attributes.bodyWeightInKg() == null || attributes.gender() == null) {
+            return new Macronutrient(BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0), BigDecimal.valueOf(0));
+        }
+        BigDecimal totalProtein = calculateTotalProtein(attributes.bodyWeightInKg(), attributes.gender());
+        BigDecimal totalFats = calculateTotalFats(attributes.requiredCalories());
+        BigDecimal totalCarbohydrates = calculateCarbohydrates(attributes.requiredCalories(), totalProtein, totalFats);
+        return new Macronutrient(attributes.requiredCalories(), totalProtein, totalFats, totalCarbohydrates);
+    }
+}
+
+```
+
+[//]: # (![HighProteinMacroCalculator Code screenshot]&#40;/screenshots/highproteinmacrocalculator_code_ss.png&#41;)
 
 The `Macronutrient` serves as a holder for calculated values and is used in the `DietGenerator` to determine whether the
 values need to be increased or decreased in the diet. It also has two methods, `reduceValues` and `increaseValues`,
 which
 take `Nutrients` as a parameter.
 
-![Macronutrient Code screenshot](/screenshots/macronutrient_code_ss.png)
+```java
+public class Macronutrient {
+    private BigDecimal calories;
+    private BigDecimal proteins;
+    private BigDecimal fats;
+    private BigDecimal carbohydrates;
+}
+```
+
+[//]: # (![Macronutrient Code screenshot]&#40;/screenshots/macronutrient_code_ss.png&#41;)
 
 ## 2.4 Generators
 
@@ -458,7 +690,29 @@ calories and dividing it by numberOfMeals.
 
 `baseCaloriesPerMeal = (totalCalories - (totalCalories * 0.1)) / numberOfMeals`
 
-![DietGeneratorImpl members and constructor Code screenshot](/screenshots/dietgeneratorfieldconstructor_code_ss.png)
+```java
+public class DietGeneratorImpl implements DietGenerator {
+
+    private final Random random;
+    private final Map<MealType, List<Recipe>> recipes;
+    private final Macronutrient missingMacronutrients;
+    private final BigDecimal numberOfMeals;
+    private final BigDecimal baseCaloriesPerMeal;
+
+
+    public DietGeneratorImpl(BigDecimal numberOfMeals, Macronutrient missingMacronutrients, Map<MealType, List<Recipe>> recipes) {
+        this.missingMacronutrients = missingMacronutrients;
+        this.numberOfMeals = numberOfMeals;
+        BigDecimal reservedCalories = missingMacronutrients.getCalories().multiply(BigDecimal.valueOf(0.1));
+        BigDecimal requiredCaloriesAfterReservation = missingMacronutrients.getCalories().subtract(reservedCalories);
+        this.baseCaloriesPerMeal = requiredCaloriesAfterReservation.divide(numberOfMeals, 2, RoundingMode.DOWN);
+        this.random = new Random();
+        this.recipes = recipes;
+    }
+}
+```
+
+[//]: # (![DietGeneratorImpl members and constructor Code screenshot]&#40;/screenshots/dietgeneratorfieldconstructor_code_ss.png&#41;)
 
 After the `DietGeneratorImpl` is created, it contains all the necessary information to generate the diet. This includes
 a
@@ -466,13 +720,38 @@ lists of `Recipe` for each `MealType`, the required `Macronutrient`, the
 requested `numberOfMeals`, `baseCaloriesPerMeal`, and a
 `Random` object for later usage.
 
-![DietGeneratorImpl generate Code screenshot](/screenshots/dietgeneratorgenerate_code_ss.png)
+```java
+    @Override
+    public Diet generateDiet() {
+        Diet diet = new Diet();
+        addDishes(diet);
+        adjustMacronutrients(diet);
+        diet.setShoppingList(ShoppingListGenerator.generateShoppingList(diet));
+        return diet;
+    }
+```
+
+[//]: # (![DietGeneratorImpl generate Code screenshot]&#40;/screenshots/dietgeneratorgenerate_code_ss.png&#41;)
 
 There are three main steps in diet creation, `addDishes`, `adjustMacronutrients` and `generateShoppingList`.
 
 The `addDishes` method:
 
-![DietGeneratorImpl addDishes Code screenshot](/screenshots/adddishesmethod_code_ss.png)
+```java
+    private void addDishes(Diet diet) {
+        addDish(diet, MealType.BREAKFAST);
+        for (int i = 1; i < numberOfMeals.doubleValue() - 1; i++) {
+            if (i == 3) {
+                addDish(diet, MealType.SNACK);
+                continue;
+            }
+            addDish(diet, MealType.LUNCH);
+        }
+        addDish(diet, MealType.DINNER);
+    }
+```
+
+[//]: # (![DietGeneratorImpl addDishes Code screenshot]&#40;/screenshots/adddishesmethod_code_ss.png&#41;)
 
 The diet plan is populated with specific meal types based on the requested number of meals:
 
@@ -490,7 +769,19 @@ As `Recipe` holds `Nutrients` information per 100g of the products, `totalCalori
 to create the factor.
 This factor is multiplied by each product proportion value to get the actual required grams of the product.
 
-![Dish createDish Code screenshot](/screenshots/dishcreate_code_ss.png)
+```java
+    public static Dish createDish(Recipe recipe, BigDecimal requiredCalories) {
+        BigDecimal recipeTotalCalories = recipe.getNutrients().getCalories().getTotalCalories();
+        BigDecimal factor = requiredCalories.divide(recipeTotalCalories, 3, RoundingMode.HALF_UP);
+        Map<Product, BigDecimal> emptyRecipeToGram = new HashMap<>();
+        recipe.getIngredientsProportion().forEach(((product, proportion) -> {
+            emptyRecipeToGram.put(product, proportion.multiply(factor));
+        }));
+        return new Dish(emptyRecipeToGram, recipe);
+    }
+```
+
+[//]: # (![Dish createDish Code screenshot]&#40;/screenshots/dishcreate_code_ss.png&#41;)
 
 It is important to note that immediately after a `Dish` is added to the `Diet`, the macronutrients in
 the `Macronutrient`
@@ -505,7 +796,29 @@ specific macronutrient values must be adjusted accordingly.
 
 The `adjustMacronutrients` method:
 
-![DietGenerator adjustMacronutrient Code screenshot](/screenshots/adjustmacronutrient_code_ss.png)
+```java
+   private void adjustMacronutrients(Diet diet) {
+        int numberOfLoops = 3;
+        for (int i = 0; i < numberOfLoops; i++) {
+            if (missingMacronutrients.getCarbohydrates().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.CARBOHYDRATE, missingMacronutrients.getCarbohydrates().abs(), missingMacronutrients);
+            else
+                diet.increaseMacronutrient(Filler.CARBOHYDRATE, missingMacronutrients.getCarbohydrates(), missingMacronutrients);
+
+            if (missingMacronutrients.getFats().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.FAT, missingMacronutrients.getFats().abs(), missingMacronutrients);
+            else
+                diet.increaseMacronutrient(Filler.FAT, missingMacronutrients.getFats(), missingMacronutrients);
+
+            if (missingMacronutrients.getProteins().doubleValue() < 0)
+                diet.reduceMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins().abs(), missingMacronutrients);
+            else
+                diet.increaseMacronutrient(Filler.PROTEIN, missingMacronutrients.getProteins(), missingMacronutrients);
+        }
+    }
+```
+
+[//]: # (![DietGenerator adjustMacronutrient Code screenshot]&#40;/screenshots/adjustmacronutrient_code_ss.png&#41;)
 
 This method check `Macronutrient`'s `carbohydrates`, `fats` and `proteins` fields. If the value is negative it means
 there
@@ -522,7 +835,23 @@ proteins. Unfortunately, very likely this method is going to add also some carbo
 
 Every iteration required macronutrients that need to be adjusted are closer to the 0 and three iterations is sufficient.
 
-![Diet increase macro Code screenshot](/screenshots/increasemacro_code_ss.png)
+```java
+    public void reduceValues(Nutrients nutrients) {
+        setCalories(calories.subtract(nutrients.getCalories().getTotalCalories()));
+        setProteins(proteins.subtract(nutrients.getProteins().getTotalProteins()));
+        setFats(fats.subtract(nutrients.getFats().getTotalFats()));
+        setCarbohydrates(carbohydrates.subtract(nutrients.getCarbohydrates().getTotalCarbohydrates()));
+    }
+
+    public void increaseValues(Nutrients nutrients) {
+        setCalories(calories.add(nutrients.getCalories().getTotalCalories()));
+        setProteins(proteins.add(nutrients.getProteins().getTotalProteins()));
+        setFats(fats.add(nutrients.getFats().getTotalFats()));
+        setCarbohydrates(carbohydrates.add(nutrients.getCarbohydrates().getTotalCarbohydrates()));
+    }
+```
+
+[//]: # (![Diet increase macro Code screenshot]&#40;/screenshots/increasemacro_code_ss.png&#41;)
 
 Those method first look for `Dish` in the `Diet` object that can be scaled with the given `Filler`. Then the amount of
 requested grams are distributed uniformly across the all suitable dishes and `Product`s in those `Dish`es by
@@ -535,11 +864,73 @@ The difference in `Nutrients` is returned and subtracted or added from `Macronut
 
 The `increaseFiller` method:
 
-![Dish increaseFiller Code screenshot](/screenshots/increasefiller_code_ss.png)
+```java
+public Nutrients increaseFiller(Filler filler, BigDecimal grams) {
+        Nutrients totalAddedNutrients = Nutrients.createEmptyNutrients();
+        if (grams == null || filler == null || filler == Filler.NONE || grams.doubleValue() <= 0){
+            return totalAddedNutrients;
+        }
+
+        Integer fillerPopulation = numberOfFillers.get(filler);
+        if (fillerPopulation == null) return totalAddedNutrients;
+
+        BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
+        if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
+            BigDecimal gramsFraction = grams.divide(numberOfProductFillers, 2, RoundingMode.HALF_DOWN);
+            productToGrams.forEach(((product, bigDecimal) -> {
+                if (product.getFiller().equals(filler)) {
+                    BigDecimal currentGrams = productToGrams.get(product);
+                    BigDecimal productGramsToAdd = product.calculateProductGramsForRequiredFiller(filler, gramsFraction);
+                    productToGrams.put(product, currentGrams.add(productGramsToAdd));
+                    Nutrients subtractedNutrients = product.calculateNutrients(productGramsToAdd);
+                    nutrients.addNutrients(subtractedNutrients);
+                    totalAddedNutrients.addNutrients(subtractedNutrients);
+                }
+            }));
+        }
+        return totalAddedNutrients;
+    }
+```
+
+[//]: # (![Dish increaseFiller Code screenshot]&#40;/screenshots/increasefiller_code_ss.png&#41;)
 
 The `reduceFiller` method:
 
-![Dish reduceFiller Code screenshot](/screenshots/reducefiller_code_ss.png)
+```java
+public Nutrients reduceFiller(Filler filler, BigDecimal grams) {
+        Nutrients totalReducedNutrients = Nutrients.createEmptyNutrients();
+        if (grams == null ||  filler == null || grams.doubleValue() <= 0 || filler == Filler.NONE ){
+            return totalReducedNutrients;
+        }
+
+        Integer fillerPopulation = numberOfFillers.get(filler);
+        if (fillerPopulation == null) return totalReducedNutrients;
+
+        BigDecimal numberOfProductFillers = BigDecimal.valueOf(fillerPopulation);
+        if (recipe.isScalable() && numberOfProductFillers.doubleValue() > 0) {
+            BigDecimal gramsFraction = grams.divide(numberOfProductFillers, 2, RoundingMode.HALF_DOWN);
+
+            Map<Product, BigDecimal> fillersToGrams = productToGrams.entrySet().stream()
+                    .filter(entry -> entry.getKey().getFiller().equals(filler))
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            Map.Entry::getValue));
+
+            fillersToGrams.forEach(((product, currentGrams) -> {
+                BigDecimal productGramsToRemove = product.calculateProductGramsForRequiredFiller(filler, gramsFraction);
+                if (currentGrams.subtract(productGramsToRemove).doubleValue() > 0) {
+                    productToGrams.put(product, currentGrams.subtract(productGramsToRemove));
+                    Nutrients subtractedNutrients = product.calculateNutrients(productGramsToRemove);
+                    nutrients.subtractNutrients(subtractedNutrients);
+                    totalReducedNutrients.addNutrients(subtractedNutrients);
+                }
+            }));
+        }
+        return totalReducedNutrients;
+    }
+```
+
+[//]: # (![Dish reduceFiller Code screenshot]&#40;/screenshots/reducefiller_code_ss.png&#41;)
 
 ### ShoppingListGenerator
 
@@ -547,7 +938,28 @@ The `ShoppingListGenerator` is a simple interface with one default method that g
 product names to values
 in grams for the entire diet. It requires only one parameter, which is `Diet`.
 
-![ShoppingListGenerator Code screenshot](/screenshots/shoppinglistgenerator_code_ss.png)
+```java
+public interface ShoppingListGenerator {
+
+    static Map<String, Double> generateShoppingList(Diet diet) {
+        Map<String, Double> shoppingList = new HashMap<>();
+
+        diet.getDishes().forEach((dish -> {
+            dish.getProductToGrams().forEach((product, grams) -> {
+                Double currentValue = shoppingList.get(product.getName());
+                double valueToAdd = grams.setScale(1, RoundingMode.HALF_UP).doubleValue();
+                if(currentValue != null) {
+                    valueToAdd += currentValue;
+                }
+                shoppingList.put(product.getName(), valueToAdd);
+            });
+        }));
+        return shoppingList;
+    }
+}
+```
+
+[//]: # (![ShoppingListGenerator Code screenshot]&#40;/screenshots/shoppinglistgenerator_code_ss.png&#41;)
 
 # 3. Architecture
 
@@ -685,7 +1097,18 @@ Since the application is relatively small, the configuration file is also small.
 
 Here is a sample `@Bean` registration method:
 
-![Bean registration screenshot](/screenshots/bean_registration_ss.png)
+```java
+@Configuration
+public class BeanConfiguration {
+
+    @Bean
+    public CreateDiet dietService(RecipeRepository recipeRepository) {
+        return new CreateDietUseCase(recipeRepository);
+    }
+}
+```
+
+[//]: # (![Bean registration screenshot]&#40;/screenshots/bean_registration_ss.png&#41;)
 
 ### 4.1.2 Cors Configuration
 
@@ -699,7 +1122,27 @@ provided. It is highly
 recommended to
 adjust these settings for your needs.
 
-![CORS config screenshot](/screenshots/cors_config_ss.png)
+```java
+@Configuration
+public class CorsConfiguration {
+    
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**")
+                        .allowedHeaders("GET", "POST")
+                        .allowedOrigins("*")
+                        .allowedHeaders("*");
+            }
+        };
+    }
+
+}
+```
+
+[//]: # (![CORS config screenshot]&#40;/screenshots/cors_config_ss.png&#41;)
 
 ### 4.1.3 Error Handling
 
@@ -708,7 +1151,25 @@ To achieve this, application utilize `@ControllerAdvice` component and register 
 all cases `ExceptionResponse` dto is returned to the user with message, date and description. See presentation layer for
 details about dto.
 
-![GlobalExceptionHandler config screenshot](/screenshots/global_exception_handler_ss.png)
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(
+            ResourceNotFoundException exception, WebRequest webRequest) {
+
+        ExceptionResponse errorDto = new ExceptionResponse(
+                exception.getMessage(),
+                new Date(),
+                webRequest.getDescription(false));
+
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    }
+}
+```
+
+[//]: # (![GlobalExceptionHandler config screenshot]&#40;/screenshots/global_exception_handler_ss.png&#41;)
 
 ## 4.2 Calories Ninjas
 
@@ -771,12 +1232,46 @@ document in this application. To achieve that, special abstract class `MongoUUID
 created.
 It also contains setter method that is used during serialization if id is not presented.
 
-![MongoUUID screenshot](/screenshots/mogouuid_ss.png)
+```java
+@Getter
+@SuperBuilder
+@NoArgsConstructor
+public abstract class MongoUUIDEntity {
+
+    @Id
+    protected UUID id;
+
+    public void setId(UUID id) {
+        if (this.id != null) throw new UnsupportedOperationException("ID is already defined");
+
+        this.id = id;
+    }
+}
+```
+
+[//]: # (![MongoUUID screenshot]&#40;/screenshots/mogouuid_ss.png&#41;)
 
 Each actual document need to extend that class to provide `UUID` as ID. Special `@Component` is created that listen
 for `BeforeConvertEvent` and will assign the UUID.
 
-![Before Convert Event screenshot](/screenshots/beforeConvert_event_ss.png)
+```java
+@Component
+public class UuidEntityEventListener extends AbstractMongoEventListener<MongoUUIDEntity> {
+
+    @Override
+    public void onBeforeConvert(BeforeConvertEvent<MongoUUIDEntity> event) {
+        super.onBeforeConvert(event);
+        MongoUUIDEntity mongoUUIDEntity = event.getSource();
+
+        if(mongoUUIDEntity.getId() == null) {
+            mongoUUIDEntity.setId(UUID.randomUUID());
+        }
+    }
+
+}
+```
+
+[//]: # (![Before Convert Event screenshot]&#40;/screenshots/beforeConvert_event_ss.png&#41;)
 
 ### 4.3.2 Mappers
 
@@ -785,7 +1280,14 @@ This step is mandatory to separate domain and infrastructure layers. `DomainMapp
 implemented by actual mappers. Some inner classes that are used to represent data but are not actual `@Documents` also
 needs mappers. For example `NutrientInformation` class.
 
-![Domain Mapper screenshot](/screenshots/domain_mapper_ss.png)
+```java
+public interface DomainMapper<D, E> {
+    D mapToDomain(E entityObject);
+    E mapFromDomain(D domainObject);
+}
+```
+
+[//]: # (![Domain Mapper screenshot]&#40;/screenshots/domain_mapper_ss.png&#41;)
 
 ### 4.3.3 Repositories
 
@@ -799,12 +1301,42 @@ extend
 `MongoRepository<T, ID>` interface. This repository extend `CrudRepository` and is adjusted to handle custom
 mongo `@Query`. Those interfaces always have prefix `SpringDataMongo`
 
-![Spring Data Repo screenshot](/screenshots/spring_data_repo_ss.png)
+```java
+public interface SpringDataMongoProductRepository extends MongoRepository<ProductDocument, UUID> {
+    
+    @Query("{ 'name' : ?0 }")
+    Optional<ProductDocument> findByName(String name);
+    
+}
+```
+
+[//]: # (![Spring Data Repo screenshot]&#40;/screenshots/spring_data_repo_ss.png&#41;)
 
 Once we have our interfaces we inject them in to the classes that implement exposed by domain layer interfaces to
 actually perform writing to and reading from database.
 
-![Mongo Impl Repo screenshot](/screenshots/mongo_impl_ss.png)
+```java
+@Repository
+@Qualifier("mongoProductRepository")
+public class MongoProductRepositoryImpl implements ProductRepository {
+
+    private final SpringDataMongoProductRepository productRepository;
+    private final ProductMapper productMapper;
+
+    public MongoProductRepositoryImpl(SpringDataMongoProductRepository productRepository, ProductMapper productMapper) {
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
+    }
+
+    @Override
+    public Product save(Product product) {
+        ProductDocument savedProduct = productRepository.save(productMapper.mapFromDomain(product));
+        return productMapper.mapToDomain(savedProduct);
+    }
+}
+```
+
+[//]: # (![Mongo Impl Repo screenshot]&#40;/screenshots/mongo_impl_ss.png&#41;)
 
 This way we keep our domain layer free from frameworks. To look at it from another angle see the diagram below.
 
