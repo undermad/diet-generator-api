@@ -24,7 +24,6 @@ public class CalculatorController {
     public CalculatorController(CalculateTDEE TDEECalculator, CalculateBMI calculateBMI) {
         this.TDEECalculator = TDEECalculator;
         this.calculateBMI = calculateBMI;
-        System.out.println("panic, didn't realize what time is it whaaaaat....");
     }
 
 

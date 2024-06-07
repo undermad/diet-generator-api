@@ -23,12 +23,6 @@ public class ProductController {
         this.productDtoMapper = productDtoMapper;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createProduct(@RequestBody Product product) {
-        Product savedProduct = productService.saveProduct(product);
-        return ResponseEntity.ok(savedProduct.getName());
-    }
-
     @GetMapping("/{productName}")
     public ResponseEntity<ProductResponse> getProductByName(@PathVariable String productName) {
         Product product = productService.getProduct(productName);

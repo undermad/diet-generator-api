@@ -33,5 +33,4 @@ public class RecipeController {
         return ResponseEntity.ok(new RecipeResponse(recipeDto));
     }
 
-
 }
