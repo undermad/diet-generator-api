@@ -1443,11 +1443,19 @@ using `ProductService`.
 This application utilize MongoDB which is easy to use NoSQL database. As Clean Architecture is used in this project,
 each `@Document` has special implementation flow. Database connection configuration is very simple, it consists of one
 line located in
-`application.properties` file.
+`application.properties` file and `MongoDBConfiguration` class where packages is specified to scan. 
 
 ``` application.properties
 spring.data.mongodb.uri=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin
 ```
+
+```java
+@Configuration
+@EnableMongoRepositories(basePackages = "org.ectimel.dietgenerator.infrastructure.persistance.mongo.repositories")
+public class MongoDBConfiguration {
+}
+```
+
 
 Note that Docker Compose is used in this project, which means the uri address is service name
 from `docker-compose.yaml`.
