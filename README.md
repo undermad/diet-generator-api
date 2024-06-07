@@ -108,6 +108,121 @@ or [ENG](https://www.youtube.com/@DevMentorsEN)
 
 # DOCUMENTATION
 
+1. [Introduction](#1-introduction)
+   
+   1.1 [About Importance of Documentation](#11-about-importance-of-documentation) 
+
+   1.2 [What is Fatatu?](#12-what-is-fatatu)
+
+   1.3 [Why this repository exist?](#13-why-this-repository-exists)
+   
+   1.4 [Disclaimer](#14-disclaimer)
+
+   1.5 [Star and share](#15-star-and-share)
+
+2. [Architecture](#2-architecture)
+
+   2.1 [Clean Architecture](#21-clean-architecture)
+
+   2.2 [C4 Model](#22-c4-model)
+
+   2.2.1 [C1 System Context](#221-c1-system-context)
+
+   2.2.2 [C2 Container](#222-c2-container)
+
+   2.2.3 [C3 Component](#223-c3-component)
+
+   2.2.4 [C4 Code Calculator Component](#224-c4-code---calculator-component)
+
+   2.2.4 [C1 Diet Component](#224-c4-code---diet-generator-component)
+
+   2.2.4 [C1 Ninja Service Component](#224-c4-code---ninja-service-component)
+
+3. [Domain](#3-domain)
+
+   3.1 [How human body works](#31-how-human-body-works)
+
+   3.1.1 [How kcal works](#311-how-kcal-works)
+
+   3.1.2 [BMI](#312-bmi)
+
+   3.1.3 [TDEE](#313-tdee)
+
+   3.1.4 [TEF](#314-tef)
+
+   3.2 [Data Representation](#32-data-representation)
+
+   3.2.1 [Product](#321-product)
+
+   3.2.2 [Filler](#322-filler)
+
+   3.2.3 [Nutrients](#323-nutrients)
+
+   3.2.4 [Recipe](#324-recipe)
+
+   3.2.5 [MealType](#325-mealtype)
+
+   3.2.6 [DietType](#326-diettype)
+
+   3.2.7 [BigDecimal](#327-bigdecimal)
+
+   3.2.8 [Dish](#328-dish)
+
+   3.2.9 [Diet](#329-diet)
+
+   3.3 [Calculators](#33-calculators)
+
+   3.3.1 [BMICalculator](#331-bmicalculator)
+
+   3.3.2 [BMRCalculator](#332-bmrcalculator)
+
+   3.3.3 [MacroCalculator](#333-macrocalculator)
+
+   3.4 [Generators](#34-generators)
+
+   3.4.1 [DietGenerator](#341-dietgenerator)
+
+   3.4.2 [ShoppingListGenerator](#342-shoppinglistgenerator)
+
+4. [Application](#4-application)
+
+   4.1 [Repositories](#41-repositories)
+
+   4.1 [Use Cases](#42-use-cases)
+
+5. [Infrastructure](#5-infrastructure)
+
+   5.1 [Spring Boot configuration](#51-spring-boot-configuration)
+
+   5.1.1 [Bean Configuration](#511-bean-configuration)
+
+   5.1.2 [Cors Configuration](#512-cors-configuration)
+
+   5.1.3 [Error Handling](#513-error-handling)
+
+   5.2 [Calories Ninjas](#52-calories-ninjas)
+
+   5.3 [Persistence](#53-persistence)
+
+   5.3.1 [Documents](#531-documents)
+
+   5.3.2 [Mappers](#532-mappers)
+
+   5.3.3 [Repositories](#533-repositories)
+
+6. [Presentation](#6-presentation)
+
+   6.1 [Controllers endpoints](#61-controllers-endpoints)
+
+7. [Docker](#7-docker)
+8. [Inspiration](#8-inspirations)
+
+
+
+
+
+
+
 # 1. Introduction
 
 ---
@@ -163,6 +278,9 @@ Happy coding!
 ---
 
 This application is simple monolith that utilize clean architecture approach.
+
+
+## 2.1 Clean Architecture
 
 Clean Architecture, introduced by Robert C. Martin, offers numerous benefits for backend applications. It enforces a
 clear separation of concerns, enhancing code manageability and comprehension. This structure improves testability by
@@ -234,7 +352,7 @@ Packages according to the clean architecture are presented below:
 
 ![Packages screenshot](/screenshots/package_structure_ss.png)
 
-### 2.1 C4 Model
+### 2.2 C4 Model
 
 "The C4 model was created as a way to help software development teams describe and communicate software architecture,
 both during up-front design sessions and when retrospectively documenting an existing codebase. It's a way to create
@@ -245,27 +363,27 @@ You can read more about C4 Model at this [LINK](https://c4model.com/)
 
 The C4 model has 4 parts:
 
-### 2.1.1 C1 System Context
+### 2.2.1 C1 System Context
 
 ![C1 screenshot](/screenshots/c1planning.png)
 
-### 2.1.2 C2 Container
+### 2.2.2 C2 Container
 
 ![C2 screenshot](/screenshots/c2planning.png)
 
-### 2.1.3 C3 Component
+### 2.2.3 C3 Component
 
 ![C3 screenshot](/screenshots/c3planning.png)
 
-### 2.1.4 C4 Code - Calculator Component
+### 2.2.4 C4 Code - Calculator Component
 
 ![C4 screenshot](/screenshots/calculator_component_diagram_ss.png)
 
-### 2.1.4 C4 Code - Diet Generator Component
+### 2.2.4 C4 Code - Diet Generator Component
 
 ![C4 screenshot](/screenshots/generator_component_ss.png)
 
-### 2.1.4 C4 Code - Ninja Service Component
+### 2.2.4 C4 Code - Ninja Service Component
 
 ![C4 screenshot](/screenshots/ninja_service_ss.png)
 
