@@ -43,6 +43,8 @@ services:
     environment:
       - MONGO_URI=mongodb://fatatu:fatatu@mongo:27017/diet-generator?authSource=admin
       - NINJA_API_KEY=${NINJA_API_KEY}
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     networks:
