@@ -21,7 +21,7 @@ export const ShoppingListComponent = ({shoppingList}: ShoppingListProps) => {
                 {Object.entries(shoppingList).map(([item, grams]) => (
                     <li key={item}>
                         <Typography variant={"body2"}>
-                            {item}: {grams}g
+                            {item}: {parseFloat(grams.toFixed(1))}g
                         </Typography>
                     </li>
                 ))}

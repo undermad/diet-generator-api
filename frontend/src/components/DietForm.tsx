@@ -27,7 +27,7 @@ export enum DietType {
     HighProtein = "High Protein",
 }
 
-export type DietForm = {
+export type DietFormData = {
     kcal: number,
     dietType: DietType,
     numberOfMeals: number,
@@ -37,7 +37,7 @@ export type DietForm = {
 
 export const DietForm = () => {
 
-    const [formData, setFormData] = useState<DietForm>({
+    const [formData, setFormData] = useState<DietFormData>({
         kcal: 0,
         numberOfMeals: 0,
         bodyWeightInKg: 0,
@@ -74,10 +74,10 @@ export const DietForm = () => {
         
         if (!validateData()) return;
         setLoading(true);
-
+        
         axiosBase.post("/diet", formData)
             .then((response: AxiosResponse<Diet>) => {
-                navigate("/diet", {state: {data: response.data}});
+                navigate("/diet", {state: {data: response.data, formData}});
             })
             .catch((error) => {
                 console.log(error)

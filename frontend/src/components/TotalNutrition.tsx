@@ -11,7 +11,7 @@ export type TotalNutritionProps = {
 export const TotalNutrition = ({nutrition}: TotalNutritionProps) => {
 
     return (
-        <Stack spacing={4} sx={{width: '100%', maxWidth: '600px', margin: 'auto'}}>
+        <Stack spacing={4} sx={{width: '100%', margin: 'auto'}}>
             <Box sx={{width: '100%', justifyContent: 'center', display: {xs: 'none', sm: 'flex'}}}>
                 <PieChart
                     series={[
@@ -39,7 +39,7 @@ export const TotalNutrition = ({nutrition}: TotalNutritionProps) => {
 
                 <Stack direction={{xs: 'column', sm: 'row'}} spacing={1}
                        sx={{width: '100%'}}>
-                    <Stack spacing={1}>
+                    <Stack spacing={1} sx={{width: '100%'}}>
 
                         <Typography variant={"h5"}>
                             Total Nutrient Information

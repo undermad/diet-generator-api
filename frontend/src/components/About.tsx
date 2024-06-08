@@ -191,11 +191,11 @@ export const About = () => {
                             </Typography>
                             <Box sx={{marginLeft: '20px'}}>
                                 <List sx={{listStyleType: 'disc', marginTop: '0px'}}>
-                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Proteins: <Code>(2.2g MALE,
+                                    <ListItem sx={{display: 'list-item', padding: '0px', marginBottom: '3px'}}>Proteins: <Code>(2.2g MALE,
                                         1.6g FEMALE) x Body Weight</Code></ListItem>
-                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Fats: <Code>30% of total
+                                    <ListItem sx={{display: 'list-item', padding: '0px', marginBottom: '3px'}}>Fats: <Code>30% of total
                                         caloric intake</Code></ListItem>
-                                    <ListItem sx={{display: 'list-item', padding: '0px'}}>Carbohydrates: <Code>Calculated
+                                    <ListItem sx={{display: 'list-item', padding: '0px', marginBottom: '3px'}}>Carbohydrates: <Code>Calculated
                                         as
                                         the remaining calories after proteins and fats</Code></ListItem>
                                 </List>
