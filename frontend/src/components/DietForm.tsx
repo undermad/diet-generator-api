@@ -15,6 +15,8 @@ import {LoadingButton} from "@mui/lab";
 import {useState} from "react";
 import {axiosBase} from "../api/axios.ts";
 import {useNavigate} from "react-router";
+import {AxiosResponse} from "axios";
+import {Diet} from "../api/Diet.ts";
 
 export enum Gender {
     Male = "Male",
@@ -74,8 +76,8 @@ export const DietForm = () => {
         setLoading(true);
 
         axiosBase.post("/diet", formData)
-            .then((response) => {
-                navigate("/response", {state: {data: response.data}});
+            .then((response: AxiosResponse<Diet>) => {
+                navigate("/diet", {state: {data: response.data}});
             })
             .catch((error) => {
                 console.log(error)

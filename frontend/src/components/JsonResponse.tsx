@@ -7,7 +7,7 @@ export const JsonResponse = () => {
 
     return (
         <Container>
-            <pre style={{ maxWidth: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word',}}>
+            <pre style={{maxWidth: '100%', whiteSpace: 'pre-wrap', wordWrap: 'break-word',}}>
             {JSON.stringify(responseData, null, 2)}
             </pre>
         </Container>

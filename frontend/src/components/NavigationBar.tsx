@@ -9,12 +9,13 @@ import {
     Stack,
     Typography
 } from "@mui/material";
-import {LogoIcon} from "./LogoIcon.tsx";
+import {CustomIcon} from "./CustomIcon.tsx";
 import {useState} from "react";
 import {IoMdMenu} from "react-icons/io";
 import {IoCloseSharp} from "react-icons/io5";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
+import fatatu from "../assets/images/Default_gwnerate_diet_generator_logo_with_chicken_and_fork_and_2.jpg"
 
 export const NavigationBar = () => {
 
@@ -37,7 +38,7 @@ export const NavigationBar = () => {
         <div>
             <Stack direction={"row"} spacing={3}
                    sx={{alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #ccc'}}>
-                <LogoIcon/>
+                <CustomIcon iconSource={fatatu}/>
                 <Typography onClick={navigateToHome} sx={{cursor: "pointer"}}>
                     FATATU
                 </Typography>
@@ -73,7 +74,7 @@ export const NavigationBar = () => {
 
                     <Stack direction={"row"} spacing={5}
                            sx={{display: {xs: 'none', sm: 'block'}}}>
-                        <LogoIcon/>
+                        <CustomIcon iconSource={fatatu}/>
                         <Button component={"a"} href="http://localhost:5173/" sx={{color: "white"}}>
                             Fatatu
                         </Button>
@@ -99,7 +100,7 @@ export const NavigationBar = () => {
                             <IoMdMenu/>
 
                         </IconButton>
-                        <LogoIcon/>
+                        <CustomIcon iconSource={fatatu}/>
                         <Button component={"a"} href="http://localhost:5173/" sx={{color: "white"}}>
                             Fatatu
                         </Button>

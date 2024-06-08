@@ -6,6 +6,6 @@ public record DishDto(
         Map<String, Double> productsToGrams,
         String recipeName,
         String howToCook,
-        NutrientDto nutrient
+        NutrientDto nutrition
 ) {
 }

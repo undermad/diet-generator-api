@@ -76,13 +76,13 @@ Start Docker Compose (Make sure Docker is running)
 It may take several minutes to download all dependencies, be patient and enjoy the application.
 
 ```
-docker compose up --build
+docker compose up
 ```
 
 Once docker containers are running you can access the presentation website under this [LINK](http://localhost:5173/) or
 enter directly in your browser `http://localhost:5173/`.
-API endpoints link is under `http://localhost:8080/api/v1/`. See presentation layer documentation to discover available
-endpoints.
+API base url is as follow `http://localhost:8080/api/v1/`. See presentation layer documentation to discover available
+endpoints or visit [SWAGGER](http://localhost:8080/swagger-ui/index.html) / `http://localhost:8080/swagger-ui/index.html`
 
 # 100 Commits!
 
