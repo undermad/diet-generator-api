@@ -1,7 +1,11 @@
 import {Box, Button, Stack, Typography} from "@mui/material";
 import fatatu from "../assets/images/Default_gwnerate_diet_generator_logo_with_chicken_and_fork_and_2.jpg";
 
-export const MiniHero = () => {
+interface MiniHeroProps {
+    scrollToDietForm: () => void;
+}
+
+export const MiniHero = ({scrollToDietForm}: MiniHeroProps) => {
 
 
     return (
@@ -21,7 +25,7 @@ export const MiniHero = () => {
                     calories with specific macronutrient depends on chosen diet type.</Typography>
 
                 <Stack justifyContent={"flex-start"} sx={{width: '100%', marginTop: 'auto'}}>
-                    <Button variant={"contained"} sx={{width: '120px', marginTop: 4}}>Try</Button>
+                    <Button onClick={scrollToDietForm} variant={"contained"} sx={{width: '120px', marginTop: 4}}>Try</Button>
                 </Stack>
 
             </Stack>

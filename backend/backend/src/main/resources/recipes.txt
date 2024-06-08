@@ -108,7 +108,7 @@ greek yogurt:50/None
 Name:Protein shake I
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
 DietType:High Protein
-MealType:Dinner/Breakfast/Snack
+MealType:Snack
 Scalable:true
 **
 strawberry:200/None
@@ -124,7 +124,7 @@ chia seeds:5/None
 Name:Protein shake II
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
 DietType:High Protein
-MealType:Dinner/Breakfast/Snack
+MealType:Snack
 Scalable:true
 **
 blueberry:300/None
@@ -138,7 +138,7 @@ chia seeds:5/None
 Name:Protein shake III
 HowTo:Put all ingredients into the blender and blend until smooth consistency. Choose your favorite protein powder flavour. Fruits may be frozen or fresh.
 DietType:High Protein
-MealType:Dinner/Breakfast/Snack
+MealType:Snack
 Scalable:true
 **
 banana:460/None
@@ -155,7 +155,7 @@ MealType:Breakfast
 Scalable:true
 **
 gram flour:30/Carbohydrate
-dried oregano:5/None
+oregano:5/None
 nutrition yeast:3/None
 rapeseed oil:10/Fat
 baby spinach:80/None
@@ -194,4 +194,261 @@ onion:120/None
 salt:2/None
 **
 ***
-
+*
+Name:Tuna and Avocado
+HowTo:Smash the avocado with fork and put on the bread. Add tuna on top with sliced cucumber and salad leafs. Add you favorites spices.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+avocado:50/None
+bread:110/Carbohydrate
+tuna:120/Protein
+salad:30/None
+cucumber:30/None
+salt:2/None
+**
+***
+*
+Name:Ham and Cheese
+HowTo:Combine ham and cheese with bread and put sliced cucumber with salad on top. Add your favourites spices.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+bread:110/Carbohydrate
+ham:100/Protein
+cheese:30/None
+salad:30/None
+cucumber:30/None
+salt:2/None
+**
+***
+*
+Name:Cottage Cheese with Jam
+HowTo:Mix cottage cheese with yogurt and put on the bread. Add your favourite jam on top.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+bread:110/Carbohydrate
+cottage cheese:125/Protein
+jam:40/None
+greek yogurt:50/None
+**
+***
+*
+Name:Cottage Cheese with Chives
+HowTo:Mix cottage cheese with yogurt and put on top of the bread, add sliced chives and radish on top. Add your favourite spices.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+bread:130/Carbohydrate
+cottage cheese:125/Protein
+greek yogurt:50/None
+chives:5/None
+radish:30/None
+salt:2/None
+**
+***
+*
+Name:Oatmeal Oreo
+HowTo:Grate the zucchini, cook with the oats in milk for about 5 minutes. Pour into a bowl, wait a few minutes, add protein and mix. Add crushed cookie. 
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+oat:60/Carbohydrate
+protein powder:30/None
+milk:250/None
+oreo:20/None
+zucchini:25/None
+**
+***
+*
+Name:Oatmeal Nuts
+HowTo:Boil the flakes in water for about 5 minutes. Pour into a bowl, wait a few minutes, add yogurt and mix. Add nuts.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+oat:70/Carbohydrate
+skyr:250/None
+strawberry:150/None
+nuts:15/Fat
+**
+***
+*
+Name:Oatmeal Applecin
+HowTo:Cut the apple into small cubes and cook in milk together with the oats for about 5 minutes. Pour into a bowl, wait a few minutes, add the proteins and mix.
+DietType:High Protein
+MealType:Breakfast
+Scalable:true
+**
+oat:60/Carbohydrate
+milk:250/None
+apple:75/None
+protein powder:30/None
+cinnamon:3/None
+**
+***
+*
+Name:Chicken Teriyaki
+HowTo:Cook the rice and rinse it with cold water. Mix it with the fried vegetables. Pour olive oil, soy sauce, honey into a pan, add a bit of grated garlic and ginger. Bring the sauce to a boil and stew the fillets in it. Sprinkle with sesame seeds for garnish
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+chicken breast:200/Protein
+rice:70/Carbohydrate
+honey:20/None
+soy sauce:20/None
+mushrooms:30/None
+paprika:30/None
+onion:30/None
+carrot:30/None
+olive oil:20/Fat
+ginger:5/None
+garlic:5/None
+**
+***
+*
+Name:Fit Chilli Con Carne
+HowTo:Boil the rice and rinse it with cold water. Fry the chopped meat with tomatoes from can, corn from can and beans from can in olive oil. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+chicken breast:200/Protein
+rice:70/Carbohydrate
+red bean:50/None
+sweetcorn:50/None
+tomatoes:200/None
+olive oil:20/Fat
+salt:2/None
+**
+***
+*
+Name:Turkey with mushrooms
+HowTo:Boil the rice and rinse it with cold water. Fry the chopped meat, mushrooms and onion in olive oil. Finally, add the yogurt and mix everything together. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+chicken breast:200/Protein
+rice:90/Carbohydrate
+greek yogurt:100/None
+olive oil:10/Fat
+mushrooms:250/None
+salt:2/None
+**
+***
+*
+Name:Fit Bolognese
+HowTo:Boil the pasta and rinse it with cold water. Fry the chopped meat and add the canned tomatoes and the concentrate, wait until the sauce thickens. Season with salt, thyme and oregano.
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+turkey breast:200/Protein
+pasta:80/Carbohydrate
+tomatoes:200/None
+tomato paste:30/None
+thyme:10/None
+oregano:5/None
+salt:2/None
+**
+***
+*
+Name:Cottage Cheese with Strawberries
+HowTo:Boil the pasta and rinse it with cold water. Blend with a blender or mash the strawberries with a fork and yogurt. Pour the prepared sauce over the pasta. Add almonds.
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+pasta:70/Carbohydrate
+cottage cheese:200/None
+strawberry:100/None
+greek yogurt:50/None
+almonds:30/Fat
+**
+***
+*
+Name:Home Burger
+HowTo:Form burgers from the meat and fry in olive oil, at the end put yellow cheese on the burger and wait until it melts. Put the meat with cheese and vegetables in a bun and pour sauces over it. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Lunch
+Scalable:true
+**
+turkey breast:150/Protein
+bread:120/Carbohydrate
+cheese:50/None
+mustard:10/None
+ketchup:10/None
+salad:10/None
+olive oil:10/Fat
+**
+***
+*
+Name:Tofu with vegetables
+HowTo:Cut the smoked tofu into strips and fry with the soy sauce. Add the broccoli florets and sliced peppers to the pan, simmer under the lid with the tofu. Serve with waffles. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Dinner
+Scalable:true
+**
+tofu:180/Protein
+broccoli:50/None
+paprika:50/None
+olive oil:5/Fat
+soy sauce:20/None
+waffles:10/None
+**
+***
+*
+Name:Ham with mozzarella
+HowTo:Cut everything into small pieces and drizzle with a little lemon juice and olive oil. Serve with waffles. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Dinner
+Scalable:true
+**
+ham:80/Protein
+mozzarella:100/Fat
+paprika:50/None
+salad:20/None
+olive oil:15/Fat
+waffles:15/None
+lemon juice:5/None
+**
+***
+*
+Name:Feta Chicken
+HowTo:Fry the meat in olive oil. Toast the sunflower seeds in a pan. Chop everything into small pieces and mix with the salad. Serve with waffles. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Dinner
+Scalable:true
+**
+chicken breast:80/Protein
+feta cheese:40/None
+olive oil:10/None
+sunflower seeds:15/None
+tomato:50/None
+cucumber:30/None
+waffles:15/None
+**
+***
+*
+Name:Cottage Cheese with avocado
+HowTo:Crush cottage cheese into small pieces. Peel and chop the onion and avocado. Mix all ingredients together. Serve with waffles. Season with salt/pepper/herbs as desired.
+DietType:High Protein
+MealType:Dinner
+Scalable:true
+**
+cottage cheese:150/Protein
+avocado:70/None
+olive oil:15/Fat
+onion:20/None
+chives:10/None
+waffles:15/None
+**
+***
