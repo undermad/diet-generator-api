@@ -1,10 +1,10 @@
-FROM node:18.20.2-alpine
+FROM node:20.5.0-alpine
 
 WORKDIR /app
 
 COPY package.json .
 
-RUN npm install -g npm@10.5.1
+RUN npm install -g npm@10.8.1
 RUN npm install -g typescript
 RUN npm install
 

@@ -20,11 +20,15 @@
 ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 ![MaterialUI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)
 
+# LIVE APPLICATION <-- [https://www.fatatu.com](https://www.fatatu.com)
+
+The application has been deployed. You are welcome to play with it, is relative simple and satisfying to use.
+
 # HOW TO RUN IT ON YOUR LOCAL MACHINE
 
 ---
 
-## 1. Make sure you have Docker and Docker Compose installed. Follow the links below.
+## 1. Make sure you have Docker and Docker Compose installed.
 
 Install Docker [LINK](https://docs.docker.com/engine/install/)
 
