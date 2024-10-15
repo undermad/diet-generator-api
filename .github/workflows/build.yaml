@@ -20,4 +20,4 @@ jobs:
           cache: maven
 
       - name: Build jar with Maven
-        run: mvn -B package --file backend/pom.xml
+        run: mvn -B package --file backend/backend/pom.xml
