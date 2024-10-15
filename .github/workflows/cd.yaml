@@ -16,8 +16,8 @@ jobs:
         run: |
           cd /home/ubuntu/apps/fatatu/
           docker compose down
-          docker rm undermad/fatatu
-          docker rm undermad/fatatu-front
+          docker rm undermad/fatatu || true
+          docker rm undermad/fatatu-front || true
           docker rmi undermad/fatatu || true
           docker rmi undermad/fatatu-front || true
           docker compose up -d
