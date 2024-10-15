@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class BaseMetabolicRateTest {
 
     BMRCalculator bmrCalculator;

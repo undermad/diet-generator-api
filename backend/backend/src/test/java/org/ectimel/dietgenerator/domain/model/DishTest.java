@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class DishTest {
 
     private Recipe recipe;
