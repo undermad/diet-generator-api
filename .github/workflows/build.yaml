@@ -9,6 +9,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      NINJA_API_KEY=${{ secrets.NINJA_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
