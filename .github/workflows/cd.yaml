@@ -27,11 +27,21 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build backend image and push
         uses: docker/build-push-action@v4
         with:
           context: ./backend/backend
           file: ./backend/backend/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: undermad/fatatu:latest
+      
+      - name: Build frontend image and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: undermad/fatatu-front:latest
+         
