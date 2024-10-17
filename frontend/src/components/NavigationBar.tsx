@@ -24,9 +24,10 @@ export const NavigationBar = () => {
     const navigate = useNavigate();
     
     
+    
+    
     const navigateToHome = () => {
         navigate("/");
-        handleDrawerToggle();
     }
     
     const handleDrawerToggle = () => {
@@ -39,7 +40,7 @@ export const NavigationBar = () => {
             <Stack direction={"row"} spacing={3}
                    sx={{alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #ccc'}}>
                 <CustomIcon iconSource={fatatu}/>
-                <Typography onClick={navigateToHome} sx={{cursor: "pointer"}}>
+                <Typography onClick={handleDrawerToggle} sx={{cursor: "pointer"}}>
                     FATATU
                 </Typography>
                 <Box display={"flex"} justifyContent={"flex-end"} sx={{padding: '12px', fontSize: '1.5rem', cursor: "pointer"}}>
@@ -75,7 +76,7 @@ export const NavigationBar = () => {
                     <Stack direction={"row"} spacing={5}
                            sx={{display: {xs: 'none', sm: 'block'}}}>
                         <CustomIcon iconSource={fatatu}/>
-                        <Button component={"a"} href="http://localhost:5173/" sx={{color: "white"}}>
+                        <Button component={"a"} onClick={navigateToHome} sx={{color: "white"}}>
                             Fatatu
                         </Button>
 
