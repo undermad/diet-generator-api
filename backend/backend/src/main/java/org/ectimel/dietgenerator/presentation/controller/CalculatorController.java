@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/api/v1/calculator")
+@RequestMapping("/v1/calculator")
 public class CalculatorController {
 
     private final CalculateTDEE TDEECalculator;
