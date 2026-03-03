@@ -1,0 +1,21 @@
+name: test-env.yml
+
+on:
+  workflow_call:
+    inputs:
+      environment_name:
+        description: "GitHub Environment name"
+        required: true
+        type: string
+
+jobs:
+  test-env:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ inputs.environment_name }}
+
+    steps:
+      - name: Echo environment variables
+        run: |
+          echo "Variable first: ${{ vars.FIRST_VARIABLE }}"

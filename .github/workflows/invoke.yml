@@ -1,0 +1,19 @@
+name: invoke.yml
+on:
+  push:
+    branches:
+      - test-env
+
+jobs:
+  call-test-env-config-one:
+    uses: ./.github/workflows/test-env.yml
+    with:
+      environment_name: CONFIG_ONE
+    secrets: inherit
+
+  call-test-env-config-two:
+    uses: ./.github/workflows/test-env.yml
+    with:
+      environment_name: CONFIG_TWO
+    secrets: inherit
+
