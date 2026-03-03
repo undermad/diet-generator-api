@@ -1,0 +1,23 @@
+name: test-changed-files.yml
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-if-config-changed:
+    runs-on: ubuntu-latest
+    outputs:
+      changed_files: ${{ steps.get-changed-config.outputs.all_changed_files }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed files
+        id: get-changed-config
+        uses: tj-actions/changed-files@8cba46e29c11878d930bca7870bb54394d3e8b21 # v47.0.2
+        with:
+          files: test/**
